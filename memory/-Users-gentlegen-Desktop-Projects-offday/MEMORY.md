@@ -1,0 +1,10 @@
+- [Verifying motion locally](verifying-motion-locally.md) — pane can't show animation; use Playwright with installed Chrome, mouse clicks, flushSync for scroll-following
+- [Competitive + security findings 2026-10](competitive-and-security-findings-2026-10.md) — audit gaps, missing table stakes, coverage-aware smart PTO white space
+- [Stacked PR merging](stacked-pr-merging.md) — retarget the child PR before deleting a merged base branch
+- [No side-accent borders](no-side-accent-borders.md) — never use thick coloured border-left accents on cards/callouts
+- [Undo windows and side effects](undo-windows-and-side-effects.md) — client undo must be shorter than the server delay (shared constant); cancel side effects only after success
+- [CI is build-only](ci-build-only.md) — private repo, billed minutes: CI type-checks+builds on PRs only; full Playwright suite runs locally before each PR
+- [Typed dates pass partial years](typed-date-intermediate-values.md) — date inputs emit 0002/0020 while typing; bound year loops numerically; UI tests must type dates
+- [Preview → demo id remap](preview-demo-id-remap.md) — signed-out preview ids change in ensureDemo; carry people across by email; test signed out, not on the first row
+- [Build workers share the DB](build-workers-share-the-db.md) — next build runs schema setup in ~7 processes at once; migrations must survive a concurrent winner
+- [Demo holidays date-dependence](demo-holidays-make-tests-date-dependent.md) — real public holidays in demos break "every weekday" tests in holiday weeks

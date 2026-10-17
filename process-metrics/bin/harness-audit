@@ -1,0 +1,420 @@
+#!/usr/bin/env python3
+"""harness-audit: cross-project self-harness audit of Claude Code transcripts.
+
+Usage:
+  harness-audit [--project NAME ...] [--since YYYY-MM-DD] [--until YYYY-MM-DD]
+                [--root ~/.claude/projects] [--out-dir ~/.claude/process-metrics]
+                [--report PATH] [--no-ledger] [--dry-ledger] [--min-idle-min 30]
+                [--digest-only] [--self-test]
+  harness-audit --fg-wait-baseline --since 2026-09-07 --until 2026-10-07T11:45 --no-ledger
+        freeze the fg-wait-guard baseline (reports/fg-wait-baseline-<date>.{json,md}); never writes the ledger,
+        refuses to overwrite a frozen file without --force
+  harness-audit --judge-fg-wait [--baseline PATH] [--until now]
+        compute the post window (baseline end .. --until) and apply the frozen rule FG-WAIT-R1;
+        writes reports/fg-wait-judgement-<date>.json; never writes the ledger
+
+--until accepts YYYY-MM-DD (whole day, local) or YYYY-MM-DDTHH:MM (exact, local time unless an offset is given).
+
+Writes:
+  <out-dir>/reports/tool-reliability-<date>[-<project>].md   (data sections regenerated; a block between
+        <!-- BEGIN MANUAL --> and <!-- END MANUAL --> in an existing report is preserved)
+  <out-dir>/reports/tool-reliability-<date>[-<project>].json (aggregates)
+  <out-dir>/<project>.jsonl                                  (§10 ledger, append-only, idempotent on task_id)
+  <out-dir>/cache/digests/*.json                             (per-transcript digests keyed by path+size+mtime+parser)
+
+Run it at nice 10 for a full pass; it streams files and keeps only digests in memory.
+"""
+import argparse
+import collections
+import json
+import os
+import re
+import sys
+import time
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import harness_core as H  # noqa: E402
+import harness_analysis as A  # noqa: E402
+import fg_wait as FW  # noqa: E402
+
+
+def load_digests(root, cache_dir, projects=None, since=None, until=None, quiet=False):
+    os.makedirs(cache_dir, exist_ok=True)
+    items = list(H.discover(root))
+    if projects:
+        items = [x for x in items if x[1] in projects]
+    out = []
+    hit = miss = 0
+    t0 = time.time()
+    for k, (p, proj, kind, sess, mp) in enumerate(items):
+        try:
+            d, cached = H.cached_digest(p, proj, kind, sess, mp, cache_dir)
+        except Exception as e:  # a malformed file must not kill the audit
+            sys.stderr.write('skip %s: %s\n' % (H.redact(p, 80), H.redact(str(e), 80)))
+            continue
+        hit += cached
+        miss += (not cached)
+        if not quiet and (k % 200 == 0):
+            sys.stderr.write('[%d/%d] %.0fs cache hit=%d miss=%d\n' % (k, len(items), time.time() - t0, hit, miss))
+        if since and d.get('last') and d['last'] < since:
+            continue
+        if until and d.get('first') and d['first'] > until:
+            continue
+        out.append(d)
+    if not quiet:
+        sys.stderr.write('digests: %d (cache hit=%d miss=%d) in %.0fs\n' % (len(out), hit, miss, time.time() - t0))
+    return out
+
+
+def md_table(head, rows):
+    s = '| ' + ' | '.join(head) + ' |\n|' + '|'.join('---' for _ in head) + '|\n'
+    for r in rows:
+        s += '| ' + ' | '.join(str(x).replace('|', '\\|').replace('\n', ' ') for x in r) + ' |\n'
+    return s
+
+
+def f1(x, nd=1):
+    return '-' if x is None else ('%.' + str(nd) + 'f') % x
+
+
+def pctf(x):
+    return '-' if x is None else '%.1f%%' % (100 * x)
+
+
+def render(au, title_scope):
+    R = []
+    rec = au.reconciliation()
+    loops = au.loops()
+    tools = au.tool_table()
+    ecs = au.error_classes()
+    comps = au.comparisons()
+    sk, base, ucmds = au.skills()
+    g, g2, cinfo = au.conditions()
+    P = au.per_project(loops)
+    J = dict(reconciliation=rec)
+
+    R.append('## 1. Method\n')
+    R.append('- Source: every `*.jsonl` transcript under `~/.claude/projects/` (main sessions and `subagents/`), scope: %s. '
+             'Files are streamed line by line by `harness-audit` (`~/.claude/process-metrics/bin/`); only digests (tool name, category, '
+             'timings, hashes, program names, redacted <=120-char error signatures) are kept. No prompt text, file content or command text is stored.\n' % title_scope)
+    R.append('- A **call** is a `tool_use` block paired with its `tool_result` by id. Latency = result timestamp - use timestamp (ms resolution; '
+             'includes permission/classifier latency). Background Bash calls are excluded from latency and hours (their launch returns at once).\n')
+    R.append('- **Failure** = `is_error` on the result, or a timeout (timeout text, `timedOutAfterMs`, or a foreground command "moved to the background" at its limit). '
+             'Each failure gets one cause class from the result text (first match wins; rules in `harness_core.classify_error`) and one bucket: '
+             '**ENV** (host, shell setup, sandbox, permissions, services), **TOOL** (a different tool or shell form avoids it), '
+             '**BEHAVIOUR** (the agent\'s own step was wrong), **SIGNAL** (the command worked and reported a real failure: failing test, tsc error, grep no-match).\n')
+    R.append('- **Hours lost** per failure = failed call time + the reaction gap to the agent\'s next tool call, capped at %d s (longer gaps are dormancy or owner time). '
+             'It is an estimate of the turn spent on the failure, not a measured counterfactual.\n' % A.GAP_CAP)
+    R.append('- `permission:user-rejected` latency is the owner\'s decision time, so it is excluded from hours lost (%.1f h of owner time).\n' % sum(r.get('owner_h', 0) for r in au.error_classes()))
+    R.append('- Timeouts of a command whose identical skeleton later succeeded in the same agent are re-labelled `timeout:host-load-passed-on-rerun` (%d calls).\n' % rec['host_reclass'])
+    R.append('- Tool-choice comparisons report raw rates with Wilson 95% CIs and a **within-agent** Mantel-Haenszel odds ratio (strata = agents that used both arms), '
+             'which removes between-task mix but not within-task mix. A difference "counts" only when the within-agent CI excludes 1.\n')
+    R.append('- Concurrency: a minute is active for a project when any of its transcripts has an assistant/user record in it. Associations only.\n')
+
+    R.append('\n## 2. Reconciliation of counts\n')
+    R.append(md_table(['quantity', 'value'], [
+        ['transcript files found', rec['raw_files']],
+        ['dropped as copies (forked/resumed sessions copy subagent files and parent records)', '%d subagent copies + %d main transcripts >= 90%% copied' % (rec['dedup']['sub_copies'], rec['dedup']['transcripts_dropped'])],
+        ['transcript files analysed (main / sub)', '%d (%d / %d)' % (rec['files'], rec['main'], rec['sub'])],
+        ['window', '%s .. %s' % (A.fdate(rec['first']), A.fdate(rec['last']))],
+        ['JSONL lines read (unparseable)', '%d (%d)' % (rec['lines'], rec['bad_lines'])],
+        ['tool_use blocks', rec['tool_use_blocks']],
+        ['tool_result blocks', rec['tool_results']],
+        ['paired calls parsed (all files)', rec['paired_raw']],
+        ['duplicate calls dropped (same tool_use id seen in another file)', rec['dedup']['calls_dropped']],
+        ['paired calls analysed', rec['paired_calls']],
+        ['tool_use without result (killed / session ended)', rec['orphan_uses']],
+        ['tool_result without a use in the same file', rec['results_without_use']],
+        ['failures = errors + timeouts-not-flagged-as-error', '%d = %d + %d' % (rec['failures'], rec['errors'], rec['timeouts_not_error'])],
+        ['failures classified to a named cause', '%d (%.1f%%)' % (rec['classified'], 100 * rec['classified'] / max(1, rec['failures']))],
+        ['"other" + "other:nonzero-exit" share', '%d + %d = %.1f%%' % (rec['other'], rec['other_nonzero'], 100 * rec['other_share'])],
+        ['sum of transcript wall-clock (h)', '%.1f' % rec['agent_wall_h']],
+    ]))
+
+    R.append('\n## 3. Tool-call reliability per tool\n')
+    rows = []
+    for r in tools[:40]:
+        own = r['key'] in ('AskUserQuestion',)
+        rows.append([r['key'] + (' (latency = owner reply time)' if own else ''), r['n'], r['err'], pctf(r['err'] / r['n']), pctf(r['fail'] / r['n']), f1(r['med'], 2), f1(r['p90'], 1), f1(r['hours'])])
+    R.append(md_table(['tool', 'calls', 'errors', 'error rate', 'failure rate (incl. timeouts)', 'median s', 'p90 s', 'fg hours'], rows))
+    kk = au.tool_table(key=lambda d, c: d['kind'])
+    R.append('\nBy transcript kind: ' + '; '.join('%s %d calls, failure rate %s' % (r['key'], r['n'], pctf(r['fail'] / r['n'])) for r in kk) + '.\n')
+    mm = au.tool_table(key=lambda d, c: A.time.strftime('%Y-%m', A.time.localtime(c['t'])))
+    R.append('\nBy month (calls / failure rate): ' + '; '.join('%s %d / %s' % (r['key'], r['n'], pctf(r['fail'] / r['n'])) for r in sorted(mm, key=lambda r: r['key'])) + '.\n')
+    J['tools'] = tools
+
+    R.append('\n### 3b. Per project (top tools)\n')
+    tp = au.tool_table(key=lambda d, c: (d['project'], c['tn']))
+    projs = sorted(P, key=lambda p: -P[p]['calls'])
+    top_tools = ['Bash', 'Read', 'Edit', 'Write', 'Grep', 'Glob', 'Agent', 'mcp:Claude_Browser']
+    idx = {r['key']: r for r in tp}
+    rows = []
+    for p in projs[:18]:
+        row = [p]
+        for t in top_tools:
+            r = idx.get((p, t))
+            row.append('-' if not r else '%d / %s' % (r['n'], pctf(r['fail'] / r['n'])))
+        rows.append(row)
+    R.append('Cells: calls / failure rate.\n\n' + md_table(['project'] + top_tools, rows))
+
+    R.append('\n## 4. Failure causes\n')
+    rows = []
+    for r in ecs:
+        rows.append([r['cls'], r['bucket'], r['n'], pctf(r['n'] / max(1, rec['failures'])), f1(r['call_h'], 2), f1(r['lost_h'], 2),
+                     ', '.join('%s %d' % x for x in r['tools']), ', '.join('%s %d' % x for x in r['projects']), '`%s`' % r['example'][:120] if r['example'] else ''])
+    R.append(md_table(['cause', 'bucket', 'n', 'share', 'call h', 'lost h (call+reaction)', 'tools', 'projects', 'typical signature (redacted)'], rows))
+    bk = collections.defaultdict(lambda: [0, 0.0])
+    for r in ecs:
+        bk[r['bucket']][0] += r['n']
+        bk[r['bucket']][1] += r['lost_h']
+    R.append('\n**By bucket:**\n\n' + md_table(['bucket', 'failures', 'share', 'lost h'], [[b, v[0], pctf(v[0] / max(1, rec['failures'])), f1(v[1], 2)] for b, v in sorted(bk.items(), key=lambda x: -x[1][1])]))
+    R.append('\n### Most common signatures inside the 8 largest causes (redacted, digits as N)\n')
+    for r in sorted(ecs, key=lambda r: -r['n'])[:8]:
+        R.append('- **%s** (%d): ' % (r['cls'], r['n']) + '; '.join('`%s` x%d' % (k[:100], v) for k, v in r['sigs'][:4]) + '\n')
+    R.append('\n### Top 10 failure causes by hours lost\n')
+    R.append(md_table(['#', 'cause', 'bucket', 'n', 'lost h'], [[k + 1, r['cls'], r['bucket'], r['n'], f1(r['lost_h'], 2)] for k, r in enumerate(ecs[:10])]))
+    J['error_classes'] = ecs
+
+    R.append('\n## 5. Loops and double work\n')
+    def ex_rows(lst, fn, n=5):
+        return [fn(x) for x in sorted(lst, key=lambda x: -x.get('_k', 0))[:n]]
+    L = loops
+    summ = []
+    rl = L['retry_loops']
+    summ.append(['same failing call (identical skeleton) retried 3+ times, 2+ failures', len(rl), f1(sum(x['lo'] for x in rl) / 3600, 2), f1(sum(x['hi'] for x in rl) / 3600, 2),
+                 '%d ended in success' % sum(1 for x in rl if x['ended'].startswith('succeeded'))])
+    fs = L['fail_streaks']
+    summ.append(['3+ consecutive failures of one tool (any input)', len(fs), f1(sum(x['lo'] for x in fs) / 3600, 2), f1(sum(x['span'] for x in fs) / 3600, 2),
+                 ', '.join('%s %d' % kv for kv in collections.Counter(x['ended'] for x in fs).most_common(3))])
+    ec_ = L['edit_cycles']
+    summ.append(['edit fail -> re-edit on one file (files with 1+ failed edit)', len(ec_), '-', f1(sum(x['rec'] for x in ec_) / 3600, 2),
+                 '%d files with 2+ failed edits' % sum(1 for x in ec_ if x['fails'] >= 2)])
+    du = L['dups']
+    d90 = [x for x in du if x['j'] >= 0.9]
+    d90done = [x for x in d90 if x['a_done']]
+    d90unk = [x for x in d90 if x['a_done'] is None]
+    d90fx = [x for x in d90done if x.get('fx')]
+    summ.append(['near-identical dispatch (prompt Jaccard >= 0.9) after the first agent had finished', len(d90done), '-', f1(sum(x['b_active'] for x in d90done) / 3600, 2),
+                 '%d identical prompts; %d say fix-round/retry/resume (%.1f h); %d while the first was still running; %d first agent not found; %d pairs >= 0.8' % (sum(1 for x in d90done if x['same_prompt']), len(d90fx), sum(x['b_active'] for x in d90fx) / 3600, len(d90) - len(d90done) - len(d90unk), len(d90unk), len(du))])
+    rb = L['rebuilds']
+    summ.append(['build of an unchanged tree (same build command, no edit/mutation in between, same agent) INFERRED', len(rb), f1(sum(x['dur'] for x in rb) / 3600, 2), '-',
+                 '%d after a failed build' % sum(1 for x in rb if x['prev_fail'])])
+    rt = L['retests']
+    summ.append(['full test/tsc run repeated with no change in between INFERRED', len(rt), f1(sum(x['dur'] for x in rt) / 3600, 2), '-',
+                 '%d after a failed run' % sum(1 for x in rt if x['prev_fail'])])
+    wt = L['wait_timeouts']
+    summ.append(['waits that ended in a timeout', len(wt), f1(sum(x['dur'] for x in wt) / 3600, 2), '-',
+                 '+%d foreground sleeps blocked by the harness' % len(L['sleep_blocked'])])
+    pk = L['parked']
+    pkc = sorted(x['coord'] for x in pk if x['coord'] > 0)
+    summ.append(['subagents parked waiting on the coordinator (dormant until a coordinator message)', len(pkc), '-', f1(sum(pkc) / 3600, 2),
+                 'median %.0f min, p90 %.0f min per agent; %d parked > 30 min; capped at 8 h per agent: %.1f h; bg-notification wakes add %.1f h' % (
+                     (A.pct(pkc, .5) or 0) / 60, (A.pct(pkc, .9) or 0) / 60, sum(1 for x in pkc if x > 1800), sum(min(x, 28800) for x in pkc) / 3600, sum(x['bgwake'] for x in pk) / 3600)])
+    pl = L['polls']
+    summ.append(['manual polling: same successful command 5+ times within 30 min', len(pl), f1(sum(x['lo'] for x in pl) / 3600, 2), f1(sum(x['hi'] for x in pl) / 3600, 2),
+                 ', '.join('%s %d' % kv for kv in collections.Counter(x['cat'].split(':')[0] for x in pl).most_common(3))])
+    R.append(md_table(['pattern', 'count', 'hours (tool time, lower bound)', 'hours (span, upper bound)', 'how it ended / notes'], summ))
+    R.append('\nDormant-on-coordinator time is wall-clock the subagent did not work; it costs no compute but delays the task. '
+             'Dup-dispatch hours are the later agent\'s active time; whether it was waste needs the brief (fix rounds reuse templates).\n')
+
+    D = au.D
+    R.append('\n### Top 10 loops and double-work instances (by upper-bound hours)\n')
+    inst = []
+    for x in rl:
+        inst.append((x['hi'], D[x['i']]['project'], A.fdate(x['t']), 'retry loop: %s `%s` x%d (%s)' % (x['tool'], x['head'] or '-', x['n'], x['ec']), x['ended']))
+    for x in fs:
+        inst.append((x['span'], D[x['i']]['project'], A.fdate(x['t']), 'failure streak: %s x%d (%s)' % (x['tool'], x['n'], ', '.join(str(k) for k, _ in x['ecs'])), x['ended']))
+    for x in d90done:
+        inst.append((x['b_active'], x['project'], A.fdate(x['t']), 'near-identical dispatch J=%.2f "%s" after "%s"' % (x['j'], x['desc_b'][:40], x['desc_a'][:40]),
+                     'earlier agent outcome: %s; gap %.1f h' % (x['a_outcome'] or 'unknown', x['gap'] / 3600)))
+    for x in rb:
+        inst.append((x['dur'], D[x['i']]['project'], A.fdate(x['t']), 'unchanged-tree rebuild `%s` (%s)' % (x['head'] or '-', x['cat']), 'previous build %s' % ('failed' if x['prev_fail'] else 'succeeded')))
+    for x in wt:
+        inst.append((x['dur'], D[x['i']]['project'], A.fdate(x['t']), 'wait timed out: %s %s `%s`' % (x['tool'], x['cat'], x['head'] or '-'), 'timeout'))
+    for x in pk:
+        if x['coord'] > 0:
+            inst.append((x['coord'], D[x['i']]['project'], A.fdate(D[x['i']]['first']), 'subagent parked on coordinator: "%s"' % (D[x['i']].get('desc') or '-')[:50], 'resumed by coordinator message'))
+    inst.sort(key=lambda z: -z[0])
+    R.append(md_table(['hours', 'project', 'date', 'pattern', 'how it ended'], [[f1(h / 3600, 2), p, dt, pat, e] for h, p, dt, pat, e in inst[:10]]))
+
+    R.append('\n### Examples per pattern (redacted)\n')
+    for name, lst, fn in (
+        ('Retry loops', sorted(rl, key=lambda x: -x['hi'])[:5], lambda x: '%s, %s: %s `%s` %d calls (%d failed, %s); %s; %.1f min span' % (D[x['i']]['project'], A.fdate(x['t']), x['tool'], x['head'] or '-', x['n'], x['nf'], x['ec'], x['ended'], x['hi'] / 60)),
+        ('Failure streaks', sorted(fs, key=lambda x: -x['n'])[:5], lambda x: '%s, %s: %s failed %d times in a row (%s); %s' % (D[x['i']]['project'], A.fdate(x['t']), x['tool'], x['n'], ', '.join('%s %d' % kv for kv in x['ecs']), x['ended'])),
+        ('Edit cycles', sorted(ec_, key=lambda x: -x['fails'])[:5], lambda x: '%s, %s: %d failed of %d edits on one file (%s); %.1f min to recover' % (D[x['i']]['project'], A.fdate(x['t']), x['fails'], x['edits'], ', '.join('%s %d' % kv for kv in x['ecs']), x['rec'] / 60)),
+        ('Near-identical dispatch', sorted(d90done, key=lambda x: -x['b_active'])[:5], lambda x: '%s, %s: "%s" re-dispatched as "%s", J=%.2f, %.1f h after the first; second agent active %.1f h; first outcome %s' % (x['project'], A.fdate(x['t']), x['desc_a'][:40], x['desc_b'][:40], x['j'], x['gap'] / 3600, x['b_active'] / 3600, x['a_outcome'] or 'unknown')),
+        ('Unchanged-tree rebuilds', sorted(rb, key=lambda x: -x['dur'])[:5], lambda x: '%s, %s: `%s` %.1f min, previous identical build %s, no edit in between' % (D[x['i']]['project'], A.fdate(x['t']), x['head'] or '-', x['dur'] / 60, 'failed' if x['prev_fail'] else 'succeeded')),
+        ('Repeated full test runs', sorted(rt, key=lambda x: -x['dur'])[:5], lambda x: '%s, %s: `%s` %.1f min, previous identical run %s, no edit in between' % (D[x['i']]['project'], A.fdate(x['t']), x['head'] or '-', x['dur'] / 60, 'failed' if x['prev_fail'] else 'passed')),
+        ('Waits ending in timeout', sorted(wt, key=lambda x: -x['dur'])[:5], lambda x: '%s, %s: %s %s `%s` %.1f min' % (D[x['i']]['project'], A.fdate(x['t']), x['tool'], x['cat'], x['head'] or '-', x['dur'] / 60)),
+    ):
+        R.append('\n**%s**\n' % name)
+        for x in lst:
+            R.append('- ' + fn(x) + '\n')
+    J['loops_summary'] = summ
+
+    R.append('\n## 6. Which choices have a lower error rate\n')
+    rows = []
+    for c in comps:
+        rows.append([c['name'], '%d/%d = %s [%s-%s]' % (c['fa'], c['na'], pctf(c['ra']), pctf(c['cia'][0]), pctf(c['cia'][1])),
+                     '%d/%d = %s [%s-%s]' % (c['fb'], c['nb'], pctf(c['rb']), pctf(c['cib'][0]), pctf(c['cib'][1])),
+                     c['strata'], '%d/%d vs %d/%d' % (c['wfa'], c['wa'], c['wfb'], c['wb']),
+                     '-' if c['orr'] is None else '%.2f [%.2f-%.2f]' % (c['orr'], c['lo'], c['hi']), c['verdict'] + ('; ' + c['note'] if c['note'] else '')])
+    R.append(md_table(['comparison', 'A failures', 'B failures', 'agents with both', 'within-agent A vs B', 'MH odds ratio A:B [95% CI]', 'verdict'], rows))
+    J['comparisons'] = comps
+
+    R.append('\n## 7. Skills and workflows (associations, not causes)\n')
+    rows = []
+    for s in sk:
+        rows.append([s['skill'], s['n'], ', '.join('%s %d' % x for x in s['projects']), f1(s['med_wall_min']), f1(s['med_calls'], 0), pctf(s['fail_rate']),
+                     s['agents'], s['tests'], s['edits'], ', '.join('%s %d' % x for x in s['outcomes'].items()) or '-',
+                     '; '.join('%s x%d' % x for x in s['contra'].most_common()) or '-'])
+    R.append(md_table(['skill', 'invocations', 'projects', 'median episode min', 'median calls', 'failure rate after', 'agents dispatched', 'test runs', 'edits', 'outcomes (subagents)', 'instructions contradicted (heuristic)'], rows))
+    R.append('\nEpisode = from the Skill call to the next owner prompt (main session) or the end of the subagent. Baseline: %d subagents with no Skill call: median %.1f min, median %s calls, failure rate %s.\n'
+             % (base['n'], base['med_wall_min'], f1(base['med_calls'], 0), pctf(base['fail_rate'])))
+    if ucmds:
+        R.append('\nOwner-typed slash commands: ' + ', '.join('`/%s` %d' % kv for kv in ucmds.most_common(25)) + '\n')
+    J['skills'] = sk
+
+    R.append('\n## 8. Conditions: host concurrency\n')
+    R.append('%d active minutes; %d (%s) had 2+ projects active at once.\n\n' % (cinfo['active_minutes'], cinfo['multi_project_minutes'], pctf(cinfo['multi_project_minutes'] / max(1, cinfo['active_minutes']))))
+    for label, G, order in (('concurrent projects', g, ['1', '2', '3', '4+']), ('concurrent transcripts (agents)', g2, ['1-2', '3-5', '6-10', '11+'])):
+        rows = []
+        for k in order:
+            r = G.get(k)
+            if not r:
+                continue
+            rows.append([k, r['n'], pctf(r['f'] / max(1, r['n'])), pctf(r['to'] / max(1, r['n'])), r['hl'], f1(A.pct(r['read'], .5), 2), f1(A.pct(r['git'], .5), 2), f1(A.pct(r['fs'], .5), 2),
+                         '%s (n=%d)' % (f1(A.pct(r['jest'], .5), 1), len(r['jest'])), '%s (n=%d)' % (f1(A.pct(r['tsc'], .5), 1), len(r['tsc']))])
+        R.append('**By %s at call start**\n\n' % label + md_table([label, 'calls', 'failure rate (excl. SIGNAL)', 'timeout rate', 'host-load timeouts', 'median Read s', 'median git s', 'median fs-read Bash s', 'median full jest s', 'median tsc s'], rows) + '\n')
+
+    R.append('\n## 9. Per-project summary\n')
+    rows = []
+    for p in projs:
+        x = P[p]
+        top = ', '.join('%s %d' % kv for kv in x['ec'].most_common(3))
+        rows.append([p, '%s..%s' % (A.fdate(x['first']), A.fdate(x['last'])), '%d/%d' % (x['main'], x['sub']), x['calls'], pctf(x['fails'] / max(1, x['calls'])), f1(x['wall'] / 3600), f1(x['active'] / 3600),
+                     f1(x['to_s'] / 3600, 2), f1(x['loops_s'] / 3600, 2), '%d (%.1f h)' % (x['dup'], x['dup_s'] / 3600), x['skills'], top])
+    R.append(md_table(['project', 'window', 'main/sub transcripts', 'calls', 'failure rate', 'wall h', 'active h', 'fg timeout h', 'retry-loop h', 'dup dispatch', 'skill calls', 'top causes'], rows))
+    J['per_project'] = {p: {k: (v if not isinstance(v, collections.Counter) else dict(v.most_common(10))) for k, v in P[p].items()} for p in projs}
+    return ''.join(R), J
+
+
+def write_report(path, body, title):
+    manual = ''
+    if os.path.exists(path):
+        s = open(path).read()
+        m = re.search(r'<!-- BEGIN MANUAL -->.*?<!-- END MANUAL -->', s, re.S)
+        if m:
+            manual = m.group(0)
+    if not manual:
+        manual = '<!-- BEGIN MANUAL -->\n(Hand-written findings, proposed rules and recommendations go here; harness-audit preserves this block.)\n<!-- END MANUAL -->'
+    head = '# %s\n\nGenerated by `harness-audit` (%s) on %s. Data sections below the manual block are regenerated on every run.\n\n' % (title, H.PARSER_VERSION, time.strftime('%Y-%m-%d %H:%M'))
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    tmp = path + '.tmp'
+    with open(tmp, 'w') as fh:
+        fh.write(head + manual + '\n\n' + body)
+    os.replace(tmp, path)
+
+
+def judge_fg_wait(a, cache, until):
+    import glob
+    path = a.baseline or (sorted(glob.glob(os.path.join(a.out_dir, 'reports', 'fg-wait-baseline-*.json'))) or [None])[-1]
+    if not path or not os.path.exists(path):
+        print('error: no frozen baseline (run --fg-wait-baseline first)', file=sys.stderr)
+        return 2
+    base = json.load(open(path))
+    if FW._digest(base['metrics']) != base.get('metrics_sha'):
+        print('error: baseline metrics do not match their sha; the frozen file was edited', file=sys.stderr)
+        return 2
+    since = FW.parse_local(base['window']['until'])
+    until = until or time.time()
+    ds = load_digests(os.path.expanduser(a.root), cache, None, since, until, a.quiet)
+    post = FW.compute(A.Audit(ds), since, until)
+    verdict, det = FW.judge(base, post)
+    out = dict(schema='fg-wait-judgement/1', judged_at=FW.iso_local(time.time()), baseline=path, rule=base['rule']['id'],
+               post_window=dict(since=FW.iso_local(since), until=FW.iso_local(until)), parser=H.PARSER_VERSION,
+               baseline_parser=base.get('parser'), verdict=verdict, details=det, post_metrics=post)
+    jp = os.path.join(a.out_dir, 'reports', 'fg-wait-judgement-%s.json' % time.strftime('%Y-%m-%d'))
+    with open(jp, 'w') as fh:
+        json.dump(out, fh, indent=1)
+    print('verdict: %s (rule %s; post %s .. %s)' % (verdict, base['rule']['id'], out['post_window']['since'], out['post_window']['until']))
+    print(json.dumps(det, indent=1))
+    if base.get('parser') != H.PARSER_VERSION:
+        print('WARNING: baseline parser %s != current %s; features may differ' % (base.get('parser'), H.PARSER_VERSION))
+    print('judgement: %s (ledger untouched)' % jp)
+    return 0
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('--root', default=os.path.expanduser('~/.claude/projects'))
+    ap.add_argument('--out-dir', default=os.path.expanduser('~/.claude/process-metrics'))
+    ap.add_argument('--project', action='append')
+    ap.add_argument('--since')
+    ap.add_argument('--until')
+    ap.add_argument('--report')
+    ap.add_argument('--no-ledger', action='store_true')
+    ap.add_argument('--dry-ledger', action='store_true')
+    ap.add_argument('--min-idle-min', type=float, default=30.0)
+    ap.add_argument('--digest-only', action='store_true')
+    ap.add_argument('--self-test', action='store_true')
+    ap.add_argument('--quiet', action='store_true')
+    ap.add_argument('--fg-wait-baseline', action='store_true', help='freeze the fg-wait-guard baseline (no ledger writes)')
+    ap.add_argument('--judge-fg-wait', action='store_true', help='judge the fg-wait-guard experiment against the frozen baseline')
+    ap.add_argument('--baseline', help='frozen baseline JSON (default: newest reports/fg-wait-baseline-*.json)')
+    ap.add_argument('--force', action='store_true', help='allow --fg-wait-baseline to overwrite a frozen file')
+    ap.add_argument('--reason', help='with --force: why the frozen baseline is rebuilt (stored in the file)')
+    a = ap.parse_args(argv)
+    if a.self_test:
+        import selftest
+        return selftest.run()
+    since = FW.parse_local(a.since) if a.since else None
+    if a.until and a.until != 'now':
+        until = FW.parse_local(a.until) + (86400 if 'T' not in a.until else 0)
+    else:
+        until = None
+    cache = os.path.join(a.out_dir, 'cache', 'digests')
+    if a.judge_fg_wait:
+        return judge_fg_wait(a, cache, until)
+    if a.fg_wait_baseline:
+        if since is None or until is None:
+            ap.error('--fg-wait-baseline needs --since and --until')
+        ds = load_digests(os.path.expanduser(a.root), cache, None, since, until, a.quiet)
+        au = A.Audit(ds)
+        stamp = time.strftime('%Y-%m-%d', time.localtime(until - 1))
+        base = os.path.join(a.out_dir, 'reports', 'fg-wait-baseline-%s' % stamp)
+        if a.force and not a.reason:
+            ap.error('--force needs --reason (it is written into the frozen file)')
+        doc = FW.freeze(au, since, until, base + '.json', base + '.md', H.PARSER_VERSION, force=a.force, reason=a.reason)
+        print('baseline: %s.{json,md} metrics_sha=%s (ledger untouched)' % (base, doc['metrics_sha']))
+        for s_ in FW.SCOPES:
+            m = doc['metrics'][s_]
+            print('%-15s bash=%6d A=%4d (%.3f/1k) B=%6.2fh WA=%3d (%.3f/1k) NULL=%3d (%.3f/1k)' % (
+                s_, m['bash_calls'], m['A_fg_ge300_count'], m['A_per_1000'] or 0, m['B_fg_ge120_hours'],
+                m['workaround']['total'], m['workaround']['per_1000'] or 0, m['null_zsh_equals_count'], m['null_per_1000'] or 0))
+        return 0
+    ds = load_digests(os.path.expanduser(a.root), cache, a.project, since, until, a.quiet)
+    if a.digest_only:
+        print('digests ready: %d' % len(ds))
+        return 0
+    au = A.Audit(ds)
+    scope = ('projects ' + ', '.join(a.project)) if a.project else 'all projects'
+    body, J = render(au, scope)
+    date = time.strftime('%Y-%m-%d')
+    suffix = ('-' + '-'.join(re.sub(r'[^\w.-]+', '_', p) for p in a.project)) if a.project else ''
+    rp = a.report or os.path.join(a.out_dir, 'reports', 'tool-reliability-%s%s.md' % (date, suffix))
+    write_report(rp, body, 'Tool reliability and self-harness audit (%s)' % scope)
+    with open(rp[:-3] + '.json', 'w') as fh:
+        json.dump(J, fh, default=lambda o: dict(o) if isinstance(o, collections.Counter) else str(o), indent=1)
+    print('report: %s' % rp)
+    rec = J['reconciliation']
+    print('calls=%d failures=%d classified=%.1f%% other=%.1f%%' % (rec['paired_calls'], rec['failures'], 100 * rec['classified'] / max(1, rec['failures']), 100 * rec['other_share']))
+    if not a.no_ledger:
+        added = A.append_ledger(au.ledger_lines(a.min_idle_min), a.out_dir, dry=a.dry_ledger)
+        print('ledger %s: %s' % ('(dry run) would add' if a.dry_ledger else 'added', json.dumps(dict(sorted(added.items())))))
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

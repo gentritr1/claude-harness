@@ -1,0 +1,3 @@
+- [OFFBEAT pass 3 review](offbeat-pass3-review.md) — browser-verified bugs, NEXT-PASS.md brief, QA scripts, groovebox+swing concept
+- [OFFBEAT env gotchas](offbeat-env-gotchas.md) — Node 24 for tests, reuse :3000 dev server, 120Hz frame reconciliation
+- [OFFBEAT measurement traps](offbeat-measurement-traps.md) — load-tail misattribution, empty computed font, double rAF probe, DOM watermark as fake 3D artifact

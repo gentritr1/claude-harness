@@ -1,0 +1,4 @@
+- [three composer clear colour](three-composer-clear-colour.md) — dark clear colour reads grey through OutputPass; use scene.background; browser pane pauses rAF when hidden
+- [event horizon draft](event-horizon-draft.md) — warm up WebGL hidden before the intro; frame harness; open intermittent scroll stall
+- [exploded view draft](exploded-view-draft.md) — owner's chosen direction; keep SVG drawing and 3D identical (numbers + overlay check)
+- [private cv documents](private-cv-documents.md) — repo is public; reference letter excluded in cv/; CV PDF re-print + 1-page check

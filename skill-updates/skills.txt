@@ -1,0 +1,8 @@
+# Skills installed from sickn33/agentic-awesome-skills that check.sh tracks. One id per line.
+# Expo skills come from the official expo plugin (claude-plugins-official, auto-updates) since 2026-10-07.
+react-native-skills
+vercel-optimize
+neon-postgres
+neon-postgres-egress-optimizer
+prisma-expert
+database-migration

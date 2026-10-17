@@ -1,0 +1,116 @@
+{
+ "schema": "fg-wait-baseline/1",
+ "frozen_at": "2026-10-07T12:16+02:00",
+ "parser": "harness-audit/1.5",
+ "window": {
+  "since": "2026-09-07T00:00+02:00",
+  "until": "2026-10-07T11:45+02:00",
+  "basis": "call start time, local host clock"
+ },
+ "scopes": [
+  "arrows-game",
+  "geoguesser-app",
+  "all"
+ ],
+ "rule": {
+  "id": "FG-WAIT-R1",
+  "registered": "2026-10-07",
+  "success": "A per 1,000 Bash calls is down >= 50 % vs the baseline in BOTH strata, and in each stratum the post count is below the 5th percentile of Poisson(baseline rate x post Bash calls), i.e. the drop beats count noise",
+  "workaround_flat": "in each stratum the post workaround count (sum of WA_KEYS) is at or below the 95th percentile of Poisson(baseline rate x post Bash calls); above it in either stratum = ROSE",
+  "null_flat": "in each stratum the post zsh `=` failure count lies inside the central 95 % Poisson interval of baseline rate x post Bash calls; outside it in either stratum = the population moved",
+  "min_post_bash_calls": 1000,
+  "verdicts": {
+   "INSUFFICIENT": "a stratum has fewer than min_post_bash_calls post Bash calls, or a zero baseline A count",
+   "REMOVE-HOOK": "the workaround detector ROSE (\u00a711: remove the hook if workarounds rise)",
+   "INCONCLUSIVE": "the null moved, so a change in A cannot be attributed to the hook",
+   "SUCCESS": "success condition met, workarounds flat, null flat",
+   "NO-EFFECT": "anything else"
+  },
+  "not_judged": "B (call-hours) and gap forms (for loops, cd && prefixes) are reported only; they are legal by design"
+ },
+ "metrics": {
+  "arrows-game": {
+   "bash_calls": 16169,
+   "fg_bash_calls": 15784,
+   "A_fg_ge300_count": 271,
+   "A_per_1000": 16.76,
+   "B_fg_ge120_hours": 52.81,
+   "B_hours_per_1000": 3.266,
+   "null_zsh_equals_count": 99,
+   "null_per_1000": 6.123,
+   "workaround": {
+    "total": 38,
+    "per_1000": 2.35,
+    "by_form": {
+     "wa:py-sleep": 13,
+     "wa:node-sleep": 18,
+     "wa:read-t": 0,
+     "wa:timeout-tail": 0,
+     "wa:wait-script": 1,
+     "wa:bg-wait-timeout": 6
+    }
+   },
+   "gap_forms_not_judged": {
+    "gap:for": 40,
+    "gap:cd": 96
+   },
+   "hook_predicate_would_deny": 140
+  },
+  "geoguesser-app": {
+   "bash_calls": 18087,
+   "fg_bash_calls": 17617,
+   "A_fg_ge300_count": 193,
+   "A_per_1000": 10.671,
+   "B_fg_ge120_hours": 40.6,
+   "B_hours_per_1000": 2.245,
+   "null_zsh_equals_count": 63,
+   "null_per_1000": 3.483,
+   "workaround": {
+    "total": 12,
+    "per_1000": 0.663,
+    "by_form": {
+     "wa:py-sleep": 1,
+     "wa:node-sleep": 4,
+     "wa:read-t": 0,
+     "wa:timeout-tail": 0,
+     "wa:wait-script": 0,
+     "wa:bg-wait-timeout": 7
+    }
+   },
+   "gap_forms_not_judged": {
+    "gap:for": 17,
+    "gap:cd": 8
+   },
+   "hook_predicate_would_deny": 146
+  },
+  "all": {
+   "bash_calls": 52624,
+   "fg_bash_calls": 51347,
+   "A_fg_ge300_count": 584,
+   "A_per_1000": 11.098,
+   "B_fg_ge120_hours": 122.93,
+   "B_hours_per_1000": 2.336,
+   "null_zsh_equals_count": 224,
+   "null_per_1000": 4.257,
+   "workaround": {
+    "total": 180,
+    "per_1000": 3.42,
+    "by_form": {
+     "wa:py-sleep": 15,
+     "wa:node-sleep": 29,
+     "wa:read-t": 0,
+     "wa:timeout-tail": 118,
+     "wa:wait-script": 1,
+     "wa:bg-wait-timeout": 17
+    }
+   },
+   "gap_forms_not_judged": {
+    "gap:for": 77,
+    "gap:cd": 108
+   },
+   "hook_predicate_would_deny": 336
+  }
+ },
+ "rebuild_reason": "rebuilt the same day before any judgement: parser 1.5 treats heredoc bodies as data (1.4, frozen 12:13 and never used, counted edit scripts that merely mention sleep( or a wait script)",
+ "metrics_sha": "2ff107eba1779564"
+}

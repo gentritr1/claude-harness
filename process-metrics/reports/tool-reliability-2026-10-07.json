@@ -1,0 +1,5393 @@
+{
+ "reconciliation": {
+  "files": 1474,
+  "main": 122,
+  "sub": 1352,
+  "lines": 559546,
+  "bad_lines": 0,
+  "tool_use_blocks": 151455,
+  "tool_results": 151926,
+  "paired_calls": 135035,
+  "orphan_uses": 15,
+  "results_without_use": 486,
+  "paired_raw": 151440,
+  "dedup": {
+   "sub_copies": 152,
+   "calls_dropped": 2706,
+   "transcripts_dropped": 3
+  },
+  "raw_files": 1629,
+  "errors": 3492,
+  "timeouts_not_error": 484,
+  "failures": 3976,
+  "classified": 3731,
+  "other": 31,
+  "other_nonzero": 214,
+  "other_share": 0.061619718309859156,
+  "first": 1782329059.372,
+  "last": 1791336758.563,
+  "agent_wall_h": 7447.038861111733,
+  "host_reclass": 8
+ },
+ "tools": [
+  {
+   "key": "Bash",
+   "n": 78707,
+   "err": 1971,
+   "fail": 2454,
+   "med": 1.644,
+   "p90": 21.86400000000003,
+   "hours": 293.03439555555553
+  },
+  {
+   "key": "mcp:Claude_Browser",
+   "n": 17561,
+   "err": 1040,
+   "fail": 1040,
+   "med": 1.866,
+   "p90": 6.101,
+   "hours": 17.319181111111114
+  },
+  {
+   "key": "Edit",
+   "n": 12891,
+   "err": 194,
+   "fail": 194,
+   "med": 0.026,
+   "p90": 0.186,
+   "hours": 1.2859875
+  },
+  {
+   "key": "Read",
+   "n": 12498,
+   "err": 63,
+   "fail": 63,
+   "med": 0.023,
+   "p90": 0.3273000000000011,
+   "hours": 3.058322222222222
+  },
+  {
+   "key": "Write",
+   "n": 4697,
+   "err": 32,
+   "fail": 32,
+   "med": 0.034,
+   "p90": 1.178,
+   "hours": 0.6105122222222222
+  },
+  {
+   "key": "WebSearch",
+   "n": 1342,
+   "err": 19,
+   "fail": 19,
+   "med": 9.196000000000002,
+   "p90": 14.744100000000008,
+   "hours": 4.520983611111111
+  },
+  {
+   "key": "WebFetch",
+   "n": 1081,
+   "err": 31,
+   "fail": 31,
+   "med": 6.997,
+   "p90": 13.317,
+   "hours": 2.5036022222222223
+  },
+  {
+   "key": "Agent",
+   "n": 870,
+   "err": 19,
+   "fail": 19,
+   "med": 3.003,
+   "p90": 639.2013000000003,
+   "hours": 27.964604444444443
+  },
+  {
+   "key": "mcp:connector",
+   "n": 607,
+   "err": 19,
+   "fail": 19,
+   "med": 4.971,
+   "p90": 18.7684,
+   "hours": 1.4833625
+  },
+  {
+   "key": "ToolSearch",
+   "n": 562,
+   "err": 0,
+   "fail": 0,
+   "med": 0.011,
+   "p90": 0.072,
+   "hours": 0.06286138888888888
+  },
+  {
+   "key": "SubagentHandback",
+   "n": 438,
+   "err": 0,
+   "fail": 0,
+   "med": 0.4955,
+   "p90": 1.6602999999999999,
+   "hours": 0.09951027777777778
+  },
+  {
+   "key": "mcp:claude-in-chrome",
+   "n": 419,
+   "err": 19,
+   "fail": 19,
+   "med": 2.663,
+   "p90": 14.179999999999978,
+   "hours": 0.7181841666666667
+  },
+  {
+   "key": "mcp:ccd_session",
+   "n": 402,
+   "err": 0,
+   "fail": 0,
+   "med": 0.018,
+   "p90": 0.04790000000000003,
+   "hours": 0.00954361111111111
+  },
+  {
+   "key": "StructuredOutput",
+   "n": 310,
+   "err": 20,
+   "fail": 20,
+   "med": 0.008,
+   "p90": 0.018,
+   "hours": 0.0009133333333333333
+  },
+  {
+   "key": "mcp:computer-use",
+   "n": 306,
+   "err": 2,
+   "fail": 2,
+   "med": 0.196,
+   "p90": 2.4765,
+   "hours": 0.3788675
+  },
+  {
+   "key": "TaskUpdate",
+   "n": 301,
+   "err": 0,
+   "fail": 0,
+   "med": 0.01,
+   "p90": 0.025,
+   "hours": 0.009236666666666667
+  },
+  {
+   "key": "SendMessage",
+   "n": 272,
+   "err": 1,
+   "fail": 1,
+   "med": 1.6869999999999998,
+   "p90": 3.8708,
+   "hours": 0.17370083333333333
+  },
+  {
+   "key": "mcp:Claude_Preview",
+   "n": 257,
+   "err": 7,
+   "fail": 7,
+   "med": 2.94,
+   "p90": 6.841200000000001,
+   "hours": 0.2851525
+  },
+  {
+   "key": "SendUserFile",
+   "n": 199,
+   "err": 4,
+   "fail": 4,
+   "med": 0.311,
+   "p90": 3.1358,
+   "hours": 0.09904750000000001
+  },
+  {
+   "key": "Skill",
+   "n": 193,
+   "err": 1,
+   "fail": 1,
+   "med": 0.041,
+   "p90": 1.7178000000000004,
+   "hours": 0.03031972222222222
+  },
+  {
+   "key": "Monitor",
+   "n": 185,
+   "err": 3,
+   "fail": 3,
+   "med": 0.365,
+   "p90": 1.7041999999999997,
+   "hours": 0.0374525
+  },
+  {
+   "key": "Artifact",
+   "n": 184,
+   "err": 13,
+   "fail": 13,
+   "med": 2.0355,
+   "p90": 6.756500000000005,
+   "hours": 0.1892786111111111
+  },
+  {
+   "key": "TaskCreate",
+   "n": 172,
+   "err": 0,
+   "fail": 0,
+   "med": 0.009,
+   "p90": 0.019,
+   "hours": 0.0006122222222222222
+  },
+  {
+   "key": "TaskStop",
+   "n": 116,
+   "err": 2,
+   "fail": 2,
+   "med": 0.02,
+   "p90": 0.0865,
+   "hours": 0.004333611111111111
+  },
+  {
+   "key": "AskUserQuestion",
+   "n": 85,
+   "err": 1,
+   "fail": 1,
+   "med": 72.832,
+   "p90": 11317.840800000053,
+   "hours": 0.0
+  },
+  {
+   "key": "DesignSync",
+   "n": 66,
+   "err": 1,
+   "fail": 1,
+   "med": 0.377,
+   "p90": 1.045,
+   "hours": 0.011636666666666667
+  },
+  {
+   "key": "mcp:blender",
+   "n": 62,
+   "err": 0,
+   "fail": 0,
+   "med": 2.7125000000000004,
+   "p90": 5.0893,
+   "hours": 0.058394166666666664
+  },
+  {
+   "key": "mcp:Claude_Code_iOS_Simulator",
+   "n": 57,
+   "err": 6,
+   "fail": 6,
+   "med": 4.83,
+   "p90": 8.434,
+   "hours": 0.09168111111111112
+  },
+  {
+   "key": "mcp:terminal",
+   "n": 43,
+   "err": 0,
+   "fail": 1,
+   "med": 6.231,
+   "p90": 91.88480000000001,
+   "hours": 0.2650075
+  },
+  {
+   "key": "Workflow",
+   "n": 25,
+   "err": 1,
+   "fail": 1,
+   "med": 2.1155,
+   "p90": 3.5730999999999997,
+   "hours": 0.01733583333333333
+  },
+  {
+   "key": "mcp:unity-mcp",
+   "n": 22,
+   "err": 20,
+   "fail": 20,
+   "med": 5.7295,
+   "p90": 17.3489,
+   "hours": 0.04861361111111111
+  },
+  {
+   "key": "mcp:ccd_pr",
+   "n": 21,
+   "err": 2,
+   "fail": 2,
+   "med": 1.062,
+   "p90": 1.862,
+   "hours": 0.008637222222222223
+  },
+  {
+   "key": "TaskOutput",
+   "n": 18,
+   "err": 0,
+   "fail": 0,
+   "med": 269.911,
+   "p90": 600.0463000000001,
+   "hours": 1.440331388888889
+  },
+  {
+   "key": "ScheduleWakeup",
+   "n": 17,
+   "err": 0,
+   "fail": 0,
+   "med": 4.36,
+   "p90": 6.0973999999999995,
+   "hours": 0.026280833333333333
+  },
+  {
+   "key": "SearchSkills",
+   "n": 8,
+   "err": 0,
+   "fail": 0,
+   "med": 0.484,
+   "p90": 1.7669999999999992,
+   "hours": 0.0021699999999999996
+  },
+  {
+   "key": "mcp:visualize",
+   "n": 6,
+   "err": 0,
+   "fail": 0,
+   "med": 0.5445,
+   "p90": 4.055,
+   "hours": 0.0027075
+  },
+  {
+   "key": "ListAgents",
+   "n": 6,
+   "err": 0,
+   "fail": 0,
+   "med": 0.1505,
+   "p90": 0.2735,
+   "hours": 0.00025027777777777776
+  },
+  {
+   "key": "mcp:ccd_session_mgmt",
+   "n": 5,
+   "err": 0,
+   "fail": 0,
+   "med": 2.185,
+   "p90": 6.4968,
+   "hours": 0.0044061111111111115
+  },
+  {
+   "key": "ListSkills",
+   "n": 5,
+   "err": 0,
+   "fail": 0,
+   "med": 0.47,
+   "p90": 0.5112,
+   "hours": 0.0006394444444444444
+  },
+  {
+   "key": "SearchPlugins",
+   "n": 5,
+   "err": 0,
+   "fail": 0,
+   "med": 1.615,
+   "p90": 6.1008,
+   "hours": 0.0038866666666666663
+  },
+  {
+   "key": "ArtifactData",
+   "n": 5,
+   "err": 0,
+   "fail": 0,
+   "med": 0.588,
+   "p90": 0.8954,
+   "hours": 0.0009644444444444444
+  },
+  {
+   "key": "ListPlugins",
+   "n": 2,
+   "err": 0,
+   "fail": 0,
+   "med": 4.083,
+   "p90": 6.9822,
+   "hours": 0.0022683333333333336
+  },
+  {
+   "key": "TaskList",
+   "n": 1,
+   "err": 0,
+   "fail": 0,
+   "med": 0.011,
+   "p90": 0.011,
+   "hours": 3.055555555555555e-06
+  },
+  {
+   "key": "PushNotification",
+   "n": 1,
+   "err": 0,
+   "fail": 0,
+   "med": 0.013,
+   "p90": 0.013,
+   "hours": 3.611111111111111e-06
+  },
+  {
+   "key": "SuggestSkills",
+   "n": 1,
+   "err": 0,
+   "fail": 0,
+   "med": 0.607,
+   "p90": 0.607,
+   "hours": 0.0001686111111111111
+  },
+  {
+   "key": "ReportFindings",
+   "n": 1,
+   "err": 0,
+   "fail": 0,
+   "med": 0.008,
+   "p90": 0.008,
+   "hours": 2.222222222222222e-06
+  },
+  {
+   "key": "bash",
+   "n": 1,
+   "err": 1,
+   "fail": 1,
+   "med": 0.009,
+   "p90": 0.009,
+   "hours": 2.4999999999999998e-06
+  },
+  {
+   "key": "CronCreate",
+   "n": 1,
+   "err": 0,
+   "fail": 0,
+   "med": 0.502,
+   "p90": 0.502,
+   "hours": 0.00013944444444444445
+  },
+  {
+   "key": "mcp:ccd_directory",
+   "n": 1,
+   "err": 0,
+   "fail": 0,
+   "med": 196.26,
+   "p90": 196.26,
+   "hours": 0.054516666666666665
+  }
+ ],
+ "error_classes": [
+  {
+   "cls": "timeout:foreground-wait",
+   "bucket": "BEHAVIOUR",
+   "n": 257,
+   "call_h": 38.33550833333333,
+   "lost_h": 39.01689722222222,
+   "projects": [
+    [
+     "arrows-game",
+     142
+    ],
+    [
+     "geoguesser-app",
+     58
+    ],
+    [
+     "futurisma-race",
+     22
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     257
+    ]
+   ],
+   "example": "Exit code N: Command timed out after Nm Ns",
+   "sigs": [
+    [
+     "Exit code N: Command timed out after Nm Ns",
+     11
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: bpqmziNaN). Output is being writte",
+     1
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: babvsvdxN). Output is being writte",
+     1
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: bduNmNedo). Output is being writte",
+     1
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: bNaNjpNl). Output is being writte",
+     1
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: bNoeNixkj). Output is being writte",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "timeout:command",
+   "bucket": "BEHAVIOUR",
+   "n": 261,
+   "call_h": 20.82878111111111,
+   "lost_h": 22.377169999999996,
+   "projects": [
+    [
+     "geoguesser-app",
+     91
+    ],
+    [
+     "futurisma-race",
+     37
+    ],
+    [
+     "arrows-game",
+     35
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     259
+    ],
+    [
+     "mcp:Claude_Code_iOS_Simulator",
+     2
+    ]
+   ],
+   "example": "Exit code N: Command timed out after Nm Ns",
+   "sigs": [
+    [
+     "Exit code N: Command timed out after Nm Ns",
+     18
+    ],
+    [
+     "TIMEOUT, last diagnostics:",
+     10
+    ],
+    [
+     "import { defineConfig, devices } from '@playwright/test'",
+     3
+    ],
+    [
+     "# smoke: NxN, target N rounds",
+     3
+    ],
+    [
+     "Exit code N:",
+     2
+    ],
+    [
+     "open_url failed: Failed to spawn xcrun (via disclaimer): /Applications/Claude.app/Contents/Helpers/disclaimer exited wit",
+     2
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "browser:pane-timeout",
+   "bucket": "ENV",
+   "n": 233,
+   "call_h": 2.446578888888889,
+   "lost_h": 3.0748844444444443,
+   "projects": [
+    [
+     "the-annex-mvp",
+     36
+    ],
+    [
+     "pizzuno",
+     36
+    ],
+    [
+     "tondo",
+     24
+    ]
+   ],
+   "tools": [
+    [
+     "mcp:Claude_Browser",
+     230
+    ],
+    [
+     "mcp:claude-in-chrome",
+     3
+    ]
+   ],
+   "example": "javascript_tool timed out after Ns. The Browser pane is currently hidden. The pane may be stuck (modal dialog, navigati",
+   "sigs": [
+    [
+     "javascript_tool timed out after Ns. The Browser pane is currently hidden. The pane may be stuck (modal dialog, navigati",
+     57
+    ],
+    [
+     "computer timed out after Ns. The Browser pane may be stuck (modal dialog, navigation hang, or unresponsive renderer). C",
+     41
+    ],
+    [
+     "computer timed out after Ns. The Browser pane is currently hidden. The pane may be stuck (modal dialog, navigation hang",
+     27
+    ],
+    [
+     "javascript_tool timed out after Ns. The Browser pane may be stuck (modal dialog, navigation hang, or unresponsive rende",
+     15
+    ],
+    [
+     "javascript_tool timed out after Ns. The Browser pane is currently displayed. The pane may be stuck (modal dialog, navig",
+     13
+    ],
+    [
+     "javascript_tool timed out after Ns. The Browser pane is currently hidden. The script did not finish (a promise that nev",
+     12
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "permission:classifier-unavailable",
+   "bucket": "ENV",
+   "n": 93,
+   "call_h": 0.9780425,
+   "lost_h": 1.7334869444444445,
+   "projects": [
+    [
+     "block-blaster",
+     28
+    ],
+    [
+     "snaxx-tech",
+     25
+    ],
+    [
+     "wordle",
+     20
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     49
+    ],
+    [
+     "mcp:Claude_Browser",
+     25
+    ],
+    [
+     "Edit",
+     10
+    ]
+   ],
+   "example": "claude-sonnet-N[Nm] is temporarily unavailable, so auto mode cannot determine the safety of Bash right now. Wait briefly",
+   "sigs": [
+    [
+     "claude-sonnet-N[Nm] is temporarily unavailable, so auto mode cannot determine the safety of Bash right now. Wait briefly",
+     37
+    ],
+    [
+     "claude-sonnet-N[Nm] is temporarily unavailable, so auto mode cannot determine the safety of <REDACTED> right now. Wait b",
+     12
+    ],
+    [
+     "claude-opus-N-N[Nm] is temporarily unavailable, so auto mode cannot determine the safety of Bash right now. Wait briefly",
+     10
+    ],
+    [
+     "claude-opus-N-N[Nm] is temporarily unavailable, so auto mode cannot determine the safety of Edit right now. Wait briefly",
+     10
+    ],
+    [
+     "claude-opus-N-N[Nm] is temporarily unavailable, so auto mode cannot determine the safety of <REDACTED> right now. Wait b",
+     5
+    ],
+    [
+     "claude-sonnet-N[Nm] is temporarily unavailable, so auto mode cannot determine the safety of Agent right now. Wait briefl",
+     5
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "script:python-traceback",
+   "bucket": "BEHAVIOUR",
+   "n": 86,
+   "call_h": 0.9105058333333333,
+   "lost_h": 1.2980613888888888,
+   "projects": [
+    [
+     "futurisma-race",
+     27
+    ],
+    [
+     "arrows-game",
+     25
+    ],
+    [
+     "geoguesser-app",
+     7
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     86
+    ]
+   ],
+   "example": "Exit code N: Traceback (most recent call last):",
+   "sigs": [
+    [
+     "Exit code N: Traceback (most recent call last):",
+     78
+    ],
+    [
+     "Exit code N: ERROR: could not get idle state.",
+     2
+    ],
+    [
+     "Exit code N: [mov,mpN,mNa,Ngp,NgN,mjN @ NxbN] moov atom not found",
+     1
+    ],
+    [
+     "Exit code N: Race modes PASS: N formats x N tiers parsed (N hostile tokens collapsed to the defaults); sprint pinned at",
+     1
+    ],
+    [
+     "Exit code N: # fail N",
+     1
+    ],
+    [
+     "Exit code N: errors N",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "other:nonzero-exit",
+   "bucket": "BEHAVIOUR",
+   "n": 214,
+   "call_h": 0.6157680555555555,
+   "lost_h": 1.2608791666666666,
+   "projects": [
+    [
+     "arrows-game",
+     53
+    ],
+    [
+     "geoguesser-app",
+     50
+    ],
+    [
+     "the-annex-mvp",
+     10
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     214
+    ]
+   ],
+   "example": "Exit code N: N",
+   "sigs": [
+    [
+     "Exit code N: N",
+     21
+    ],
+    [
+     "Exit code N: hint: Disable this message with \"git config set advice.addIgnoredFile false\"",
+     6
+    ],
+    [
+     "Exit code N: N total",
+     5
+    ],
+    [
+     "Exit code N: magick not found",
+     3
+    ],
+    [
+     "Exit code N:",
+     3
+    ],
+    [
+     "Exit code N: ? new Error(`${response.errorText} at ${url}`)",
+     2
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "file:not-found",
+   "bucket": "BEHAVIOUR",
+   "n": 132,
+   "call_h": 0.3724613888888889,
+   "lost_h": 1.0619058333333333,
+   "projects": [
+    [
+     "arrows-game",
+     29
+    ],
+    [
+     "geoguesser-app",
+     24
+    ],
+    [
+     "futurisma-race",
+     19
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     97
+    ],
+    [
+     "Read",
+     31
+    ],
+    [
+     "SendUserFile",
+     3
+    ]
+   ],
+   "example": "File does not exist. Note: your current working directory is ~<REDACTED>.",
+   "sigs": [
+    [
+     "File does not exist. Note: your current working directory is ~<REDACTED>.",
+     8
+    ],
+    [
+     "File does not exist. Note: your current working directory is ~/Desktop/the-annex-mvp.",
+     7
+    ],
+    [
+     "Exit code N: ls: ~<REDACTED>: No such file or directory",
+     4
+    ],
+    [
+     "File does not exist. Note: your current working directory is ~/Desktop/pizzuno/.<REDACTED>.",
+     4
+    ],
+    [
+     "File does not exist. Note: your current working directory is ~/Desktop/Projects/arrows-game.",
+     4
+    ],
+    [
+     "File does not exist. Note: your current working directory is ~/Desktop/arrows-game.",
+     2
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "permission:classifier-denied",
+   "bucket": "ENV",
+   "n": 71,
+   "call_h": 0.45205388888888887,
+   "lost_h": 1.0384149999999999,
+   "projects": [
+    [
+     "geoguesser-app",
+     13
+    ],
+    [
+     "arrows-game",
+     11
+    ],
+    [
+     "manga-reader",
+     8
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     63
+    ],
+    [
+     "Artifact",
+     6
+    ],
+    [
+     "mcp:connector",
+     1
+    ]
+   ],
+   "example": "Permission for this action was denied by the Claude Code auto mode classifier. Reason: Blocked by classifier. If you hav",
+   "sigs": [
+    [
+     "Permission for this action was denied by the Claude Code auto mode classifier. Reason: Blocked by classifier. If you hav",
+     24
+    ],
+    [
+     "Permission for this command was denied by a built-in Claude Code safety check, not by the user. The check stops removals",
+     14
+    ],
+    [
+     "Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Irreversible Local Destruction].",
+     8
+    ],
+    [
+     "This is not a judgement against Artifact. Repeat the identical Artifact call once now; it will be reviewed against the a",
+     6
+    ],
+    [
+     "Permission to use Bash has been denied. IMPORTANT: You *may* attempt to accomplish this action using other tools that mi",
+     5
+    ],
+    [
+     "This command requires approval",
+     3
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "permission:user-rejected",
+   "bucket": "BEHAVIOUR",
+   "n": 31,
+   "call_h": 0.0,
+   "lost_h": 0.9482777777777778,
+   "projects": [
+    [
+     "futurisma-race",
+     7
+    ],
+    [
+     "arrows-game",
+     6
+    ],
+    [
+     "claude-scratch",
+     6
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     13
+    ],
+    [
+     "Agent",
+     10
+    ],
+    [
+     "Read",
+     4
+    ]
+   ],
+   "example": "The user doesn't want to proceed with this tool use. The tool use was rejected (eg. if it was a file edit, the new_strin",
+   "sigs": [
+    [
+     "The user doesn't want to proceed with this tool use. The tool use was rejected (eg. if it was a file edit, the new_strin",
+     17
+    ],
+    [
+     "[Request interrupted by user for tool use]",
+     10
+    ],
+    [
+     "The user doesn't want to take this action right now. STOP what you are doing and wait for the user to tell you how to pr",
+     4
+    ]
+   ],
+   "owner_h": 30.303084166666668
+  },
+  {
+   "cls": "browser:js-error",
+   "bucket": "BEHAVIOUR",
+   "n": 262,
+   "call_h": 0.23582999999999998,
+   "lost_h": 0.9088577777777778,
+   "projects": [
+    [
+     "pizzuno",
+     41
+    ],
+    [
+     "the-annex-mvp",
+     38
+    ],
+    [
+     "tondo",
+     30
+    ]
+   ],
+   "tools": [
+    [
+     "mcp:Claude_Browser",
+     256
+    ],
+    [
+     "mcp:claude-in-chrome",
+     6
+    ]
+   ],
+   "example": "javascript_tool failed: SyntaxError: await is only valid in async functions and the top level bodies of modules",
+   "sigs": [
+    [
+     "javascript_tool failed: SyntaxError: await is only valid in async functions and the top level bodies of modules",
+     29
+    ],
+    [
+     "javascript_tool failed: Inspected target navigated or closed",
+     17
+    ],
+    [
+     "javascript_tool failed: TypeError: Cannot read properties of undefined (reading 'click')",
+     13
+    ],
+    [
+     "javascript_tool failed: SyntaxError: Illegal return statement",
+     12
+    ],
+    [
+     "javascript_tool failed: Inspected target navigated or closed The page navigated or was closed mid-evaluation (if the scr",
+     9
+    ],
+    [
+     "[navigate] navigated to http://localhost:N",
+     8
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "shell:zsh-equals-expansion",
+   "bucket": "TOOL",
+   "n": 284,
+   "call_h": 0.29205583333333335,
+   "lost_h": 0.8637502777777778,
+   "projects": [
+    [
+     "arrows-game",
+     101
+    ],
+    [
+     "geoguesser-app",
+     64
+    ],
+    [
+     "futurisma-race",
+     22
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     284
+    ]
+   ],
+   "example": "Exit code N: (eval):N: == not found",
+   "sigs": [
+    [
+     "Exit code N: (eval):N: == not found",
+     73
+    ],
+    [
+     "Exit code N: (eval):N: === not found",
+     21
+    ],
+    [
+     "Exit code N: (eval):N: ===== not found",
+     19
+    ],
+    [
+     "Exit code N: (eval):N: ==== not found",
+     18
+    ],
+    [
+     "Exit code N: sandbox before your task (the emulator cannot start inside the sandbox). Do NOT boot, kill, wipe or",
+     7
+    ],
+    [
+     "Exit code N: running it. If you cannot run commands in this environment, name the",
+     6
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "browser:other",
+   "bucket": "ENV",
+   "n": 69,
+   "call_h": 0.26913694444444447,
+   "lost_h": 0.7938313888888889,
+   "projects": [
+    [
+     "futurisma-race",
+     16
+    ],
+    [
+     "tondo",
+     8
+    ],
+    [
+     "apollonia-events",
+     7
+    ]
+   ],
+   "tools": [
+    [
+     "mcp:Claude_Browser",
+     59
+    ],
+    [
+     "mcp:claude-in-chrome",
+     8
+    ],
+    [
+     "mcp:computer-use",
+     2
+    ]
+   ],
+   "example": "Server <REDACTED> not found",
+   "sigs": [
+    [
+     "Server <REDACTED> not found",
+     5
+    ],
+    [
+     "[navigate] navigated to http://localhost:N",
+     5
+    ],
+    [
+     "Could not open a new tab (Browser pane gone, gate off, or tab cap reached).",
+     3
+    ],
+    [
+     "[computer:wait] waited Ns",
+     3
+    ],
+    [
+     "[navigate] navigated to http://N.N.N.N:N",
+     3
+    ],
+    [
+     "actions[N] (navigate) failed: {",
+     3
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "tool:misuse-params",
+   "bucket": "BEHAVIOUR",
+   "n": 109,
+   "call_h": 0.02139472222222222,
+   "lost_h": 0.7532558333333333,
+   "projects": [
+    [
+     "the-annex-mvp",
+     18
+    ],
+    [
+     "wordle",
+     12
+    ],
+    [
+     "tondo",
+     12
+    ]
+   ],
+   "tools": [
+    [
+     "mcp:Claude_Browser",
+     68
+    ],
+    [
+     "StructuredOutput",
+     20
+    ],
+    [
+     "Read",
+     6
+    ]
+   ],
+   "example": "MCP error -N: Input validation error: Invalid arguments for tool computer: [",
+   "sigs": [
+    [
+     "MCP error -N: Input validation error: Invalid arguments for tool computer: [",
+     30
+    ],
+    [
+     "MCP error -N: Input validation error: Invalid arguments for tool navigate: [",
+     19
+    ],
+    [
+     "MCP error -N: Input validation error: Invalid arguments for tool resize_window: [",
+     10
+    ],
+    [
+     "MCP error -N: Input validation error: Invalid arguments for tool javascript_tool: [",
+     6
+    ],
+    [
+     "<tool_use_error>InputValidationError: Read was called with input that could not be parsed as JSON.",
+     6
+    ],
+    [
+     "Output does not match required schema: root: must have required property 'status', root: must have required property 'ba",
+     4
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "sandbox:worktree-guard",
+   "bucket": "TOOL",
+   "n": 298,
+   "call_h": 0.1430797222222222,
+   "lost_h": 0.7408575,
+   "projects": [
+    [
+     "futurisma-race",
+     199
+    ],
+    [
+     "pizzuno",
+     58
+    ],
+    [
+     "geoguesser-app",
+     17
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     295
+    ],
+    [
+     "Edit",
+     2
+    ],
+    [
+     "Write",
+     1
+    ]
+   ],
+   "example": "This agent is isolated in the worktree ~<REDACTED>.<REDACTED>, but this command is too complex to verify that it stays i",
+   "sigs": [
+    [
+     "This agent is isolated in the worktree ~<REDACTED>.<REDACTED>, but this command is too complex to verify that it stays i",
+     153
+    ],
+    [
+     "This agent is isolated in the worktree ~/Desktop/pizzuno/.<REDACTED>, but this command is too complex to verify that it ",
+     50
+    ],
+    [
+     "This agent is isolated in the worktree ~<REDACTED>.<REDACTED>, but this command changes directory to the shared checkout",
+     26
+    ],
+    [
+     "This agent is isolated in the worktree ~<REDACTED>.<REDACTED>, but this command names git in a form too complex to verif",
+     12
+    ],
+    [
+     "This agent is isolated in the worktree ~/Desktop/Projects/arrows-game/.<REDACTED>, but this command is too complex to ve",
+     6
+    ],
+    [
+     "This agent is isolated in the worktree ~<REDACTED>.<REDACTED>, but this command runs sed with a value computed at runtim",
+     5
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "wait:sleep-blocked",
+   "bucket": "TOOL",
+   "n": 213,
+   "call_h": 0.0015430555555555555,
+   "lost_h": 0.5624597222222222,
+   "projects": [
+    [
+     "geoguesser-app",
+     63
+    ],
+    [
+     "arrows-game",
+     55
+    ],
+    [
+     "futurisma-race",
+     28
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     213
+    ]
+   ],
+   "example": "<tool_use_error>Blocked: sleep N followed by: echo waited. To wait for a condition, use Monitor with an until-loop (e.g",
+   "sigs": [
+    [
+     "<tool_use_error>Blocked: sleep N followed by: echo waited. To wait for a condition, use Monitor with an until-loop (e.g",
+     12
+    ],
+    [
+     "<tool_use_error>Blocked: sleep N followed by: cat <REDACTED>.output. To wait for a condition, use Monitor with an unti",
+     10
+    ],
+    [
+     "<tool_use_error>Blocked: sleep N followed by: tail -N <REDACTED>.output. To wait for a condition, use Monitor with an ",
+     8
+    ],
+    [
+     "<tool_use_error>Blocked: sleep N followed by: cat <REDACTED>.output. To wait for a condition, use Monitor with an until",
+     8
+    ],
+    [
+     "<tool_use_error>Blocked: sleep N followed by: cat <REDACTED>.log. To wait for a condition, use Monitor with an until-lo",
+     7
+    ],
+    [
+     "<tool_use_error>Blocked: sleep N followed by: tail -N <REDACTED>.log. To wait for a condition, use Monitor with an unti",
+     6
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "browser:precondition",
+   "bucket": "BEHAVIOUR",
+   "n": 207,
+   "call_h": 0.07777166666666667,
+   "lost_h": 0.5097994444444445,
+   "projects": [
+    [
+     "pizzuno",
+     33
+    ],
+    [
+     "the-annex-mvp",
+     31
+    ],
+    [
+     "futurisma-race",
+     23
+    ]
+   ],
+   "tools": [
+    [
+     "mcp:Claude_Browser",
+     207
+    ]
+   ],
+   "example": "no read_page tree cached; call read_page first",
+   "sigs": [
+    [
+     "no read_page tree cached; call read_page first",
+     72
+    ],
+    [
+     "left_click with `coordinate` requires a prior computer{action:\"screenshot\"} (no screenshot dimensions cached)",
+     21
+    ],
+    [
+     "No site is open in this tab. Use `navigate` first.",
+     11
+    ],
+    [
+     "Tab cap reached. Close a tab (tabs_close) before opening another, or call tabs_context to find an existing tab to reuse.",
+     9
+    ],
+    [
+     "ref map not initialized; call read_page first",
+     8
+    ],
+    [
+     "`scroll` with `coordinate` requires a prior computer{action:\"screenshot\"}",
+     8
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "script:node-error",
+   "bucket": "BEHAVIOUR",
+   "n": 84,
+   "call_h": 0.2564383333333333,
+   "lost_h": 0.4898827777777778,
+   "projects": [
+    [
+     "futurisma-race",
+     16
+    ],
+    [
+     "geoguesser-app",
+     15
+    ],
+    [
+     "arrows-game",
+     11
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     84
+    ]
+   ],
+   "example": "Exit code N: triggerUncaughtException(",
+   "sigs": [
+    [
+     "Exit code N: triggerUncaughtException(",
+     8
+    ],
+    [
+     "Exit code N: ReferenceError: WebSocket is not defined",
+     5
+    ],
+    [
+     "Exit code N: if (result.exceptionDetails) throw new Error(JSON.stringify(result.exceptionDetails));",
+     4
+    ],
+    [
+     "Exit code N: SyntaxError: Unexpected token=<REDACTED>",
+     3
+    ],
+    [
+     "Exit code N: SyntaxError: Unexpected end of JSON input",
+     3
+    ],
+    [
+     "Exit code N: SyntaxError: The requested module './src/sim/unlocks' does not provide an export named 'allUnlockableItemId",
+     2
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "timeout:host-load-passed-on-rerun",
+   "bucket": "ENV",
+   "n": 8,
+   "call_h": 0.4120047222222222,
+   "lost_h": 0.4720047222222222,
+   "projects": [
+    [
+     "codex-new-chat-gold-pdf-bot",
+     2
+    ],
+    [
+     "the-annex-mvp",
+     1
+    ],
+    [
+     "odd-hours",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     7
+    ],
+    [
+     "mcp:terminal",
+     1
+    ]
+   ],
+   "example": "Exit code N:",
+   "sigs": [
+    [
+     "Exit code N:",
+     2
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: bvwvrNmjg). Output is being writte",
+     1
+    ],
+    [
+     "Locator: getByText('PLAYING', { exact: true }).filter({ visible: true })",
+     1
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: bNunNxNtb). Output is being writte",
+     1
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: bNawNxmk). Output is being writte",
+     1
+    ],
+    [
+     "MCP tool \"terminal/read_terminal\" was moved to the background as task kNwNpbuiy so that a message that arrived while it ",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "nonzero:benign-no-match",
+   "bucket": "SIGNAL",
+   "n": 96,
+   "call_h": 0.09701,
+   "lost_h": 0.4398155555555555,
+   "projects": [
+    [
+     "arrows-game",
+     23
+    ],
+    [
+     "geoguesser-app",
+     18
+    ],
+    [
+     "futurisma-race",
+     9
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     96
+    ]
+   ],
+   "example": "Exit code N:",
+   "sigs": [
+    [
+     "Exit code N:",
+     31
+    ],
+    [
+     "Exit code N: N",
+     6
+    ],
+    [
+     "Exit code N: ---",
+     3
+    ],
+    [
+     "Exit code N: (eval):cd:N: no such file or directory: ~<REDACTED>",
+     2
+    ],
+    [
+     "Exit code N: N total",
+     2
+    ],
+    [
+     "Exit code N: --- MEMORY.md ---",
+     2
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "env:command-not-found",
+   "bucket": "ENV",
+   "n": 94,
+   "call_h": 0.21487722222222222,
+   "lost_h": 0.43832166666666666,
+   "projects": [
+    [
+     "arrows-game",
+     23
+    ],
+    [
+     "snaxx-tech",
+     15
+    ],
+    [
+     "futurisma-race",
+     13
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     94
+    ]
+   ],
+   "example": "Exit code N: Traceback (most recent call last):",
+   "sigs": [
+    [
+     "Exit code N: Traceback (most recent call last):",
+     25
+    ],
+    [
+     "Exit code N: const err = new Error(message);",
+     10
+    ],
+    [
+     "Exit code N: Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'playwright' imported from <REDACTED>.mjs",
+     6
+    ],
+    [
+     "Exit code N: Error: Cannot find module 'ws'",
+     4
+    ],
+    [
+     "Exit code N: Error: Cannot find module 'postcss'",
+     3
+    ],
+    [
+     "Exit code N: node: bad option: --import",
+     2
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "shell:zsh-glob-nomatch",
+   "bucket": "TOOL",
+   "n": 129,
+   "call_h": 0.17760333333333334,
+   "lost_h": 0.42610333333333333,
+   "projects": [
+    [
+     "arrows-game",
+     45
+    ],
+    [
+     "geoguesser-app",
+     33
+    ],
+    [
+     "futurisma-race",
+     7
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     129
+    ]
+   ],
+   "example": "Exit code N: (eval):N: no matches found: --include=*.ts",
+   "sigs": [
+    [
+     "Exit code N: (eval):N: no matches found: --include=*.ts",
+     23
+    ],
+    [
+     "Exit code N: (eval):N: no matches found: --include=*.tsx",
+     8
+    ],
+    [
+     "Exit code N: (eval):N: no matches found: app.config.*",
+     5
+    ],
+    [
+     "Exit code N: (eval):N: no matches found: <REDACTED>*",
+     5
+    ],
+    [
+     "Exit code N: (eval):N: no matches found: app/manga/[id]/page.tsx",
+     3
+    ],
+    [
+     "Exit code N: (eval):N: no matches found: .env*",
+     3
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "test:failures",
+   "bucket": "SIGNAL",
+   "n": 60,
+   "call_h": 0.15236388888888888,
+   "lost_h": 0.37058611111111117,
+   "projects": [
+    [
+     "futurisma-race",
+     36
+    ],
+    [
+     "arrows-game",
+     7
+    ],
+    [
+     "apollonia-events",
+     6
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     60
+    ]
+   ],
+   "example": "Exit code N: triggerUncaughtException(",
+   "sigs": [
+    [
+     "Exit code N: triggerUncaughtException(",
+     29
+    ],
+    [
+     "Exit code N: Traceback (most recent call last):",
+     15
+    ],
+    [
+     "Exit code N: PASS onTouched: blur empty field shows inline error \u2014 Ju lutemi shkruani numrin e t\u00eb ftuarve.",
+     2
+    ],
+    [
+     "Exit code N: FAIL reserve: guest count preserved after Ndrysho",
+     1
+    ],
+    [
+     "Exit code N: FAIL gnomon dot stays on the line span \u2014 dotX=N line=[N,N]",
+     1
+    ],
+    [
+     "Exit code N: FAIL meander in reveal: undrawn before, drawn after scroll \u2014 before={\"visible\":false,\"dashoffset\":\"N.N",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "network",
+   "bucket": "ENV",
+   "n": 35,
+   "call_h": 0.1282338888888889,
+   "lost_h": 0.31070611111111107,
+   "projects": [
+    [
+     "claude-scratch",
+     10
+    ],
+    [
+     "arrows-game",
+     6
+    ],
+    [
+     "pizzuno",
+     5
+    ]
+   ],
+   "tools": [
+    [
+     "WebFetch",
+     25
+    ],
+    [
+     "mcp:connector",
+     5
+    ],
+    [
+     "Bash",
+     5
+    ]
+   ],
+   "example": "Claude Code is unable to fetch from www.reddit.com",
+   "sigs": [
+    [
+     "Claude Code is unable to fetch from www.reddit.com",
+     4
+    ],
+    [
+     "Error: net::ERR_FAILED",
+     4
+    ],
+    [
+     "error:N:SSL routines:OPENSSL_internal:TLSVN_ALERT_INTERNAL_ERROR",
+     3
+    ],
+    [
+     "unable to verify the first certificate",
+     3
+    ],
+    [
+     "getaddrinfo ENOTFOUND trustmrr.com",
+     3
+    ],
+    [
+     "Claude Code is unable to fetch from www.nytimes.com",
+     2
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "env:disk-full",
+   "bucket": "ENV",
+   "n": 14,
+   "call_h": 0.09570361111111111,
+   "lost_h": 0.30875916666666664,
+   "projects": [
+    [
+     "geoguesser-app",
+     5
+    ],
+    [
+     "snaxx-tech",
+     4
+    ],
+    [
+     "futurisma-race",
+     2
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     12
+    ],
+    [
+     "Agent",
+     2
+    ]
+   ],
+   "example": "ENOSPC: no space left on device, open '<REDACTED>.output'",
+   "sigs": [
+    [
+     "ENOSPC: no space left on device, open '<REDACTED>.output'",
+     9
+    ],
+    [
+     "Failed to create worktree: Preparing worktree (new branch '<REDACTED>')",
+     2
+    ],
+    [
+     "Exit code N: Traceback (most recent call last):",
+     2
+    ],
+    [
+     "Exit code N: OSError: [Errno N] No space left on device",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "nonzero:check-failed",
+   "bucket": "SIGNAL",
+   "n": 20,
+   "call_h": 0.18211444444444444,
+   "lost_h": 0.26983666666666667,
+   "projects": [
+    [
+     "geoguesser-app",
+     14
+    ],
+    [
+     "manga-reader",
+     2
+    ],
+    [
+     "arrows-game",
+     2
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     20
+    ]
+   ],
+   "example": "Exit code N: # fail N",
+   "sigs": [
+    [
+     "Exit code N: # fail N",
+     7
+    ],
+    [
+     "Exit code N: Raw query failed. Code: `NPN`. Message: `ERROR: prepared statement",
+     1
+    ],
+    [
+     "Exit code N: FAIL:",
+     1
+    ],
+    [
+     "Exit code N: [vost#N:N @ NxN] Automatic encoder selection failed Default encoder for format webp (codec webp) is",
+     1
+    ],
+    [
+     "Exit code N: run N exit N # pass N # fail N",
+     1
+    ],
+    [
+     "Exit code N: N:# fail N",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "browser:navigation-denied",
+   "bucket": "ENV",
+   "n": 103,
+   "call_h": 0.081395,
+   "lost_h": 0.24239500000000003,
+   "projects": [
+    [
+     "futurisma-race",
+     13
+    ],
+    [
+     "the-annex-mvp",
+     12
+    ],
+    [
+     "wordle",
+     10
+    ]
+   ],
+   "tools": [
+    [
+     "mcp:Claude_Browser",
+     103
+    ]
+   ],
+   "example": "navigation to http://localhost:N was denied or failed",
+   "sigs": [
+    [
+     "navigation to http://localhost:N was denied or failed",
+     35
+    ],
+    [
+     "Policy check in progress for this tab; retry.",
+     24
+    ],
+    [
+     "actions[N] (navigate) failed: navigation to http://localhost:N was denied or failed (N completed, N remaining)",
+     11
+    ],
+    [
+     "navigation to http://N.N.N.N:N was denied or failed",
+     8
+    ],
+    [
+     "actions[N] (navigate) failed: navigation to http://N.N.N.N:N was denied or failed (N completed, N remaining)",
+     5
+    ],
+    [
+     "navigation to https://fjalth.com was denied or failed",
+     3
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "mcp:service-error",
+   "bucket": "ENV",
+   "n": 35,
+   "call_h": 0.06352722222222222,
+   "lost_h": 0.20191611111111113,
+   "projects": [
+    [
+     "planet-drop",
+     20
+    ],
+    [
+     "lucky-shelf",
+     7
+    ],
+    [
+     "snaxx-tech",
+     2
+    ]
+   ],
+   "tools": [
+    [
+     "mcp:unity-mcp",
+     20
+    ],
+    [
+     "mcp:Claude_Preview",
+     7
+    ],
+    [
+     "mcp:connector",
+     3
+    ]
+   ],
+   "example": "{",
+   "sigs": [
+    [
+     "{",
+     20
+    ],
+    [
+     "Error starting generation: seedance_N_N backend request failed (N): \"Pro\" or \"Ultimate\" plan required",
+     2
+    ],
+    [
+     "No booted simulator found. Boot one with: xcrun simctl boot <device> \u2014 then retry this action.",
+     2
+    ],
+    [
+     "Port N is in use by \"node\" (PID N) (not a preview server). Ask the user: does this server need port N specifica",
+     1
+    ],
+    [
+     "Port N is in use by \"node\" (PID N) (not a preview server). Ask the user: does this server need port N specific",
+     1
+    ],
+    [
+     "Failed to start server: Failed to start preview server: ERROR: npm vN.N.N is known not to run on Node.js vN.N.N. This",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "edit:not-read-first",
+   "bucket": "BEHAVIOUR",
+   "n": 120,
+   "call_h": 0.0006611111111111111,
+   "lost_h": 0.19935555555555554,
+   "projects": [
+    [
+     "lucky-shelf",
+     43
+    ],
+    [
+     "the-annex-mvp",
+     31
+    ],
+    [
+     "block-blaster",
+     15
+    ]
+   ],
+   "tools": [
+    [
+     "Edit",
+     101
+    ],
+    [
+     "Write",
+     19
+    ]
+   ],
+   "example": "<tool_use_error>File has not been read yet. Read it first before writing to it.</tool_use_error>",
+   "sigs": [
+    [
+     "<tool_use_error>File has not been read yet. Read it first before writing to it.</tool_use_error>",
+     120
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "browser:no-preview",
+   "bucket": "BEHAVIOUR",
+   "n": 50,
+   "call_h": 0.05159972222222222,
+   "lost_h": 0.16407194444444445,
+   "projects": [
+    [
+     "the-annex-mvp",
+     8
+    ],
+    [
+     "block-blaster",
+     6
+    ],
+    [
+     "pizzuno",
+     5
+    ]
+   ],
+   "tools": [
+    [
+     "mcp:Claude_Browser",
+     50
+    ]
+   ],
+   "example": "No preview is open. Use preview_start with {\"url\": \"https://\u2026\"} to open a browser tab at a URL, or with {\"name\": \"\u2026\"} to",
+   "sigs": [
+    [
+     "No preview is open. Use preview_start with {\"url\": \"https://\u2026\"} to open a browser tab at a URL, or with {\"name\": \"\u2026\"} to",
+     34
+    ],
+    [
+     "Preview not found.",
+     10
+    ],
+    [
+     "No preview is open. Use `preview_start` or `navigate` with {\"url\": \"https://\u2026\"} to open a browser tab at a URL, or `prev",
+     2
+    ],
+    [
+     "actions[N] (resize_window) failed: No preview is open. Use `preview_start` or `navigate` with {\"url\": \"https://\u2026\"} to op",
+     1
+    ],
+    [
+     "[resize_window] Viewport set to NxN on this tab. It stays (scaled down to fit if larger than the pane) until you ca",
+     1
+    ],
+    [
+     "There is no page to screenshot, zoom into or click \u2014 this tool only acts on a page in the Browser pane (not on files, th",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "env:port-in-use",
+   "bucket": "ENV",
+   "n": 32,
+   "call_h": 0.05815611111111111,
+   "lost_h": 0.15087833333333334,
+   "projects": [
+    [
+     "the-annex-mvp",
+     7
+    ],
+    [
+     "snaxx-tech",
+     3
+    ],
+    [
+     "odd-hours",
+     3
+    ]
+   ],
+   "tools": [
+    [
+     "mcp:Claude_Browser",
+     32
+    ]
+   ],
+   "example": "Port N is in use by \"node\" (PID N) (not a preview server). Ask the user: does this server need port N specific",
+   "sigs": [
+    [
+     "Port N is in use by \"node\" (PID N) (not a preview server). Ask the user: does this server need port N specific",
+     18
+    ],
+    [
+     "Port N is required by this server but is in use by \"node\" (PID N). Stop that process to free port N and try ag",
+     5
+    ],
+    [
+     "Port N is in use by \"node\" (PID N) (not a preview server). Nothing was started. If that process is already this p",
+     2
+    ],
+    [
+     "Port N is in use by \"node\" (PID N) and N other process(es) (not a preview server). Ask the user: does this server",
+     1
+    ],
+    [
+     "Port N is in use by \"node\" (PID N) and N other process(es) (not a preview server). Ask the user: does this server n",
+     1
+    ],
+    [
+     "Port N is in use by another chat's dev server \"annex-dev\". preview_stop won't stop another chat's server. Ask the use",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "env:service-limit",
+   "bucket": "ENV",
+   "n": 29,
+   "call_h": 0.04947083333333333,
+   "lost_h": 0.13338750000000002,
+   "projects": [
+    [
+     "secret-dictator-v2",
+     8
+    ],
+    [
+     "claude-scratch",
+     8
+    ],
+    [
+     "lucky-shelf",
+     4
+    ]
+   ],
+   "tools": [
+    [
+     "WebSearch",
+     15
+    ],
+    [
+     "mcp:connector",
+     7
+    ],
+    [
+     "WebFetch",
+     5
+    ]
+   ],
+   "example": "You've hit your session limit \u00b7 resets N:Npm (Europe/Belgrade)",
+   "sigs": [
+    [
+     "You've hit your session limit \u00b7 resets N:Npm (Europe/Belgrade)",
+     11
+    ],
+    [
+     "API Error: N The following domains are not accessible to our user agent: ['reddit.com']. Read more: https://support.an",
+     8
+    ],
+    [
+     "Error starting generation: Out of credits in the selected workspace.",
+     3
+    ],
+    [
+     "Error starting generation: Rate limit reached: max N concurrent job(s) on starter (monthly) plan.",
+     2
+    ],
+    [
+     "Error starting Background Removal: Rate limit reached: max N concurrent job(s) on starter (monthly) plan.",
+     1
+    ],
+    [
+     "Error starting generation: recraft_vN_N backend request failed (N): rate_limit_reached",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "git:other",
+   "bucket": "BEHAVIOUR",
+   "n": 20,
+   "call_h": 0.04344166666666667,
+   "lost_h": 0.111525,
+   "projects": [
+    [
+     "geoguesser-app",
+     4
+    ],
+    [
+     "snaxx-tech",
+     3
+    ],
+    [
+     "futurisma-race",
+     3
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     20
+    ]
+   ],
+   "example": "Exit code N: fatal: not a git repository (or any of the parent directories): .git",
+   "sigs": [
+    [
+     "Exit code N: fatal: not a git repository (or any of the parent directories): .git",
+     6
+    ],
+    [
+     "Exit code N: npm error enoent",
+     3
+    ],
+    [
+     "Exit code N: fatal: '<REDACTED>' already exists",
+     2
+    ],
+    [
+     "Exit code N: error: pathspec 'PLAN.md' did not match any file(s) known to git",
+     1
+    ],
+    [
+     "Exit code N: error: patch failed: public/css/styles.css:N",
+     1
+    ],
+    [
+     "Exit code N: error: public/css/styles.css: does not match index",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "other",
+   "bucket": "BEHAVIOUR",
+   "n": 31,
+   "call_h": 0.0072175,
+   "lost_h": 0.1058563888888889,
+   "projects": [
+    [
+     "codex-new-chat-gold-pdf-bot",
+     10
+    ],
+    [
+     "snaxx-tech",
+     7
+    ],
+    [
+     "futurisma-race",
+     3
+    ]
+   ],
+   "tools": [
+    [
+     "Read",
+     11
+    ],
+    [
+     "Bash",
+     8
+    ],
+    [
+     "Artifact",
+     7
+    ]
+   ],
+   "example": "pdftoppm is not installed. Install poppler-utils (e.g. `brew install poppler` or `apt-get install poppler-utils`) to ena",
+   "sigs": [
+    [
+     "pdftoppm is not installed. Install poppler-utils (e.g. `brew install poppler` or `apt-get install poppler-utils`) to ena",
+     9
+    ],
+    [
+     "Nothing was published or removed: this publish touches files whose published content is not what you last saw, and sendi",
+     3
+    ],
+    [
+     "deploy N: capabilities.db.rules[N]: write level is below the read level inherited from the rule above; declare read ex",
+     2
+    ],
+    [
+     "Cannot create agent worktree: not in a git repository and no WorktreeCreate hooks are configured. Configure WorktreeCrea",
+     1
+    ],
+    [
+     "File has an image extension but its content is not a valid PNG/JPEG/GIF/WebP. Detected: XML/SVG document (starts with \"<",
+     1
+    ],
+    [
+     "<tool_use_error>Unknown skill: impeccable</tool_use_error>",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "edit:string-not-found",
+   "bucket": "BEHAVIOUR",
+   "n": 45,
+   "call_h": 0.00023027777777777776,
+   "lost_h": 0.06750805555555556,
+   "projects": [
+    [
+     "lucky-shelf",
+     10
+    ],
+    [
+     "pizzuno",
+     6
+    ],
+    [
+     "odd-hours",
+     4
+    ]
+   ],
+   "tools": [
+    [
+     "Edit",
+     45
+    ]
+   ],
+   "example": "<tool_use_error>String to replace not found in file.",
+   "sigs": [
+    [
+     "<tool_use_error>String to replace not found in file.",
+     45
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "shell:bsd-vs-gnu-flags",
+   "bucket": "TOOL",
+   "n": 21,
+   "call_h": 0.011761388888888889,
+   "lost_h": 0.053872500000000004,
+   "projects": [
+    [
+     "geoguesser-app",
+     6
+    ],
+    [
+     "the-annex-mvp",
+     5
+    ],
+    [
+     "arrows-game",
+     4
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     21
+    ]
+   ],
+   "example": "Exit code N: \": invalid command code ,",
+   "sigs": [
+    [
+     "Exit code N: \": invalid command code ,",
+     13
+    ],
+    [
+     "Exit code N: sed [-EHalnu] [-i extension] [-e script] ... [-f script_file] ... [file ...]",
+     1
+    ],
+    [
+     "Exit code N: N // merge fails on spend rather than on chunk boundaries: N/N/N -> N/N/N.",
+     1
+    ],
+    [
+     "Exit code N: usage: cat [-belnstuv] [file ...]",
+     1
+    ],
+    [
+     "Exit code N: cp: /tmp/..<REDACTED>.bak: No such file or directory",
+     1
+    ],
+    [
+     "Exit code N: N. **Test-first.** Paste RED, then GREEN; a test never seen failing proves nothing. Characterisations that ",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "sandbox:not-permitted",
+   "bucket": "ENV",
+   "n": 2,
+   "call_h": 0.045125000000000005,
+   "lost_h": 0.05043055555555556,
+   "projects": [
+    [
+     "arrows-game",
+     2
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     2
+    ]
+   ],
+   "example": "Exit code N: ls: /usr/local/bin/claude: No such file or directory",
+   "sigs": [
+    [
+     "Exit code N: ls: /usr/local/bin/claude: No such file or directory",
+     1
+    ],
+    [
+     "Exit code N: curl: (N) Failed to connect to pypi.org port N after N ms: Couldn't connect to server",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "edit:stale-read",
+   "bucket": "ENV",
+   "n": 29,
+   "call_h": 0.0004613888888888889,
+   "lost_h": 0.045350277777777774,
+   "projects": [
+    [
+     "lucky-shelf",
+     13
+    ],
+    [
+     "the-annex-mvp",
+     4
+    ],
+    [
+     "futurisma-race",
+     3
+    ]
+   ],
+   "tools": [
+    [
+     "Edit",
+     23
+    ],
+    [
+     "Write",
+     6
+    ]
+   ],
+   "example": "<tool_use_error>File has been modified since read, either by the user or by a linter. Read it again before attempting to",
+   "sigs": [
+    [
+     "<tool_use_error>File has been modified since read, either by the user or by a linter. Read it again before attempting to",
+     29
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "device:adb-offline",
+   "bucket": "ENV",
+   "n": 4,
+   "call_h": 0.02287611111111111,
+   "lost_h": 0.041376111111111114,
+   "projects": [
+    [
+     "arrows-game",
+     2
+    ],
+    [
+     "block-blaster",
+     1
+    ],
+    [
+     "geoguesser-app",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     4
+    ]
+   ],
+   "example": "Exit code N: (eval):N: no such file or directory: <REDACTED>.sh",
+   "sigs": [
+    [
+     "Exit code N: (eval):N: no such file or directory: <REDACTED>.sh",
+     1
+    ],
+    [
+     "Exit code N: error: device 'emulator-N' not found",
+     1
+    ],
+    [
+     "Exit code N: http_proxy=cmd: Failure calling service settings: Broken pipe (N)",
+     1
+    ],
+    [
+     "Exit code N: adb: device 'emulator-N' not found",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "tool:subagent-wrote-report",
+   "bucket": "BEHAVIOUR",
+   "n": 4,
+   "call_h": 4.5833333333333334e-05,
+   "lost_h": 0.04057361111111111,
+   "projects": [
+    [
+     "codex-new-chat-gold-pdf-bot",
+     4
+    ]
+   ],
+   "tools": [
+    [
+     "Write",
+     4
+    ]
+   ],
+   "example": "<tool_use_error>Subagents should return findings as text, not write report files. Include this content in your final res",
+   "sigs": [
+    [
+     "<tool_use_error>Subagents should return findings as text, not write report files. Include this content in your final res",
+     4
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "shell:zsh-other",
+   "bucket": "TOOL",
+   "n": 9,
+   "call_h": 0.008797222222222222,
+   "lost_h": 0.03674166666666666,
+   "projects": [
+    [
+     "arrows-game",
+     2
+    ],
+    [
+     "lucky-shelf",
+     1
+    ],
+    [
+     "manga-reader",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     9
+    ]
+   ],
+   "example": "Exit code N: (eval):N: bad substitution",
+   "sigs": [
+    [
+     "Exit code N: (eval):N: bad substitution",
+     3
+    ],
+    [
+     "Exit code N: (eval):N: parse error near `$(grep -o 'cover-[N-...'",
+     1
+    ],
+    [
+     "Exit code N: (eval):N: parse error near `>'",
+     1
+    ],
+    [
+     "Exit code N: (eval):N: parse error near `\"\"'",
+     1
+    ],
+    [
+     "Exit code N: (eval):N: unmatched `",
+     1
+    ],
+    [
+     "Exit code N: (eval):N: no such user or named directory: Ns",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "test:tsc-errors",
+   "bucket": "SIGNAL",
+   "n": 10,
+   "call_h": 0.015185555555555555,
+   "lost_h": 0.03510222222222222,
+   "projects": [
+    [
+     "geoguesser-app",
+     5
+    ],
+    [
+     "futurisma-race",
+     3
+    ],
+    [
+     "lucky-shelf",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     10
+    ]
+   ],
+   "example": "Exit code N: src/app/summary.tsx(N,N): error TSN: Argument of type '\"/catalog\"' is not assignable to parameter of t",
+   "sigs": [
+    [
+     "Exit code N: src/app/summary.tsx(N,N): error TSN: Argument of type '\"/catalog\"' is not assignable to parameter of t",
+     1
+    ],
+    [
+     "Exit code N: eNe/forgotten-za.spec.ts(N,N): error TSN: Argument of type '{ until: \"result\"; callZa: true; }' is no",
+     1
+    ],
+    [
+     "Exit code N: src/game/shadow-settings.ts(N,N): error TSN: 'THREE' is declared but its value is never read.",
+     1
+    ],
+    [
+     "Exit code N: src/game/autopilot.ts(N,N): error TSN: 'lap' is declared but its value is never read.",
+     1
+    ],
+    [
+     "Exit code N: src/game/ability-slots.ts(N,N): error TSN: Type 'Element' is not assignable to type 'SVGElementTagNameM",
+     1
+    ],
+    [
+     "Exit code N: error TSN: Option 'paths' can only be specified in 'tsconfig.json' file or set to 'null' on command line",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "shell:zsh-no-word-split",
+   "bucket": "TOOL",
+   "n": 15,
+   "call_h": 0.006779444444444444,
+   "lost_h": 0.02661277777777778,
+   "projects": [
+    [
+     "arrows-game",
+     15
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     15
+    ]
+   ],
+   "example": "Exit code N: (eval):N: no such file or directory: ~<REDACTED> -s emulator-N",
+   "sigs": [
+    [
+     "Exit code N: (eval):N: no such file or directory: ~<REDACTED> -s emulator-N",
+     7
+    ],
+    [
+     "Exit code N: (eval):N: no such file or directory: npx tsx scripts/contrast-audit.ts --solve",
+     1
+    ],
+    [
+     "Exit code N: (eval):N: no such file or directory: node <REDACTED>.mjs",
+     1
+    ],
+    [
+     "Exit code N: (eval):N: no such file or directory: npx tsx <REDACTED>.ts",
+     1
+    ],
+    [
+     "Exit code N: (eval):N: no such file or directory: pythonN artifacts/HALLOWEEN-N/device.py",
+     1
+    ],
+    [
+     "Exit code N: (eval):N: no such file or directory: pythonN artifacts/PETAL-ADS-N/device.py",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "git:conflict-or-dirty",
+   "bucket": "ENV",
+   "n": 2,
+   "call_h": 0.01340861111111111,
+   "lost_h": 0.019880833333333334,
+   "projects": [
+    [
+     "futurisma-race",
+     1
+    ],
+    [
+     "arrows-game",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     2
+    ]
+   ],
+   "example": "Exit code N: fatal: Not possible to fast-forward, aborting.",
+   "sigs": [
+    [
+     "Exit code N: fatal: Not possible to fast-forward, aborting.",
+     1
+    ],
+    [
+     "Exit code N: error: Your local changes to the following files would be overwritten by merge:",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "build:metro-bundler",
+   "bucket": "SIGNAL",
+   "n": 13,
+   "call_h": 0.005578611111111111,
+   "lost_h": 0.017995277777777773,
+   "projects": [
+    [
+     "arrows-game",
+     6
+    ],
+    [
+     "geoguesser-app",
+     3
+    ],
+    [
+     "futurisma-race",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     9
+    ],
+    [
+     "mcp:Claude_Browser",
+     4
+    ]
+   ],
+   "example": "The dev server exited during startup (code N). Fix the error in the output below, then start the server again.",
+   "sigs": [
+    [
+     "The dev server exited during startup (code N). Fix the error in the output below, then start the server again.",
+     4
+    ],
+    [
+     "Exit code N: App.tsx",
+     2
+    ],
+    [
+     "Exit code N: theme.ts",
+     1
+    ],
+    [
+     "Exit code N: ls: -l: No such file or directory",
+     1
+    ],
+    [
+     "Exit code N: drwxr-xr-x@ N gentlegen staff N Jul N N:N res",
+     1
+    ],
+    [
+     "Exit code N: yarn-error.*",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "file:too-large",
+   "bucket": "TOOL",
+   "n": 10,
+   "call_h": 0.0025466666666666663,
+   "lost_h": 0.016935555555555554,
+   "projects": [
+    [
+     "claude-scratch",
+     4
+    ],
+    [
+     "arrows-game",
+     3
+    ],
+    [
+     "pizzuno",
+     2
+    ]
+   ],
+   "tools": [
+    [
+     "Read",
+     10
+    ]
+   ],
+   "example": "File content (N tokens) exceeds maximum allowed tokens (N). Use offset and limit parameters to read specific por",
+   "sigs": [
+    [
+     "File content (N tokens) exceeds maximum allowed tokens (N). Use offset and limit parameters to read specific por",
+     9
+    ],
+    [
+     "File content (N.NKB) exceeds maximum allowed size (NKB). Use offset and limit parameters to read specific portions o",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "interrupted",
+   "bucket": "ENV",
+   "n": 1,
+   "call_h": 0.0077733333333333335,
+   "lost_h": 0.013967777777777779,
+   "projects": [
+    [
+     "geoguesser-app",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     1
+    ]
+   ],
+   "example": "[Tool call interrupted: the session ended before this call's result was recorded, so its outcome is unknown. Check wheth",
+   "sigs": [
+    [
+     "[Tool call interrupted: the session ended before this call's result was recorded, so its outcome is unknown. Check wheth",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "edit:not-unique",
+   "bucket": "BEHAVIOUR",
+   "n": 7,
+   "call_h": 4.222222222222222e-05,
+   "lost_h": 0.01134777777777778,
+   "projects": [
+    [
+     "pizzuno",
+     3
+    ],
+    [
+     "odd-hours",
+     2
+    ],
+    [
+     "the-annex-mvp",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Edit",
+     7
+    ]
+   ],
+   "example": "<tool_use_error>Found N matches of the string to replace, but replace_all is false. To replace all occurrences, set repl",
+   "sigs": [
+    [
+     "<tool_use_error>Found N matches of the string to replace, but replace_all is false. To replace all occurrences, set repl",
+     7
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "device:install-failed",
+   "bucket": "ENV",
+   "n": 1,
+   "call_h": 0.00816111111111111,
+   "lost_h": 0.01027222222222222,
+   "projects": [
+    [
+     "geoguesser-app",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     1
+    ]
+   ],
+   "example": "Exit code N: adb: failed to install ~<REDACTED>.apk: Failure [<REDACTED>: Failed to override installation location]",
+   "sigs": [
+    [
+     "Exit code N: adb: failed to install ~<REDACTED>.apk: Failure [<REDACTED>: Failed to override installation location]",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "file:is-directory",
+   "bucket": "BEHAVIOUR",
+   "n": 6,
+   "call_h": 0.0013916666666666667,
+   "lost_h": 0.008475,
+   "projects": [
+    [
+     "arrows-game",
+     2
+    ],
+    [
+     "the-annex-mvp",
+     1
+    ],
+    [
+     "futurisma-race",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     5
+    ],
+    [
+     "Read",
+     1
+    ]
+   ],
+   "example": "Exit code N: N total",
+   "sigs": [
+    [
+     "Exit code N: N total",
+     1
+    ],
+    [
+     "Exit code N: Error: EISDIR: illegal operation on a directory, read",
+     1
+    ],
+    [
+     "Exit code N: rm: <REDACTED>: is a directory",
+     1
+    ],
+    [
+     "Exit code N: (eval):N: ==== not found",
+     1
+    ],
+    [
+     "EISDIR: illegal operation on a directory, read '~<REDACTED>'",
+     1
+    ],
+    [
+     "Exit code N: cp: /tmp/x is a directory (not copied).",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "shell:syntax",
+   "bucket": "BEHAVIOUR",
+   "n": 3,
+   "call_h": 0.003729444444444444,
+   "lost_h": 0.007951666666666666,
+   "projects": [
+    [
+     "arrows-game",
+     2
+    ],
+    [
+     "geoguesser-app",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     3
+    ]
+   ],
+   "example": "Exit code N: awk: syntax error at source line N",
+   "sigs": [
+    [
+     "Exit code N: awk: syntax error at source line N",
+     1
+    ],
+    [
+     "Exit code N: app.json restored",
+     1
+    ],
+    [
+     "Exit code N: tee: <REDACTED>.txt: No such file or directory",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "tool:unknown-tool",
+   "bucket": "BEHAVIOUR",
+   "n": 7,
+   "call_h": 3.194444444444445e-05,
+   "lost_h": 0.005893055555555556,
+   "projects": [
+    [
+     "research-idea-2",
+     2
+    ],
+    [
+     "the-annex-mvp",
+     2
+    ],
+    [
+     "planet-drop",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "mcp:Claude_Browser",
+     5
+    ],
+    [
+     "mcp:connector",
+     1
+    ],
+    [
+     "bash",
+     1
+    ]
+   ],
+   "example": "<tool_use_error>Error: No such tool available: <REDACTED></tool_use_error>",
+   "sigs": [
+    [
+     "<tool_use_error>Error: No such tool available: <REDACTED></tool_use_error>",
+     6
+    ],
+    [
+     "<tool_use_error>Error: No such tool available: bash. Tool names are case-sensitive: call Bash instead.</tool_use_error>",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "edit:no-op",
+   "bucket": "BEHAVIOUR",
+   "n": 5,
+   "call_h": 9.444444444444445e-06,
+   "lost_h": 0.004315,
+   "projects": [
+    [
+     "futurisma-race",
+     3
+    ],
+    [
+     "wordle",
+     1
+    ],
+    [
+     "geoguesser-app",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Edit",
+     5
+    ]
+   ],
+   "example": "<tool_use_error>No changes to make: old_string and new_string are exactly the same.</tool_use_error>",
+   "sigs": [
+    [
+     "<tool_use_error>No changes to make: old_string and new_string are exactly the same.</tool_use_error>",
+     5
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "build:gradle-xcode-failed",
+   "bucket": "SIGNAL",
+   "n": 2,
+   "call_h": 0.00019444444444444443,
+   "lost_h": 0.0025,
+   "projects": [
+    [
+     "arrows-game",
+     2
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     2
+    ]
+   ],
+   "example": "Exit code N: FAILURE: Build failed with an exception.",
+   "sigs": [
+    [
+     "Exit code N: FAILURE: Build failed with an exception.",
+     1
+    ],
+    [
+     "Exit code N: -rw-r--r--@ N gentlegen staff N Oct N N:N FAILED",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  }
+ ],
+ "loops_summary": [
+  [
+   "same failing call (identical skeleton) retried 3+ times, 2+ failures",
+   41,
+   "3.73",
+   "9.95",
+   "21 ended in success"
+  ],
+  [
+   "3+ consecutive failures of one tool (any input)",
+   46,
+   "9.18",
+   "9.38",
+   "next call of same tool succeeded 32, switched tool/approach 14"
+  ],
+  [
+   "edit fail -> re-edit on one file (files with 1+ failed edit)",
+   197,
+   "-",
+   "1.99",
+   "14 files with 2+ failed edits"
+  ],
+  [
+   "near-identical dispatch (prompt Jaccard >= 0.9) after the first agent had finished",
+   3,
+   "-",
+   "1.55",
+   "3 identical prompts; 0 say fix-round/retry/resume (0.0 h); 5 while the first was still running; 4 first agent not found; 24 pairs >= 0.8"
+  ],
+  [
+   "build of an unchanged tree (same build command, no edit/mutation in between, same agent) INFERRED",
+   9,
+   "0.04",
+   "-",
+   "8 after a failed build"
+  ],
+  [
+   "full test/tsc run repeated with no change in between INFERRED",
+   12,
+   "0.25",
+   "-",
+   "1 after a failed run"
+  ],
+  [
+   "waits that ended in a timeout",
+   284,
+   "64.70",
+   "-",
+   "+213 foreground sleeps blocked by the harness"
+  ],
+  [
+   "subagents parked waiting on the coordinator (dormant until a coordinator message)",
+   134,
+   "-",
+   "334.76",
+   "median 15 min, p90 107 min per agent; 34 parked > 30 min; capped at 8 h per agent: 105.8 h; bg-notification wakes add 51.1 h"
+  ],
+  [
+   "manual polling: same successful command 5+ times within 30 min",
+   18,
+   "0.32",
+   "5.38",
+   "analysis 6, fs 6, test 2"
+  ]
+ ],
+ "comparisons": [
+  {
+   "name": "Read tool (A) vs Bash cat/head/tail/sed -n (B)",
+   "na": 12498,
+   "fa": 63,
+   "nb": 13901,
+   "fb": 236,
+   "ra": 0.005040806529044647,
+   "rb": 0.016977195885188114,
+   "cia": [
+    0.003942188376473641,
+    0.006443609504696122
+   ],
+   "cib": [
+    0.014959225849996526,
+    0.019262062941959222
+   ],
+   "strata": 714,
+   "wa": 9901,
+   "wfa": 56,
+   "wb": 10630,
+   "wfb": 204,
+   "orr": 0.22613312937097946,
+   "lo": 0.1554877647703432,
+   "hi": 0.328875987603531,
+   "verdict": "A lower, holds within agent",
+   "note": ""
+  },
+  {
+   "name": "Edit tool (A) vs sed -i / perl -i / script rewrite (B)",
+   "na": 12891,
+   "fa": 194,
+   "nb": 8705,
+   "fb": 227,
+   "ra": 0.01504925917306648,
+   "rb": 0.02607696726019529,
+   "cia": [
+    0.01308735384559818,
+    0.01730011520249001
+   ],
+   "cib": [
+    0.022932414553484253,
+    0.029639629011988328
+   ],
+   "strata": 319,
+   "wa": 8236,
+   "wfa": 135,
+   "wb": 5770,
+   "wfb": 167,
+   "orr": 0.42697709523249777,
+   "lo": 0.3101757433918312,
+   "hi": 0.5877617568014597,
+   "verdict": "A lower, holds within agent",
+   "note": "sed -i exits 0 when nothing matched, so B under-reports silent misses"
+  },
+  {
+   "name": "Grep tool (A) vs Bash grep/rg (B), benign exit-1 excluded",
+   "na": 0,
+   "fa": 0,
+   "nb": 12204,
+   "fb": 109,
+   "ra": null,
+   "rb": 0.008931497869550968,
+   "cia": [
+    0.0,
+    0.0
+   ],
+   "cib": [
+    0.007409912007688776,
+    0.010762145532769486
+   ],
+   "strata": 0,
+   "wa": 0,
+   "wfa": 0,
+   "wb": 0,
+   "wfb": 0,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "arm A never used (tool not exposed in these sessions?): no comparison possible",
+   "note": ""
+  },
+  {
+   "name": "Grep tool (A) vs Bash grep/rg (B), any non-zero",
+   "na": 0,
+   "fa": 0,
+   "nb": 12204,
+   "fb": 126,
+   "ra": null,
+   "rb": 0.01032448377581121,
+   "cia": [
+    0.0,
+    0.0
+   ],
+   "cib": [
+    0.008678815166589676,
+    0.012278337488470988
+   ],
+   "strata": 0,
+   "wa": 0,
+   "wfa": 0,
+   "wb": 0,
+   "wfb": 0,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "arm A never used (tool not exposed in these sessions?): no comparison possible",
+   "note": ""
+  },
+  {
+   "name": "Glob tool (A) vs Bash find (B)",
+   "na": 0,
+   "fa": 0,
+   "nb": 330,
+   "fb": 11,
+   "ra": null,
+   "rb": 0.03333333333333333,
+   "cia": [
+    0.0,
+    0.0
+   ],
+   "cib": [
+    0.01871271868367097,
+    0.05869405147319384
+   ],
+   "strata": 0,
+   "wa": 0,
+   "wfa": 0,
+   "wb": 0,
+   "wfb": 0,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "arm A never used (tool not exposed in these sessions?): no comparison possible",
+   "note": ""
+  },
+  {
+   "name": "Write tool (A) vs heredoc/tee write (B)",
+   "na": 4697,
+   "fa": 32,
+   "nb": 4029,
+   "fb": 185,
+   "ra": 0.006812859271875665,
+   "rb": 0.04591710101762224,
+   "cia": [
+    0.004830090602213601,
+    0.00960170816335212
+   ],
+   "cib": [
+    0.03987521151025424,
+    0.052824090143448195
+   ],
+   "strata": 394,
+   "wa": 3380,
+   "wfa": 26,
+   "wb": 3239,
+   "wfb": 142,
+   "orr": 0.09310457945018212,
+   "lo": 0.05437588897301367,
+   "hi": 0.15941739764286647,
+   "verdict": "A lower, holds within agent",
+   "note": ""
+  },
+  {
+   "name": "Long command in background (A) vs foreground (B): timeout or error",
+   "na": 1309,
+   "fa": 4,
+   "nb": 11556,
+   "fb": 784,
+   "ra": 0.0030557677616501145,
+   "rb": 0.06784354447905849,
+   "cia": [
+    0.0011889312350006718,
+    0.007830892634078431
+   ],
+   "cib": [
+    0.06340055006834998,
+    0.07257376985658741
+   ],
+   "strata": 213,
+   "wa": 1300,
+   "wfa": 4,
+   "wb": 6953,
+   "wfb": 595,
+   "orr": 0.03261159763135511,
+   "lo": 0.012271349914031681,
+   "hi": 0.08666661023603668,
+   "verdict": "A lower, holds within agent",
+   "note": "A counts the launch only; a background job that later fails shows in its notification, not here"
+  },
+  {
+   "name": "Monitor tool (A) vs Bash until/while+sleep loop (B): timeout or error",
+   "na": 185,
+   "fa": 3,
+   "nb": 2137,
+   "fb": 498,
+   "ra": 0.016216216216216217,
+   "rb": 0.23303696771174542,
+   "cia": [
+    0.005529941536879922,
+    0.046585694001052405
+   ],
+   "cib": [
+    0.21560093543790648,
+    0.25143109532980656
+   ],
+   "strata": 59,
+   "wa": 173,
+   "wfa": 3,
+   "wb": 551,
+   "wfb": 188,
+   "orr": 0.059573784016592406,
+   "lo": 0.01995951991841048,
+   "hi": 0.17781167866577802,
+   "verdict": "A lower, holds within agent",
+   "note": ""
+  },
+  {
+   "name": "sh -c / bash script (A) vs plain zsh command (B)",
+   "na": 820,
+   "fa": 19,
+   "nb": 75707,
+   "fb": 2329,
+   "ra": 0.023170731707317073,
+   "rb": 0.030763337604184555,
+   "cia": [
+    0.014882960921361606,
+    0.03590544306309366
+   ],
+   "cib": [
+    0.02955690635593543,
+    0.03201738738431537
+   ],
+   "strata": 145,
+   "wa": 820,
+   "wfa": 19,
+   "wb": 23048,
+   "wfb": 812,
+   "orr": 0.6499114490920274,
+   "lo": 0.40780680031917454,
+   "hi": 1.0357475435189276,
+   "verdict": "no within-agent difference (raw gap is task mix)",
+   "note": ""
+  },
+  {
+   "name": "sh -c / bash script (A) vs plain zsh (B): zsh-class errors only",
+   "na": 820,
+   "fa": 3,
+   "nb": 75707,
+   "fb": 434,
+   "ra": 0.003658536585365854,
+   "rb": 0.0057326271018531974,
+   "cia": [
+    0.0012449734067976957,
+    0.01070101232638208
+   ],
+   "cib": [
+    0.005219340943451237,
+    0.006296071929729664
+   ],
+   "strata": 145,
+   "wa": 820,
+   "wfa": 3,
+   "wb": 23048,
+   "wfb": 141,
+   "orr": 0.4670670296862796,
+   "lo": 0.14588168638531568,
+   "hi": 1.4954009349999051,
+   "verdict": "no within-agent difference (raw gap is task mix)",
+   "note": ""
+  },
+  {
+   "name": "Bash with absolute paths only (A) vs relative paths only (B)",
+   "na": 20162,
+   "fa": 1023,
+   "nb": 26217,
+   "fb": 503,
+   "ra": 0.050739013986707666,
+   "rb": 0.019186024335354924,
+   "cia": [
+    0.04779430271361204,
+    0.05385489401517709
+   ],
+   "cib": [
+    0.017594552111114867,
+    0.020918384102191122
+   ],
+   "strata": 782,
+   "wa": 15614,
+   "wfa": 839,
+   "wb": 24207,
+   "wfb": 481,
+   "orr": 3.1057840845173694,
+   "lo": 2.7085476265885857,
+   "hi": 3.5612793679357946,
+   "verdict": "A higher, holds within agent",
+   "note": ""
+  },
+  {
+   "name": "Bash absolute (A) vs relative (B): file-not-found only",
+   "na": 20162,
+   "fa": 28,
+   "nb": 26217,
+   "fb": 32,
+   "ra": 0.0013887511159607182,
+   "rb": 0.0012205820650722813,
+   "cia": [
+    0.00096103945759105,
+    0.0020064340149765414
+   ],
+   "cib": [
+    0.0008647656859981108,
+    0.0017225501993928447
+   ],
+   "strata": 782,
+   "wa": 15614,
+   "wfa": 22,
+   "wb": 24207,
+   "wfb": 30,
+   "orr": 0.9164546329349121,
+   "lo": 0.49829753086166934,
+   "hi": 1.6855172707268007,
+   "verdict": "no within-agent difference (raw gap is task mix)",
+   "note": ""
+  },
+  {
+   "name": "Bash compound (multi-line or 3+ chained) (A) vs simple (B)",
+   "na": 42992,
+   "fa": 1654,
+   "nb": 34726,
+   "fb": 701,
+   "ra": 0.03847227391142538,
+   "rb": 0.02018660369751771,
+   "cia": [
+    0.036695027057608964,
+    0.040331994085756676
+   ],
+   "cib": [
+    0.01875959021242702,
+    0.0217197651555514
+   ],
+   "strata": 1201,
+   "wa": 42787,
+   "wfa": 1647,
+   "wb": 34341,
+   "wfb": 698,
+   "orr": 2.0699309100914944,
+   "lo": 1.8805002171101126,
+   "hi": 2.27844375319278,
+   "verdict": "A higher, holds within agent",
+   "note": ""
+  },
+  {
+   "name": "Read with offset/limit (A) vs whole-file Read (B)",
+   "na": 3125,
+   "fa": 9,
+   "nb": 9373,
+   "fb": 54,
+   "ra": 0.00288,
+   "rb": 0.005761229062199936,
+   "cia": [
+    0.0015159201453978073,
+    0.005464810358824586
+   ],
+   "cib": [
+    0.00441848868719766,
+    0.007508938987383086
+   ],
+   "strata": 469,
+   "wa": 2956,
+   "wfa": 9,
+   "wb": 5570,
+   "wfb": 32,
+   "orr": 0.34679713744537366,
+   "lo": 0.15635179942392252,
+   "hi": 0.7692156724990261,
+   "verdict": "A lower, holds within agent",
+   "note": ""
+  }
+ ],
+ "skills": [
+  {
+   "skill": "frontend-design",
+   "n": 35,
+   "projects": [
+    [
+     "kik-home-redesign",
+     6
+    ],
+    [
+     "the-annex-mvp",
+     4
+    ],
+    [
+     "odd-hours",
+     3
+    ]
+   ],
+   "med_wall_min": 35.0284166653951,
+   "med_calls": 68.0,
+   "fail_rate": 0.029517638588912886,
+   "agents": 21,
+   "tests": 63,
+   "edits": 438,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "ui-ux-pro-max",
+   "n": 33,
+   "projects": [
+    [
+     "the-annex-mvp",
+     4
+    ],
+    [
+     "tondo",
+     4
+    ],
+    [
+     "arrows-game",
+     4
+    ]
+   ],
+   "med_wall_min": 15.891366664568583,
+   "med_calls": 27.0,
+   "fail_rate": 0.028433151845130067,
+   "agents": 32,
+   "tests": 37,
+   "edits": 209,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "emil-design-eng",
+   "n": 24,
+   "projects": [
+    [
+     "arrows-game",
+     5
+    ],
+    [
+     "offday",
+     4
+    ],
+    [
+     "codex-new-chat-gold-pdf-bot",
+     4
+    ]
+   ],
+   "med_wall_min": 13.807983332872391,
+   "med_calls": 25.0,
+   "fail_rate": 0.03487358326068003,
+   "agents": 19,
+   "tests": 80,
+   "edits": 120,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "artifact-design",
+   "n": 10,
+   "projects": [
+    [
+     "claude-scratch",
+     4
+    ],
+    [
+     "futurisma-race",
+     2
+    ],
+    [
+     "geoguesser-app",
+     2
+    ]
+   ],
+   "med_wall_min": 8.12694166501363,
+   "med_calls": 8.0,
+   "fail_rate": 0.02631578947368421,
+   "agents": 1,
+   "tests": 4,
+   "edits": 45,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:brainstorming",
+   "n": 9,
+   "projects": [
+    [
+     "offday",
+     4
+    ],
+    [
+     "arrows-game",
+     2
+    ],
+    [
+     "codex-new-chat-gold-pdf-bot",
+     2
+    ]
+   ],
+   "med_wall_min": 2.598799999554952,
+   "med_calls": 4.0,
+   "fail_rate": 0.017857142857142856,
+   "agents": 4,
+   "tests": 6,
+   "edits": 1,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:writing-plans",
+   "n": 9,
+   "projects": [
+    [
+     "offday",
+     3
+    ],
+    [
+     "arrows-game",
+     2
+    ],
+    [
+     "claude-scratch",
+     2
+    ]
+   ],
+   "med_wall_min": 20.519400000572205,
+   "med_calls": 10.0,
+   "fail_rate": 0.033444816053511704,
+   "agents": 16,
+   "tests": 35,
+   "edits": 32,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "anthropic-skills:built-in-browser",
+   "n": 9,
+   "projects": [
+    [
+     "claude-scratch",
+     5
+    ],
+    [
+     "offday",
+     1
+    ],
+    [
+     "form-studio",
+     1
+    ]
+   ],
+   "med_wall_min": 7.781716668605805,
+   "med_calls": 25.0,
+   "fail_rate": 0.032679738562091505,
+   "agents": 0,
+   "tests": 5,
+   "edits": 6,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "animate-expo",
+   "n": 6,
+   "projects": [
+    [
+     "arrows-game",
+     3
+    ],
+    [
+     "block-blaster",
+     2
+    ],
+    [
+     "geoguesser-app",
+     1
+    ]
+   ],
+   "med_wall_min": 16.976941667000453,
+   "med_calls": 51.5,
+   "fail_rate": 0.03296703296703297,
+   "agents": 0,
+   "tests": 17,
+   "edits": 85,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "animate",
+   "n": 5,
+   "projects": [
+    [
+     "form-studio",
+     2
+    ],
+    [
+     "steward",
+     1
+    ],
+    [
+     "futurisma-race",
+     1
+    ]
+   ],
+   "med_wall_min": 17.186566666762033,
+   "med_calls": 18.0,
+   "fail_rate": 0.0,
+   "agents": 2,
+   "tests": 0,
+   "edits": 70,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "artifact-capabilities",
+   "n": 5,
+   "projects": [
+    [
+     "futurisma-race",
+     2
+    ],
+    [
+     "codex-new-chat-gold-pdf-bot",
+     2
+    ],
+    [
+     "snaxx-tech",
+     1
+    ]
+   ],
+   "med_wall_min": 3.7799999992052715,
+   "med_calls": 10.0,
+   "fail_rate": 0.034482758620689655,
+   "agents": 2,
+   "tests": 0,
+   "edits": 17,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:subagent-driven-development",
+   "n": 4,
+   "projects": [
+    [
+     "arrows-game",
+     1
+    ],
+    [
+     "geoguesser-app",
+     1
+    ],
+    [
+     "codex-new-chat-gold-pdf-bot",
+     1
+    ]
+   ],
+   "med_wall_min": 138.98581666549046,
+   "med_calls": 38.0,
+   "fail_rate": 0.006172839506172839,
+   "agents": 32,
+   "tests": 16,
+   "edits": 5,
+   "contra": {
+    "no agent dispatched after invoking": 1
+   },
+   "outcomes": {}
+  },
+  {
+   "skill": "improve-animations",
+   "n": 3,
+   "projects": [
+    [
+     "snaxx-tech",
+     1
+    ],
+    [
+     "block-blaster",
+     1
+    ],
+    [
+     "form-studio",
+     1
+    ]
+   ],
+   "med_wall_min": 19.97793333530426,
+   "med_calls": 24.0,
+   "fail_rate": 0.027972027972027972,
+   "agents": 7,
+   "tests": 2,
+   "edits": 14,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "design",
+   "n": 3,
+   "projects": [
+    [
+     "futurisma-race",
+     2
+    ],
+    [
+     "snaxx-tech",
+     1
+    ]
+   ],
+   "med_wall_min": 13.496316663424174,
+   "med_calls": 17.0,
+   "fail_rate": 0.01,
+   "agents": 2,
+   "tests": 0,
+   "edits": 19,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:systematic-debugging",
+   "n": 3,
+   "projects": [
+    [
+     "geoguesser-app",
+     2
+    ],
+    [
+     "arrows-game",
+     1
+    ]
+   ],
+   "med_wall_min": 22.66239999930064,
+   "med_calls": 53.0,
+   "fail_rate": 0.012658227848101266,
+   "agents": 7,
+   "tests": 15,
+   "edits": 14,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:test-driven-development",
+   "n": 3,
+   "projects": [
+    [
+     "geoguesser-app",
+     1
+    ],
+    [
+     "codex-new-chat-gold-pdf-bot",
+     1
+    ],
+    [
+     "offday",
+     1
+    ]
+   ],
+   "med_wall_min": 20.3466166694959,
+   "med_calls": 81.0,
+   "fail_rate": 0.02336448598130841,
+   "agents": 1,
+   "tests": 51,
+   "edits": 148,
+   "contra": {
+    "impl edited before any test file": 1
+   },
+   "outcomes": {
+    "changes": 1
+   }
+  },
+  {
+   "skill": "superpowers:executing-plans",
+   "n": 3,
+   "projects": [
+    [
+     "offday",
+     2
+    ],
+    [
+     "codex-new-chat-gold-pdf-bot",
+     1
+    ]
+   ],
+   "med_wall_min": 39.41398333311081,
+   "med_calls": 84.0,
+   "fail_rate": 0.0078125,
+   "agents": 4,
+   "tests": 90,
+   "edits": 12,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "impeccable",
+   "n": 2,
+   "projects": [
+    [
+     "manga-reader",
+     1
+    ],
+    [
+     "odd-hours",
+     1
+    ]
+   ],
+   "med_wall_min": 32.674408332506815,
+   "med_calls": 102.5,
+   "fail_rate": 0.02926829268292683,
+   "agents": 2,
+   "tests": 1,
+   "edits": 43,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "anthropic-skills:learn",
+   "n": 2,
+   "projects": [
+    [
+     "geoguesser-app",
+     1
+    ],
+    [
+     "codex-new-chat-gold-pdf-bot",
+     1
+    ]
+   ],
+   "med_wall_min": 1.6480666677157083,
+   "med_calls": 3.0,
+   "fail_rate": 0.0,
+   "agents": 0,
+   "tests": 0,
+   "edits": 0,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "anthropic-skills:deep-research",
+   "n": 2,
+   "projects": [
+    [
+     "claude-scratch",
+     2
+    ]
+   ],
+   "med_wall_min": 20.981724999348323,
+   "med_calls": 8.5,
+   "fail_rate": 0.058823529411764705,
+   "agents": 13,
+   "tests": 0,
+   "edits": 0,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "anthropic-skills:chrome-browser",
+   "n": 2,
+   "projects": [
+    [
+     "form-studio",
+     1
+    ],
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 7.834658332665762,
+   "med_calls": 11.5,
+   "fail_rate": 0.08695652173913043,
+   "agents": 1,
+   "tests": 0,
+   "edits": 2,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "design-taste-frontend",
+   "n": 2,
+   "projects": [
+    [
+     "codex-new-chat-gold-pdf-bot",
+     2
+    ]
+   ],
+   "med_wall_min": 24.816066668430963,
+   "med_calls": 50.5,
+   "fail_rate": 0.019801980198019802,
+   "agents": 2,
+   "tests": 16,
+   "edits": 15,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "writing-for-agents",
+   "n": 2,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ],
+    [
+     "arrows-game",
+     1
+    ]
+   ],
+   "med_wall_min": 25.477033330996832,
+   "med_calls": 73.0,
+   "fail_rate": 0.02054794520547945,
+   "agents": 3,
+   "tests": 11,
+   "edits": 28,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "claude-api",
+   "n": 1,
+   "projects": [
+    [
+     "steward",
+     1
+    ]
+   ],
+   "med_wall_min": 20.877016667524973,
+   "med_calls": 15.0,
+   "fail_rate": 0.0,
+   "agents": 2,
+   "tests": 1,
+   "edits": 1,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "workflow-authoring",
+   "n": 1,
+   "projects": [
+    [
+     "arrows-game",
+     1
+    ]
+   ],
+   "med_wall_min": 3837.1529166698456,
+   "med_calls": 27.0,
+   "fail_rate": 0.037037037037037035,
+   "agents": 0,
+   "tests": 1,
+   "edits": 1,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:using-superpowers",
+   "n": 1,
+   "projects": [
+    [
+     "geoguesser-app",
+     1
+    ]
+   ],
+   "med_wall_min": 323.626049999396,
+   "med_calls": 63.0,
+   "fail_rate": 0.015873015873015872,
+   "agents": 8,
+   "tests": 13,
+   "edits": 3,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:receiving-code-review",
+   "n": 1,
+   "projects": [
+    [
+     "geoguesser-app",
+     1
+    ]
+   ],
+   "med_wall_min": 222.29208333492278,
+   "med_calls": 42.0,
+   "fail_rate": 0.0,
+   "agents": 7,
+   "tests": 11,
+   "edits": 0,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "apple-design",
+   "n": 1,
+   "projects": [
+    [
+     "tondo",
+     1
+    ]
+   ],
+   "med_wall_min": 1409.9153833349546,
+   "med_calls": 79.0,
+   "fail_rate": 0.012658227848101266,
+   "agents": 7,
+   "tests": 6,
+   "edits": 0,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "dataviz",
+   "n": 1,
+   "projects": [
+    [
+     "arrows-game",
+     1
+    ]
+   ],
+   "med_wall_min": 54.1098499973615,
+   "med_calls": 100.0,
+   "fail_rate": 0.05,
+   "agents": 0,
+   "tests": 17,
+   "edits": 1,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "find-animation-opportunities",
+   "n": 1,
+   "projects": [
+    [
+     "snaxx-tech",
+     1
+    ]
+   ],
+   "med_wall_min": 906.8392166654269,
+   "med_calls": 34.0,
+   "fail_rate": 0.08823529411764706,
+   "agents": 0,
+   "tests": 7,
+   "edits": 3,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:dispatching-parallel-agents",
+   "n": 1,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 265.5816833337148,
+   "med_calls": 90.0,
+   "fail_rate": 0.03333333333333333,
+   "agents": 15,
+   "tests": 0,
+   "edits": 17,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:verification-before-completion",
+   "n": 1,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 2.1196333328882853,
+   "med_calls": 9.0,
+   "fail_rate": 0.0,
+   "agents": 0,
+   "tests": 0,
+   "edits": 0,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "run",
+   "n": 1,
+   "projects": [
+    [
+     "offday",
+     1
+    ]
+   ],
+   "med_wall_min": 3.5917166670163474,
+   "med_calls": 19.0,
+   "fail_rate": 0.10526315789473684,
+   "agents": 0,
+   "tests": 0,
+   "edits": 1,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:finishing-a-development-branch",
+   "n": 1,
+   "projects": [
+    [
+     "codex-new-chat-gold-pdf-bot",
+     1
+    ]
+   ],
+   "med_wall_min": 0.38571666479110717,
+   "med_calls": 0.0,
+   "fail_rate": 0.0,
+   "agents": 0,
+   "tests": 0,
+   "edits": 0,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "pinescript-plugin:pinescript-validation",
+   "n": 1,
+   "projects": [
+    [
+     "codex-new-chat-gold-pdf-bot",
+     1
+    ]
+   ],
+   "med_wall_min": 0.709766666094462,
+   "med_calls": 5.0,
+   "fail_rate": 0.0,
+   "agents": 0,
+   "tests": 0,
+   "edits": 0,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "mobile-native",
+   "n": 1,
+   "projects": [
+    [
+     "codex-new-chat-gold-pdf-bot",
+     1
+    ]
+   ],
+   "med_wall_min": 32.64731666644414,
+   "med_calls": 40.0,
+   "fail_rate": 0.025,
+   "agents": 1,
+   "tests": 0,
+   "edits": 13,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "security-review",
+   "n": 1,
+   "projects": [
+    [
+     "offday",
+     1
+    ]
+   ],
+   "med_wall_min": 1.5852166652679442,
+   "med_calls": 0.0,
+   "fail_rate": 0.0,
+   "agents": 0,
+   "tests": 0,
+   "edits": 0,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "brag",
+   "n": 1,
+   "projects": [
+    [
+     "offday",
+     1
+    ]
+   ],
+   "med_wall_min": 15.808366664250691,
+   "med_calls": 31.0,
+   "fail_rate": 0.0,
+   "agents": 0,
+   "tests": 2,
+   "edits": 3,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "anthropic-skills:explain-usage",
+   "n": 1,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 1.8416333357493082,
+   "med_calls": 4.0,
+   "fail_rate": 0.0,
+   "agents": 0,
+   "tests": 0,
+   "edits": 0,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:writing-skills",
+   "n": 1,
+   "projects": [
+    [
+     "arrows-game",
+     1
+    ]
+   ],
+   "med_wall_min": 39.71349999904633,
+   "med_calls": 114.0,
+   "fail_rate": 0.02631578947368421,
+   "agents": 3,
+   "tests": 11,
+   "edits": 18,
+   "contra": {},
+   "outcomes": {}
+  }
+ ],
+ "per_project": {
+  "geoguesser-app": {
+   "main": 7,
+   "sub": 253,
+   "calls": 22572,
+   "fails": 531,
+   "errs": 382,
+   "wall": 3078820.4620006084,
+   "active": 953523.3520006067,
+   "to_s": 59710.75499999998,
+   "ec": {
+    "timeout:command": 91,
+    "shell:zsh-equals-expansion": 64,
+    "wait:sleep-blocked": 63,
+    "timeout:foreground-wait": 58,
+    "other:nonzero-exit": 50,
+    "shell:zsh-glob-nomatch": 33,
+    "file:not-found": 24,
+    "nonzero:benign-no-match": 18,
+    "sandbox:worktree-guard": 17,
+    "script:node-error": 15
+   },
+   "loops_s": 7817.848,
+   "skills": 15,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1786194085.397,
+   "last": 1791335336.72
+  },
+  "arrows-game": {
+   "main": 4,
+   "sub": 248,
+   "calls": 20630,
+   "fails": 663,
+   "errs": 488,
+   "wall": 4072870.884001732,
+   "active": 1975698.324001731,
+   "to_s": 95308.93499999997,
+   "ec": {
+    "timeout:foreground-wait": 142,
+    "shell:zsh-equals-expansion": 101,
+    "wait:sleep-blocked": 55,
+    "other:nonzero-exit": 53,
+    "shell:zsh-glob-nomatch": 45,
+    "timeout:command": 35,
+    "file:not-found": 29,
+    "script:python-traceback": 25,
+    "nonzero:benign-no-match": 23,
+    "env:command-not-found": 23
+   },
+   "loops_s": 0.0,
+   "skills": 24,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1784388771.642,
+   "last": 1791336758.563
+  },
+  "futurisma-race": {
+   "main": 7,
+   "sub": 113,
+   "calls": 17535,
+   "fails": 605,
+   "errs": 548,
+   "wall": 2792433.760000229,
+   "active": 587162.990000229,
+   "to_s": 23285.263000000003,
+   "ec": {
+    "sandbox:worktree-guard": 199,
+    "timeout:command": 37,
+    "test:failures": 36,
+    "wait:sleep-blocked": 28,
+    "script:python-traceback": 27,
+    "browser:js-error": 25,
+    "browser:precondition": 23,
+    "shell:zsh-equals-expansion": 22,
+    "timeout:foreground-wait": 22,
+    "browser:pane-timeout": 20
+   },
+   "loops_s": 19.141,
+   "skills": 10,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1787940805.438,
+   "last": 1791319678.643
+  },
+  "the-annex-mvp": {
+   "main": 9,
+   "sub": 58,
+   "calls": 10013,
+   "fails": 285,
+   "errs": 268,
+   "wall": 929487.5980010033,
+   "active": 391784.6780010033,
+   "to_s": 5116.581,
+   "ec": {
+    "browser:js-error": 38,
+    "browser:pane-timeout": 36,
+    "browser:precondition": 31,
+    "edit:not-read-first": 31,
+    "tool:misuse-params": 18,
+    "permission:classifier-unavailable": 14,
+    "file:not-found": 12,
+    "browser:navigation-denied": 12,
+    "timeout:command": 10,
+    "timeout:foreground-wait": 10
+   },
+   "loops_s": 71.08000000000001,
+   "skills": 8,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1784455138.146,
+   "last": 1785712140.333
+  },
+  "pizzuno": {
+   "main": 3,
+   "sub": 39,
+   "calls": 9259,
+   "fails": 265,
+   "errs": 259,
+   "wall": 643258.7430009842,
+   "active": 185853.3030009842,
+   "to_s": 683.866,
+   "ec": {
+    "sandbox:worktree-guard": 58,
+    "browser:js-error": 41,
+    "browser:pane-timeout": 36,
+    "browser:precondition": 33,
+    "file:not-found": 11,
+    "other:nonzero-exit": 8,
+    "shell:zsh-equals-expansion": 8,
+    "timeout:command": 7,
+    "edit:string-not-found": 6,
+    "browser:other": 6
+   },
+   "loops_s": 218.24,
+   "skills": 2,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1785962064.866,
+   "last": 1786743928.212
+  },
+  "tondo": {
+   "main": 4,
+   "sub": 82,
+   "calls": 6512,
+   "fails": 159,
+   "errs": 146,
+   "wall": 3469600.265999794,
+   "active": 807443.8759997939,
+   "to_s": 5767.601,
+   "ec": {
+    "browser:js-error": 30,
+    "browser:pane-timeout": 24,
+    "tool:misuse-params": 12,
+    "timeout:command": 12,
+    "other:nonzero-exit": 10,
+    "browser:navigation-denied": 10,
+    "browser:other": 8,
+    "shell:zsh-equals-expansion": 8,
+    "browser:precondition": 7,
+    "browser:no-preview": 5
+   },
+   "loops_s": 0.0,
+   "skills": 9,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1786744152.996,
+   "last": 1791315605.166
+  },
+  "lucky-shelf": {
+   "main": 14,
+   "sub": 21,
+   "calls": 5306,
+   "fails": 132,
+   "errs": 132,
+   "wall": 536300.0770003796,
+   "active": 240397.92700037957,
+   "to_s": 3112.8819999999996,
+   "ec": {
+    "edit:not-read-first": 43,
+    "edit:stale-read": 13,
+    "edit:string-not-found": 10,
+    "shell:zsh-equals-expansion": 10,
+    "mcp:service-error": 7,
+    "timeout:command": 7,
+    "script:node-error": 6,
+    "env:command-not-found": 6,
+    "wait:sleep-blocked": 5,
+    "env:service-limit": 4
+   },
+   "loops_s": 107.8,
+   "skills": 2,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1783333606.022,
+   "last": 1784055502.193
+  },
+  "secret-dictator-v2": {
+   "main": 2,
+   "sub": 31,
+   "calls": 4530,
+   "fails": 96,
+   "errs": 91,
+   "wall": 725226.7499997616,
+   "active": 135046.77999976158,
+   "to_s": 2353.7569999999996,
+   "ec": {
+    "browser:js-error": 24,
+    "env:service-limit": 8,
+    "shell:zsh-equals-expansion": 7,
+    "other:nonzero-exit": 7,
+    "file:not-found": 7,
+    "wait:sleep-blocked": 6,
+    "timeout:command": 5,
+    "browser:precondition": 4,
+    "env:command-not-found": 4,
+    "browser:pane-timeout": 4
+   },
+   "loops_s": 0.0,
+   "skills": 0,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1786215019.363,
+   "last": 1788966563.241
+  },
+  "snaxx-tech": {
+   "main": 10,
+   "sub": 31,
+   "calls": 3855,
+   "fails": 163,
+   "errs": 160,
+   "wall": 937190.3430001736,
+   "active": 248363.00300017354,
+   "to_s": 1573.378,
+   "ec": {
+    "permission:classifier-unavailable": 25,
+    "env:command-not-found": 15,
+    "browser:precondition": 10,
+    "browser:navigation-denied": 9,
+    "other:nonzero-exit": 8,
+    "browser:js-error": 8,
+    "browser:pane-timeout": 7,
+    "other": 7,
+    "shell:zsh-equals-expansion": 6,
+    "tool:misuse-params": 6
+   },
+   "loops_s": 203.54099999999997,
+   "skills": 9,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1784401704.502,
+   "last": 1790715361.461
+  },
+  "codex-new-chat-gold-pdf-bot": {
+   "main": 1,
+   "sub": 49,
+   "calls": 3677,
+   "fails": 100,
+   "errs": 94,
+   "wall": 299048.35599923134,
+   "active": 71716.14599923133,
+   "to_s": 1082.772,
+   "ec": {
+    "shell:zsh-equals-expansion": 10,
+    "other": 10,
+    "browser:precondition": 8,
+    "permission:classifier-denied": 8,
+    "browser:navigation-denied": 8,
+    "other:nonzero-exit": 7,
+    "script:python-traceback": 6,
+    "browser:js-error": 5,
+    "file:not-found": 4,
+    "browser:other": 4
+   },
+   "loops_s": 0.0,
+   "skills": 21,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1791044911.19,
+   "last": 1791324885.462
+  },
+  "claude-scratch": {
+   "main": 7,
+   "sub": 50,
+   "calls": 3178,
+   "fails": 88,
+   "errs": 70,
+   "wall": 184538.38799905777,
+   "active": 114196.58799905775,
+   "to_s": 6942.057000000001,
+   "ec": {
+    "timeout:command": 18,
+    "network": 10,
+    "env:service-limit": 8,
+    "other:nonzero-exit": 7,
+    "permission:user-rejected": 6,
+    "browser:other": 5,
+    "shell:zsh-equals-expansion": 5,
+    "shell:zsh-glob-nomatch": 4,
+    "file:too-large": 4,
+    "script:python-traceback": 3
+   },
+   "loops_s": 0.0,
+   "skills": 20,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1790717047.592,
+   "last": 1791334661.019
+  },
+  "apollonia-events": {
+   "main": 5,
+   "sub": 58,
+   "calls": 2997,
+   "fails": 92,
+   "errs": 92,
+   "wall": 1347418.1970009804,
+   "active": 91959.58700098035,
+   "to_s": 0.0,
+   "ec": {
+    "browser:pane-timeout": 12,
+    "env:command-not-found": 11,
+    "browser:precondition": 9,
+    "other:nonzero-exit": 8,
+    "browser:other": 7,
+    "test:failures": 6,
+    "browser:js-error": 5,
+    "shell:zsh-equals-expansion": 5,
+    "browser:navigation-denied": 4,
+    "shell:zsh-glob-nomatch": 4
+   },
+   "loops_s": 5.603,
+   "skills": 6,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1783016713.626,
+   "last": 1789336819.496
+  },
+  "manga-reader": {
+   "main": 4,
+   "sub": 154,
+   "calls": 2959,
+   "fails": 62,
+   "errs": 62,
+   "wall": 3096316.344998598,
+   "active": 2195375.8949985984,
+   "to_s": 122.133,
+   "ec": {
+    "permission:classifier-denied": 8,
+    "browser:pane-timeout": 7,
+    "other:nonzero-exit": 7,
+    "edit:not-read-first": 6,
+    "browser:precondition": 6,
+    "file:not-found": 4,
+    "browser:js-error": 4,
+    "browser:navigation-denied": 4,
+    "shell:zsh-glob-nomatch": 3,
+    "nonzero:check-failed": 2
+   },
+   "loops_s": 0.0,
+   "skills": 2,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1782329059.372,
+   "last": 1788974947.373
+  },
+  "wordle": {
+   "main": 8,
+   "sub": 20,
+   "calls": 2835,
+   "fails": 129,
+   "errs": 129,
+   "wall": 751998.6329994202,
+   "active": 150406.64299942018,
+   "to_s": 95.762,
+   "ec": {
+    "browser:js-error": 21,
+    "permission:classifier-unavailable": 20,
+    "tool:misuse-params": 12,
+    "browser:precondition": 12,
+    "browser:pane-timeout": 11,
+    "browser:navigation-denied": 10,
+    "sandbox:worktree-guard": 6,
+    "script:node-error": 4,
+    "wait:sleep-blocked": 4,
+    "shell:zsh-equals-expansion": 4
+   },
+   "loops_s": 174.284,
+   "skills": 2,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1784225047.206,
+   "last": 1786485308.757
+  },
+  "block-blaster": {
+   "main": 6,
+   "sub": 35,
+   "calls": 2785,
+   "fails": 120,
+   "errs": 117,
+   "wall": 1108746.155000925,
+   "active": 161880.59500092507,
+   "to_s": 969.222,
+   "ec": {
+    "permission:classifier-unavailable": 28,
+    "edit:not-read-first": 15,
+    "tool:misuse-params": 10,
+    "browser:precondition": 7,
+    "browser:pane-timeout": 6,
+    "browser:no-preview": 6,
+    "permission:classifier-denied": 6,
+    "shell:zsh-glob-nomatch": 5,
+    "wait:sleep-blocked": 4,
+    "network": 4
+   },
+   "loops_s": 14.912,
+   "skills": 6,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1784267223.37,
+   "last": 1788966770.054
+  },
+  "morse-code-trainer": {
+   "main": 1,
+   "sub": 16,
+   "calls": 2680,
+   "fails": 58,
+   "errs": 49,
+   "wall": 174776.80799984932,
+   "active": 97079.74799984932,
+   "to_s": 2666.22,
+   "ec": {
+    "script:node-error": 11,
+    "wait:sleep-blocked": 7,
+    "timeout:foreground-wait": 7,
+    "timeout:command": 6,
+    "other:nonzero-exit": 5,
+    "browser:js-error": 4,
+    "browser:no-preview": 4,
+    "nonzero:benign-no-match": 3,
+    "shell:zsh-equals-expansion": 2,
+    "script:python-traceback": 2
+   },
+   "loops_s": 0.0,
+   "skills": 1,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1787413099.746,
+   "last": 1787534766.946
+  },
+  "odd-hours": {
+   "main": 3,
+   "sub": 12,
+   "calls": 2540,
+   "fails": 82,
+   "errs": 73,
+   "wall": 261785.02399992943,
+   "active": 156303.11399992942,
+   "to_s": 1516.8490000000002,
+   "ec": {
+    "browser:precondition": 13,
+    "browser:js-error": 11,
+    "browser:pane-timeout": 10,
+    "other:nonzero-exit": 7,
+    "timeout:command": 7,
+    "wait:sleep-blocked": 6,
+    "timeout:foreground-wait": 5,
+    "edit:string-not-found": 4,
+    "shell:zsh-equals-expansion": 3,
+    "env:port-in-use": 3
+   },
+   "loops_s": 0.0,
+   "skills": 5,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1786874540.014,
+   "last": 1787010220.952
+  },
+  "steward": {
+   "main": 2,
+   "sub": 19,
+   "calls": 1907,
+   "fails": 41,
+   "errs": 40,
+   "wall": 121684.83899974823,
+   "active": 41012.75899974823,
+   "to_s": 221.09199999999998,
+   "ec": {
+    "browser:pane-timeout": 10,
+    "browser:precondition": 7,
+    "browser:js-error": 7,
+    "shell:zsh-equals-expansion": 4,
+    "timeout:command": 3,
+    "edit:string-not-found": 2,
+    "network": 2,
+    "script:python-traceback": 1,
+    "shell:zsh-glob-nomatch": 1,
+    "wait:sleep-blocked": 1
+   },
+   "loops_s": 0.0,
+   "skills": 4,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1788028927.463,
+   "last": 1788130095.135
+  },
+  "offday": {
+   "main": 3,
+   "sub": 11,
+   "calls": 1458,
+   "fails": 22,
+   "errs": 18,
+   "wall": 241535.3369998932,
+   "active": 30263.316999893195,
+   "to_s": 219.28,
+   "ec": {
+    "browser:pane-timeout": 5,
+    "timeout:command": 4,
+    "file:not-found": 3,
+    "browser:navigation-denied": 2,
+    "other:nonzero-exit": 2,
+    "mcp:service-error": 2,
+    "shell:zsh-glob-nomatch": 1,
+    "browser:other": 1,
+    "build:metro-bundler": 1,
+    "network": 1
+   },
+   "loops_s": 0.0,
+   "skills": 18,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1790778272.9,
+   "last": 1791290025.921
+  },
+  "secret-dictator": {
+   "main": 1,
+   "sub": 4,
+   "calls": 1324,
+   "fails": 18,
+   "errs": 18,
+   "wall": 97443.88900017738,
+   "active": 35868.33900017738,
+   "to_s": 0.0,
+   "ec": {
+    "browser:pane-timeout": 5,
+    "wait:sleep-blocked": 3,
+    "browser:js-error": 3,
+    "browser:precondition": 2,
+    "tool:misuse-params": 2,
+    "shell:zsh-equals-expansion": 2,
+    "shell:zsh-glob-nomatch": 1
+   },
+   "loops_s": 0.0,
+   "skills": 2,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1786138801.724,
+   "last": 1786221166.844
+  },
+  "research-idea-2": {
+   "main": 1,
+   "sub": 9,
+   "calls": 1215,
+   "fails": 32,
+   "errs": 32,
+   "wall": 96684.60399913788,
+   "active": 48962.713999137886,
+   "to_s": 0.0,
+   "ec": {
+    "browser:js-error": 7,
+    "tool:misuse-params": 6,
+    "browser:precondition": 6,
+    "edit:string-not-found": 3,
+    "tool:unknown-tool": 2,
+    "browser:pane-timeout": 2,
+    "permission:user-rejected": 1,
+    "browser:no-preview": 1,
+    "wait:sleep-blocked": 1,
+    "shell:zsh-equals-expansion": 1
+   },
+   "loops_s": 0.0,
+   "skills": 2,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1784326570.923,
+   "last": 1784386514.18
+  },
+  "research-idea": {
+   "main": 2,
+   "sub": 10,
+   "calls": 806,
+   "fails": 37,
+   "errs": 37,
+   "wall": 680837.6429998875,
+   "active": 644160.0229998875,
+   "to_s": 0.0,
+   "ec": {
+    "browser:pane-timeout": 10,
+    "browser:precondition": 8,
+    "tool:misuse-params": 4,
+    "browser:navigation-denied": 4,
+    "browser:js-error": 2,
+    "permission:user-rejected": 2,
+    "env:port-in-use": 1,
+    "wait:sleep-blocked": 1,
+    "browser:other": 1,
+    "shell:zsh-glob-nomatch": 1
+   },
+   "loops_s": 0.0,
+   "skills": 0,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1784266945.748,
+   "last": 1789591580.856
+  },
+  "kik-home-redesign": {
+   "main": 1,
+   "sub": 9,
+   "calls": 776,
+   "fails": 39,
+   "errs": 39,
+   "wall": 43018.47299981117,
+   "active": 31992.14299981117,
+   "to_s": 0.0,
+   "ec": {
+    "browser:js-error": 11,
+    "browser:precondition": 8,
+    "browser:pane-timeout": 7,
+    "browser:navigation-denied": 5,
+    "permission:user-rejected": 3,
+    "edit:stale-read": 1,
+    "shell:zsh-equals-expansion": 1,
+    "edit:not-read-first": 1,
+    "tool:misuse-params": 1,
+    "browser:other": 1
+   },
+   "loops_s": 4713.283,
+   "skills": 6,
+   "dup": 3,
+   "dup_s": 5579.320999860764,
+   "first": 1783851155.587,
+   "last": 1783881171.629
+  },
+  "merge-kit": {
+   "main": 3,
+   "sub": 1,
+   "calls": 753,
+   "fails": 37,
+   "errs": 31,
+   "wall": 34426.983999967575,
+   "active": 29831.333999967574,
+   "to_s": 3103.0860000000002,
+   "ec": {
+    "nonzero:benign-no-match": 7,
+    "edit:not-read-first": 6,
+    "timeout:foreground-wait": 5,
+    "other:nonzero-exit": 4,
+    "edit:string-not-found": 3,
+    "mcp:service-error": 2,
+    "file:not-found": 2,
+    "tool:misuse-params": 2,
+    "wait:sleep-blocked": 2,
+    "shell:zsh-equals-expansion": 1
+   },
+   "loops_s": 0.0,
+   "skills": 0,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1784983662.549,
+   "last": 1785009902.197
+  },
+  "codex-make-prototype-games-that-we-can": {
+   "main": 1,
+   "sub": 6,
+   "calls": 474,
+   "fails": 12,
+   "errs": 12,
+   "wall": 16759.626000404358,
+   "active": 7045.946000404358,
+   "to_s": 0.0,
+   "ec": {
+    "browser:pane-timeout": 3,
+    "browser:js-error": 2,
+    "browser:precondition": 2,
+    "nonzero:benign-no-match": 1,
+    "env:port-in-use": 1,
+    "edit:string-not-found": 1,
+    "test:failures": 1,
+    "env:command-not-found": 1
+   },
+   "loops_s": 0.0,
+   "skills": 2,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1787075221.014,
+   "last": 1787088684.596
+  },
+  "form-studio": {
+   "main": 1,
+   "sub": 2,
+   "calls": 415,
+   "fails": 5,
+   "errs": 5,
+   "wall": 256125.45700025558,
+   "active": 8769.407000255584,
+   "to_s": 0.0,
+   "ec": {
+    "other:nonzero-exit": 1,
+    "browser:js-error": 1,
+    "browser:navigation-denied": 1,
+    "browser:other": 1,
+    "browser:no-preview": 1
+   },
+   "loops_s": 0.0,
+   "skills": 13,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1790895976.011,
+   "last": 1791149327.558
+  },
+  "thread-the-needle": {
+   "main": 1,
+   "sub": 2,
+   "calls": 390,
+   "fails": 15,
+   "errs": 15,
+   "wall": 56078.06800031662,
+   "active": 54946.77800031662,
+   "to_s": 0.0,
+   "ec": {
+    "browser:pane-timeout": 3,
+    "browser:js-error": 3,
+    "env:port-in-use": 2,
+    "edit:not-read-first": 2,
+    "nonzero:benign-no-match": 1,
+    "browser:no-preview": 1,
+    "browser:navigation-denied": 1,
+    "script:node-error": 1,
+    "edit:string-not-found": 1
+   },
+   "loops_s": 0.0,
+   "skills": 0,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1783921814.008,
+   "last": 1783972695.892
+  },
+  "battleship": {
+   "main": 3,
+   "sub": 1,
+   "calls": 375,
+   "fails": 10,
+   "errs": 10,
+   "wall": 208071.83500003815,
+   "active": 8657.395000038145,
+   "to_s": 0.0,
+   "ec": {
+    "shell:zsh-equals-expansion": 3,
+    "wait:sleep-blocked": 2,
+    "env:command-not-found": 2,
+    "permission:classifier-denied": 1,
+    "edit:string-not-found": 1,
+    "other:nonzero-exit": 1
+   },
+   "loops_s": 0.0,
+   "skills": 0,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1784061231.497,
+   "last": 1785097911.97
+  },
+  "planet-drop": {
+   "main": 3,
+   "sub": 2,
+   "calls": 335,
+   "fails": 29,
+   "errs": 29,
+   "wall": 89806.32700014114,
+   "active": 50761.70700014114,
+   "to_s": 0.0,
+   "ec": {
+    "mcp:service-error": 20,
+    "shell:zsh-equals-expansion": 2,
+    "nonzero:benign-no-match": 1,
+    "edit:string-not-found": 1,
+    "tool:unknown-tool": 1,
+    "tool:misuse-params": 1,
+    "shell:zsh-glob-nomatch": 1,
+    "git:other": 1,
+    "other:nonzero-exit": 1
+   },
+   "loops_s": 36.114999999999995,
+   "skills": 0,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1783283130.381,
+   "last": 1784983345.126
+  },
+  "cryptid-rush": {
+   "main": 1,
+   "sub": 3,
+   "calls": 284,
+   "fails": 7,
+   "errs": 7,
+   "wall": 5601.380999803543,
+   "active": 5115.950999803543,
+   "to_s": 0.0,
+   "ec": {
+    "browser:js-error": 3,
+    "nonzero:benign-no-match": 1,
+    "browser:pane-timeout": 1,
+    "file:not-found": 1,
+    "other:nonzero-exit": 1
+   },
+   "loops_s": 0.0,
+   "skills": 1,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1786797178.903,
+   "last": 1786800288.311
+  },
+  "casenovatest": {
+   "main": 1,
+   "sub": 2,
+   "calls": 279,
+   "fails": 16,
+   "errs": 16,
+   "wall": 80669.37400007248,
+   "active": 33993.97400007248,
+   "to_s": 0.0,
+   "ec": {
+    "browser:pane-timeout": 4,
+    "browser:js-error": 4,
+    "browser:navigation-denied": 3,
+    "browser:precondition": 2,
+    "browser:no-preview": 2,
+    "browser:other": 1
+   },
+   "loops_s": 60.031,
+   "skills": 1,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1783801229.563,
+   "last": 1783880756.15
+  },
+  "codex-new-chat-2-work-offbeat": {
+   "main": 1,
+   "sub": 0,
+   "calls": 276,
+   "fails": 12,
+   "errs": 11,
+   "wall": 257140.35099983215,
+   "active": 9752.570999832154,
+   "to_s": 316.029,
+   "ec": {
+    "script:node-error": 4,
+    "shell:zsh-glob-nomatch": 1,
+    "env:port-in-use": 1,
+    "browser:other": 1,
+    "browser:pane-timeout": 1,
+    "script:python-traceback": 1,
+    "shell:zsh-other": 1,
+    "shell:zsh-equals-expansion": 1,
+    "timeout:command": 1
+   },
+   "loops_s": 0.0,
+   "skills": 2,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1790892024.726,
+   "last": 1791149165.077
+  },
+  "tiny-code-agent": {
+   "main": 1,
+   "sub": 1,
+   "calls": 66,
+   "fails": 10,
+   "errs": 8,
+   "wall": 113181.09599995613,
+   "active": 1832.1059999561298,
+   "to_s": 307.139,
+   "ec": {
+    "permission:classifier-denied": 3,
+    "timeout:command": 2,
+    "shell:zsh-equals-expansion": 2,
+    "other:nonzero-exit": 1,
+    "shell:zsh-glob-nomatch": 1,
+    "nonzero:benign-no-match": 1
+   },
+   "loops_s": 0.0,
+   "skills": 0,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1791124871.39,
+   "last": 1791237622.61
+  },
+  "Loony": {
+   "main": 1,
+   "sub": 0,
+   "calls": 39,
+   "fails": 4,
+   "errs": 4,
+   "wall": 457.8270001411438,
+   "active": 455.2970001411438,
+   "to_s": 0.0,
+   "ec": {
+    "file:not-found": 1,
+    "env:port-in-use": 1,
+    "browser:precondition": 1,
+    "nonzero:benign-no-match": 1
+   },
+   "loops_s": 0.0,
+   "skills": 0,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1787204432.833,
+   "last": 1787204890.66
+  }
+ }
+}

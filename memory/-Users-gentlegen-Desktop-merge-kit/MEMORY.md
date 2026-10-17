@@ -1,0 +1,12 @@
+- [Godot prototype + perf measurement traps](godot-prototype-and-perf-measurement-traps.md) — parallel Godot greybox plays and passes 770 rules checks; its perf is UNMEASURED because `TIME_PHYSICS_PROCESS` is unusable, and a config matrix is the cheap way to catch a broken instrument.
+- [v0.2 spike outcome: matter-js fails 120 bodies](v02-spike-outcome-matter-js-fails-120.md) — 0.181 ms/body/step, budget crossed at ~97 bodies; the wall is Hermes's missing JIT, and substeps=1 is the cheap experiment to try before Rapier.
+- [Physics port seam](merge-kit-physics-port-seam.md) — the matter-js→Rapier insurance: one interface, one adapter, enforced by a test not a comment.
+- [matter-js velocity: two conventions](matter-js-velocity-two-conventions.md) — `body.velocity` is per-substep mid-step, per-baseDelta after `Engine.update`; one converter for both is a silent 2× error.
+- [Perf gates need jitter + resolution tolerance](perf-gates-need-jitter-and-resolution-tolerance.md) — p95 vs exactly 16.67 ms fails healthy 60 fps threads; it reported the wrong crossing point.
+- [useFrameCallback never ticks with an unmemoised callback](ui-thread-sampling-needs-runonjs.md) — a component re-rendering every frame re-registers it 60×/s; the symptom looks like a data-storage bug and cost two wrong diagnoses.
+- [Phantom releases can fabricate input](phantom-pan-responder-releases.md) — the greybox self-dropped 100× with no touch; a drop must require a matching grant.
+- [Metro can't resolve ESM `.js` specifiers](metro-cannot-resolve-esm-js-specifiers.md) — consuming merge-core as source needs a `resolveRequest` shim in every app.
+- [GAME_SPEC §7 omits the chamber centre offsets](game-spec-7-omits-chamber-centre-offsets.md) — the transcribed camera fit is missing two terms; a centred chamber is ~0.6 units wrong.
+- [merge-core emits `failWarning` on change only](core-emits-failwarning-on-change-only.md) — an intents-only HUD freezes `graceProgress`; project continuous values off core state.
+- [Spike scenarios need rules-paced drops](spike-scenarios-need-rules-paced-drops.md) — an invented load interval made the "worst case" cheaper than the ramp; pace from the real cooldown and cross-check scenario ordering.
+- [iOS build needs a UTF-8 locale](ios-build-needs-utf8-locale.md) — CocoaPods dies with `Encoding::CompatibilityError` on this Mac unless `LANG`/`LC_ALL` are set.

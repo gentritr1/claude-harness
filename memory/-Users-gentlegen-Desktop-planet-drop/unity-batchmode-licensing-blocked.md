@@ -1,0 +1,23 @@
+---
+name: unity-batchmode-licensing-blocked
+description: "Unity CLI batchmode runs fail on this machine — licensing channel never initializes, package entitlements unknown, thousands of bogus CS0246 errors"
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: 77ca4b8c-50e0-4c85-b08e-3d5ab5bedf39
+---
+
+The AGENTS.md command-line EditMode runner (`Unity -batchmode -automated -executeMethod …RunAll`) currently FAILS on this machine (observed 2026-07-02, Unity 6000.5.0f1): the licensing module times out waiting for channel `LicenseClient-gentlegen` (multiple 60s timeouts, "'com.unity.editor.headless' was not found"), every package reports "Unknown entitlement status", package assemblies get excluded, and the compile floods with bogus `CS0246: TMPro/UnityEngine.UI/URP not found` errors. Exit code 1 looks like a code failure but is environmental.
+
+**Why:** don't waste 10+ minutes re-running or "fixing" imports when the CS0246 wall pattern (every package namespace missing at once) appears — it's licensing, not code.
+
+**How to apply — SOLVED 2026-07-02:** pass the Hub's licensing channel explicitly: append
+`-licensingIpc LicenseClient-ApTs0fxZwXpcmItSzpY05` to the batchmode command (channel name found on any Hub-launched editor process via `pgrep -fl "Unity.app/Contents/MacOS/Unity"` — look for the `-licensingIpc` arg; it may change if the Hub session changes, so re-discover it rather than hardcoding). With that flag, entitlements resolve and compilation/tests work headless even while another Unity editor has a different project open. Without it, batch Unity waits for a `LicenseClient-<username>` channel that never exists.
+
+**Easier path — Unity MCP (confirmed working 2026-07-03, gravity-wells review):** Codex runs EditMode suites through the user's live editor via `mcp__unity_mcp.Unity_RunCommand` → `EditModeTestCommand.RunAllNoExit()`, then reads the NUnit XML (e.g. 231/231 pass) — no batchmode/licensing dance at all. Prefer this for test verification; the wrapper prints pre-existing SaveService warnings, which are noise if the NUnit XML is clean. Batchmode + `-licensingIpc` remains the fallback when no editor is open.
+
+**Correction 2026-07-05 (Opus session, home-UI branch) — the MCP `Unity_RunCommand` here is READ-ONLY and cannot run tests.** Traced through package source `com.unity.ai.assistant@d9bb465c57d1`: the tool binds to `RunReadOnlyCommandTool` (`Unity.RunReadOnlyCommand`). Contract (from `RunCommandUtils.cs`): the script is wrapped inside `namespace Unity.AI.Assistant.Agent.Dynamic.Extension.Editor {}` and the runner reflects for a class named EXACTLY `CommandScript` implementing the internal `IReadonlyRunCommand` interface — `internal class CommandScript : IReadonlyRunCommand { public void Execute(ReadonlyExecutionResult result) { result.Log("..."); } }`. Output must go through `result.Log()` (plain `Debug.Log` of type Log is NOT captured; only Error/Exception/Warning are). Any wrong class name / plain `Command.Execute()` / top-level statements → compiles but `Execution failed: No logs available` (instance null). TWO hard blocks this session: (1) even the exact `CommandScript` shape returned "No logs available" — executor never started (bridge-assembly Emit/discovery issue), and (2) read-only mode REJECTS write ops, and `RunAllNoExit` writes an XML + calls `EditorApplication.Exit`, so the EditMode suite can't be launched through it regardless. The 2026-07-03 Codex run used a write-capable RunCommand binding not exposed here.
+
+**Offline compile gate WITHOUT any Unity process (confirmed 2026-07-13, save-wipe review):** compile straight from the Bee response files with dotnet's bundled Roslyn — `dotnet exec /opt/homebrew/Cellar/dotnet/9.0.101/libexec/sdk/9.0.101/Roslyn/bincore/csc.dll @Library/Bee/artifacts/200b0aE.dag/PlanetDrop.rsp -out:/tmp/check.dll` (same for `PlanetDrop.EditModeTests.rsp` / `PlanetDrop.PlayModeTests.rsp`). Exit 0 + no CS lines = assembly compiles. Caveats: the tests rsp references the prebuilt `PlanetDrop.ref.dll`, so consts inline STALE values and cross-assembly signature changes aren't caught until Unity rebuilds; the dag hash dir (`200b0aE.dag`) changes when Unity regenerates — glob it. This is a syntax/type check only, never test execution.
+
+**Usable takeaway:** `Unity_RunCommand` is still a solid COMPILE GATE — reference an edited type (`UITheme.CosmicCyan`, `typeof(PlanetDrop.Gameplay.HomeScreen)`); no `COMPILATION_FAILED` = game code compiles. For actually RUNNING tests when only the read-only tool is exposed: have the USER run the EditMode suite from the editor, or use batchmode + `-licensingIpc` (above). For pure-view/UI changes, screenshot acceptance is the real gate anyway. [[reviewing-codex-output]]

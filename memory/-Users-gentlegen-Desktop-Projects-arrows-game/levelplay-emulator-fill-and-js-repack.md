@@ -1,0 +1,4 @@
+# LevelPlay fill on the emulator + JS-only APK repack (2026-09-16, W0-02 fix round 3)
+- Owner key 27012eed5 never fills on emulator-5556 (509). Unity's "LevelPlay Sample" key 85460dcd (rewarded 76yy3nay3ceui2a3, interstitial aeyqi3vqlv6o8sh9) DOES fill via the bundled ironsourceads adapter; Unity demo key 25b63cf85 does not (needs UnityAds adapter). Load only; compile show tripwires in.
+- JS-only capture builds need no gradle: `expo export:embed --dev false --minify false` + node_modules/hermes-compiler hermesc `-O`, swap assets/index.android.bundle (Stored) in an existing release APK, zipalign -p 4, apksigner with ~/.android/debug.keystore; uninstall first (signature change). Proven byte-identical to gradle except HBC source-hash/footer (artifacts/W0-02/fix3/build-bundle.sh).
+- Lesson: "no disk to build" + "no fill" were both premises to question, not blockers.

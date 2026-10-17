@@ -1,0 +1,7 @@
+- [Secret Dictator project](secret-dictator-project.md) — what was built, the ruleset's source of truth, the design-import cap and the Higgsfield/Kenney art pipeline.
+- [CSS var url() re-bases to the stylesheet](css-var-url-resolves-against-stylesheet.md) — why every masked asset 404'd until style.css moved to the document's directory.
+- [Grid centring degrades to start on overflow](grid-center-degrades-to-start-on-overflow.md) — why a scaled fixed-size stage parks off-centre, and to measure with getBoundingClientRect not screenshots.
+- [Clearance clamp escapes upward](clearance-clamp-escapes-upward.md) — why an autonomous destination lands on a roof, and the post-clamp band re-check that stops it.
+- [Hidden tab freezes rendering and timers](hidden-tab-freezes-rendering-and-timers.md) — why getBoundingClientRect returned spawn positions ten minutes stale, and to force a paint or read style values instead.
+- [Agency beats choreography](agency-beats-choreography.md) — "feels like art not a game" was fixed by autonomous roaming + click-to-move, not more motion polish; detection rule inside.
+- [Delegation review loop](delegation-review-loop.md) — the 4-round Opus/Fable loop that shipped the living world; transcripts expire, briefs must stand alone, demand DOM-measured evidence.

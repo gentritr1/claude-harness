@@ -1,0 +1,5 @@
+- [Payments via Poland](payments-via-poland.md) — Kosovo can't sell on Play; friend in Poland is the billing route
+- [Reddit access recipe](reddit-access-recipe.md) — Arctic Shift listings + local grep; full-text refused; live RSS 1 call/45 s
+- [Research fan-out scars](research-fanout-scars.md) — shared-tool starvation, picks overturned by primary data, generic-founder trap, interrupted agents, full disk
+- [Idea research state](idea-research-state.md) — artifact URL, report paths, round two overturned all three round-one picks; open inputs
+- [Founder profile](founder-profile.md) — existing studio: RN/Expo Android games, Next.js apps, Albanian word game, local clients, AdMob via Poland

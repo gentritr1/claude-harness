@@ -1,0 +1,7 @@
+- [Codex generated images path](codex-generated-images-path.md) — ~/.codex/generated_images/<session>/exec-*.png; review the sha256-matching file before approving
+- [Rubble floor threshold unmeasured](rubble-floor-threshold-unmeasured.md) — (1,11,20) darkest-pixel floor already failed at baseline; use ground-masked p1/p5 delta vs baseline
+- [Vite binds IPv6 only](rubble-vite-ipv6-localhost.md) — measurement scripts need http://localhost:PORT; launch entries rubble-review (5184) and rubble-baseline (5183)
+- [Warm budget lives in dusk](rubble-warm-budget-lives-in-dusk.md) — facade albedo costs 0 trial warm (pair harness); dusk fell 18.9%→5.1% vs 15.9% mood frame; do not desaturate plaster for the trial ceiling
+- [Pair gate resolution](rubble-pair-gate-resolution.md) — zero-allowance gate counts a positive only above 0.001 pp (9 px); 1-pixel fails are harness noise; gates must state measured resolution
+- [Scripts write into review folders](rubble-scripts-write-into-review-folders.md) — pass WALK_OUTPUT/PAIR_OUTPUT or an out dir to scratchpad before running Codex scripts in the shared worktree; restore from checkpoint tarballs if hit
+- [Pool gate wrong instrument](rubble-pool-gate-wrong-instrument.md) — ±9 px warm-count gate on the platform mask rejected the ambient lift it was meant to permit; lighting gates use region mean luma + unchanged light settings, never classifier counts

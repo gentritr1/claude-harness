@@ -1,0 +1,1 @@
+- [Pending M1 fun-gate review](pending-m1-fun-gate-review.md) — recordings ruling deferred; must land with M2 acceptance

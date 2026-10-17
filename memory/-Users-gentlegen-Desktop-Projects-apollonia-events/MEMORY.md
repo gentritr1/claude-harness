@@ -1,0 +1,7 @@
+- [Venue ground truth](venue-ground-truth.md) — Gjilan Kosovo, one 60 m² hall, 30–35 seated, no kitchen, 2 events/day.
+- [Stale design docs trap](stale-design-docs-trap.md) — DESIGN-TWEAK-PROMPT.md lies about geography; VENUE-QUESTIONS.md wins.
+- [The gallery is one art exhibition](gallery-is-one-art-exhibition.md) — zero wedding photos on a wedding venue's site.
+- [/reserve is uncached](reserve-route-is-uncached.md) — the booking page is the slowest page, and the homepage prefetches it.
+- [Research workflow lessons](research-workflow-lessons.md) — kill-rate inflation, invented stats, and fixes that don't exist.
+- [Next-level implementation status](next-level-implementation-status.md) — what shipped 2026-09-11, db push prerequisite, owner-gated leftovers.
+- [Hidden browser pane artifacts](hidden-browser-pane-artifacts.md) — hidden pane = stale screenshots + no rAF; verify motion via computed styles.

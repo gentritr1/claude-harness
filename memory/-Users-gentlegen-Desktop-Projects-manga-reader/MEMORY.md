@@ -1,0 +1,3 @@
+- [Inert motion layer](inert-motion-layer.md) — animation classes and motion tokens that compile to nothing; verify motion by compiling, not by reading JSX.
+- [Yomi localStorage wipe risk](yomi-localstorage-wipe-risk.md) — five `yomi-*` key prefixes are persisted schema; renaming them wipes reading progress.
+- [Prod migration not wired](prod-migration-not-wired.md) — build never runs `prisma migrate deploy`; production migration state must be resolved before any schema PR.

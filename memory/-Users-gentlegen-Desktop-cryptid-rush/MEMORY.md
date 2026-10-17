@@ -1,0 +1,2 @@
+- [Project overview](project-overview.md) — vanilla-JS port of the Table B Arcade design; 108-card deck; CR_GAME debug hook; _test.setState needs a render nudge
+- [Verification gotchas](verification-gotchas.md) — hidden pane kills rAF; don't cancel() all getAnimations(); fx 3s cleanup vs frozen frames; bench numbers

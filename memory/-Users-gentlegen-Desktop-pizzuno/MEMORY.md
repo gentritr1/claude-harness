@@ -1,0 +1,7 @@
+- [Za! setup (ex-Pizzuno)](pizzuno-setup.md) — repo za-game, rebrand naming rules, image-gen transparency gotcha, port 3000 conflict
+- [Za! arcade direction](za-arcade-direction.md) — arcade branch, design-kit source project, deferred sprite regen, stale-click automation scar
+- [ZA! fleet build](za-fleet-build.md) — parallel-agent spec build, deliberate deviations list, worktree/browser/cwd scars
+- [Table branch & Kitchen Log](za-table-and-log.md) — merge verdict pending, log conventions, 2026-08-08 scars
+- [Audit program](za-audit-program.md) — 2-wave resolution on table, worktree-base scar, open items
+- [Design prototype reviews](za-design-prototype-reviews.md) — pass 2/3 verdicts, +2 path untested, browser coordinate-space scar
+- [Tondo spinoff](tondo-spinoff.md) — new simple UNO-like repo ~/Desktop/tondo from Ring Table design, frozen PROTOCOL.md, port 4600

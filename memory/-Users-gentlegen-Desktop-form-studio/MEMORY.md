@@ -1,0 +1,2 @@
+- [Browser pane hides the page](browser-pane-hidden-rendering.md) — previews blank, transitions frozen, fps invalid in the Claude pane; how to verify anyway
+- [FORM design direction](form-design-direction.md) — what shipped 2026-10-02 (branch, commit), the pending 3D brief, open items, review lessons

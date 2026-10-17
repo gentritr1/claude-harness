@@ -1,0 +1,3 @@
+- [AppCare CSS and motion gotchas](appcare-css-and-motion-gotchas.md) — unlayered CSS vs Tailwind v4, reduced-motion hydration, cn() has no merge, missing testing-library peer
+- [AppCare landing open questions](appcare-landing-open-questions.md) — owner decisions pending after the 2026-10-09 revision (pre-sale CTA, Base44/v0, taste sign-off)
+- [Research on Claude Platform credits](claude-platform-local-research.md) — owner wants research on API credits locally, not session usage; runner + ant profile

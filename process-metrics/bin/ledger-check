@@ -1,0 +1,300 @@
+#!/usr/bin/env python3
+"""ledger-check: which ~/.claude/CLAUDE.md §10 thresholds can a project's ledger compute, and what is missing?
+
+Usage:
+  ledger-check [PROJECT ...] [--dir ~/.claude/process-metrics] [--json]
+  ledger-check --migrate-v1 PROJECT [--write]     # append MIGRATION lines for schema-less v1 records (dry run without --write)
+  ledger-check --self-test
+
+The ledger is append-only (§10): corrections and migrations are NEW lines, never edits. A line whose `migrates`
+names a task_id overlays its fields onto that task; any later line with the same task_id does the same. The
+effective record of a task is the in-order merge of all its lines.
+
+§10 thresholds checked (per project):
+  T1 >= 5 tasks logged             tasks with a numeric wall_min
+  T2 class median                  per class: >= 3 tasks with class and wall_min (a median and 2 tasks over it);
+                                   the fallback class 'other' does not count
+  T3 recurring-step share          the last 5 tasks (by date) all carry wall_min and cat_min (60 min / 15 % test)
+  T4 approved-first-time per hour  >= 5 tasks with a recognised outcome, wall_min and route_version
+Reported, not thresholds: conditions (loadavg start/end, disk, shared emulator) and owner cost coverage.
+
+python3 stdlib only. Exit 0 unless a ledger is unreadable or the self-test fails.
+"""
+import argparse
+import collections
+import json
+import os
+import re
+import statistics
+import sys
+import tempfile
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUTCOMES = {'approved-first-time', 'changes-requested', 'reverted', 'reopened'}
+OUTCOME_ALIASES = {'approved': 'approved-first-time', 'approved_first_time': 'approved-first-time',
+                   'changes': 'changes-requested', 'changes_requested': 'changes-requested'}
+FIELDS = [  # (label, getter) for the §10 field coverage table
+    ('class', lambda r: r.get('class')),
+    ('date', lambda r: r.get('date')),
+    ('purpose', lambda r: r.get('purpose')),
+    ('wall_min', lambda r: num(r.get('wall_min'))),
+    ('tool_calls', lambda r: num(r.get('tool_calls'))),
+    ('tokens', lambda r: num(r.get('tokens'))),
+    ('cat_min', lambda r: r.get('cat_min') or None),
+    ('conditions.loadavg_start', lambda r: num((r.get('conditions') or {}).get('loadavg_start'))),
+    ('conditions.loadavg_end', lambda r: num((r.get('conditions') or {}).get('loadavg_end'))),
+    ('conditions.disk_free_gb', lambda r: num((r.get('conditions') or {}).get('disk_free_gb', (r.get('conditions') or {}).get('disk_free_gb_start')))),
+    ('conditions.shared_emulator', lambda r: (r.get('conditions') or {}).get('shared_emulator')),
+    ('owner.round_trips', lambda r: num((r.get('owner') or r.get('owner_cost') or {}).get('round_trips'))),
+    ('owner.blocked_min', lambda r: num((r.get('owner') or r.get('owner_cost') or {}).get('blocked_min'))),
+    ('outcome (recognised)', lambda r: norm_outcome(r.get('outcome'))),
+    ('route_version', lambda r: r.get('route_version')),
+]
+
+
+def num(x):
+    return x if isinstance(x, (int, float)) and not isinstance(x, bool) else None
+
+
+def norm_outcome(o):
+    if not isinstance(o, str):
+        return None
+    k = o.strip().lower()
+    k = OUTCOME_ALIASES.get(k, k)
+    return k if k in OUTCOMES else None
+
+
+def read_lines(path):
+    out = []
+    with open(path) as fh:
+        for n, line in enumerate(fh, 1):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                out.append((n, json.loads(line), len(line)))
+            except json.JSONDecodeError:
+                out.append((n, None, len(line)))
+    return out
+
+
+def effective(lines):
+    """{task_id: merged record}; migration/correction lines overlay in file order."""
+    recs = collections.OrderedDict()
+    for _n, o, _l in lines:
+        if not isinstance(o, dict):
+            continue
+        tid = o.get('migrates') or o.get('task_id')
+        if not tid:
+            continue
+        base = recs.setdefault(tid, {})
+        base.update({k: v for k, v in o.items() if k != 'migrates'})
+        if o.get('migrates'):
+            base['_migrated'] = True
+    return recs
+
+
+def check_project(path):
+    lines = read_lines(path)
+    recs = effective(lines)
+    tasks = list(recs.values())
+    schemas = collections.Counter((o or {}).get('schema') if isinstance(o, dict) else 'UNPARSABLE' for _n, o, _l in lines)
+    over4k = sum(1 for _n, _o, l in lines if l >= 4096)
+    timed = [r for r in tasks if num(r.get('wall_min')) is not None]
+    by_class = collections.defaultdict(list)
+    for r in timed:
+        if r.get('class'):
+            by_class[r['class']].append(r['wall_min'])
+    classes = {c: dict(n=len(v), median_min=round(statistics.median(v), 1)) for c, v in sorted(by_class.items())}
+    last5 = sorted(tasks, key=lambda r: (str(r.get('date')), str(r.get('task_id'))))[-5:]
+    graded = [r for r in timed if norm_outcome(r.get('outcome')) and r.get('route_version')]
+    th = collections.OrderedDict()
+    th['T1 >= 5 tasks logged'] = dict(ok=len(timed) >= 5, have='%d tasks with wall_min (of %d)' % (len(timed), len(tasks)))
+    ok_classes = [c for c, v in classes.items() if v['n'] >= 3 and c != 'other']  # 'other' is the classifier's fallback, not a class
+    th['T2 class median (>= 3 per class)'] = dict(ok=bool(ok_classes), have='computable for %s' % (', '.join('%s (n=%d, median %.1f min)' % (c, classes[c]['n'], classes[c]['median_min']) for c in ok_classes) or 'no class'),
+                                                  missing='%d of %d tasks have no class' % (sum(1 for r in tasks if not r.get('class')), len(tasks)))
+    l5ok = len(last5) == 5 and all(num(r.get('wall_min')) is not None and r.get('cat_min') for r in last5)
+    th['T3 recurring-step share (last 5)'] = dict(ok=l5ok, have='last %d tasks: %d with wall_min and cat_min' % (len(last5), sum(1 for r in last5 if num(r.get('wall_min')) is not None and r.get('cat_min'))))
+    th['T4 approved-first-time per hour'] = dict(ok=len(graded) >= 5, have='%d tasks with a recognised outcome, wall_min and route_version (need 5)' % len(graded),
+                                                 missing='outcome recognised on %d, route_version on %d of %d tasks' % (sum(1 for r in tasks if norm_outcome(r.get('outcome'))), sum(1 for r in tasks if r.get('route_version')), len(tasks)))
+    cov = collections.OrderedDict((label, sum(1 for r in tasks if get(r) is not None)) for label, get in FIELDS)
+    return dict(path=path, lines=len(lines), tasks=len(tasks), schemas=dict(schemas), over_4kb=over4k,
+                migrated=sum(1 for r in tasks if r.get('_migrated')), schema_less_unmigrated=sum(1 for r in tasks if not r.get('schema')),
+                thresholds=th, classes=classes, field_coverage=cov)
+
+
+def render(res):
+    L = ['%s: %d lines, %d tasks; schemas %s; lines >= 4 KB: %d; migrated %d; schema-less unmigrated %d' % (
+        os.path.basename(res['path']), res['lines'], res['tasks'], json.dumps(res['schemas']), res['over_4kb'], res['migrated'], res['schema_less_unmigrated'])]
+    for k, v in res['thresholds'].items():
+        L.append('  %-38s %s  %s%s' % (k, 'COMPUTABLE' if v['ok'] else 'NOT COMPUTABLE', v['have'], ('; ' + v['missing']) if v.get('missing') else ''))
+    L.append('  field coverage (tasks with a value / %d):' % res['tasks'])
+    for k, v in res['field_coverage'].items():
+        L.append('    %-28s %4d  %s' % (k, v, 'MISSING everywhere' if v == 0 else ''))
+    return '\n'.join(L)
+
+
+# ------------------------------------------------------------------ v1 migration
+V1_CAT = {'builds': 'builds', 'prebuild': 'prebuild', 'adb_capture': 'adb_capture', 'adb_install': 'adb_install',
+          'emulator_boot': 'emulator_boot', 'waits': 'waits', 'analysis_scripts': 'analysis_scripts', 'image_work': 'image_work',
+          'git': 'git', 'other': 'other', 'model': 'model', 'dormant': 'dormant'}
+
+
+def infer_class(desc):
+    sys.path.insert(0, HERE)
+    import harness_analysis as A
+    return A.infer_class(desc or '')
+
+
+def parents_from_digests(project, cache_dir):
+    """agent id -> parent session id, from harness-audit digests (None when unknown)."""
+    out = {}
+    if not os.path.isdir(cache_dir):
+        return out
+    for f in os.listdir(cache_dir):
+        try:
+            with open(os.path.join(cache_dir, f)) as fh:
+                d = json.load(fh)
+        except Exception:
+            continue
+        if d.get('project') == project and d.get('kind') == 'sub' and d.get('agent'):
+            out[d['agent']] = d.get('session')
+    return out
+
+
+def migrate_v1(rec, project, parents, today):
+    cm = rec.get('cat_min') or {}
+    tests_min = None
+    if 'jest' in cm or 'tsc' in cm:
+        tests_min = round((cm.get('jest') or 0) + (cm.get('tsc') or 0), 1)
+    cat = {k2: cm.get(k1) for k1, k2 in V1_CAT.items()}
+    cat.update(tests=tests_min, browser=None, agents=None)
+    tid = rec['task_id']
+    return dict(
+        schema='process-metrics/2', migrates=tid, task_id=tid,
+        migration='MIGRATION v1 -> process-metrics/2 (%s): fields mapped from the schema-less agent_time_audit.py v1 line; '
+                  'unmapped values are null, never estimated; class inferred from purpose' % today,
+        parent_id=parents.get(tid), kind='sub' if str(tid).startswith('agent-') else 'main', project=project,
+        **{'class': infer_class(rec.get('purpose'))}, date=rec.get('date'), purpose=rec.get('purpose'),
+        wall_min=rec.get('wall_min'), active_min=rec.get('active_min'), tool_calls=rec.get('tool_calls'), tokens=rec.get('tokens'),
+        tokens_detail=rec.get('tokens_detail'), cat_min=cat,
+        builds=dict(n=rec.get('builds_n'), min=cm.get('builds'), full_vs_incremental=None),
+        tests=dict(n=None, full_n=None, min=tests_min), device_min=None,
+        timeouts=dict(n=rec.get('timeouts_n'), min=None), retries=dict(n=rec.get('retries_n')), rereads=None,
+        v1_big_reads_n=rec.get('big_reads_n'), errors=None,
+        conditions=dict(loadavg_start=None, loadavg_end=None, shared_emulator=None, disk_free_gb=None),
+        owner=dict(round_trips=None, blocked_min=None), outcome=rec.get('outcome'), route_version=None,
+        source='ledger-check --migrate-v1 from: %s' % (rec.get('source') or 'v1'),
+    )
+
+
+def cmd_migrate(project, out_dir, write, today):
+    path = os.path.join(out_dir, project + '.jsonl')
+    lines = read_lines(path)
+    migrated = {o.get('migrates') for _n, o, _l in lines if isinstance(o, dict) and o.get('migrates')}
+    todo = [o for _n, o, _l in lines if isinstance(o, dict) and not o.get('schema') and not o.get('migrates')
+            and o.get('task_id') and o['task_id'] not in migrated]
+    parents = parents_from_digests(project, os.path.join(out_dir, 'cache', 'digests'))
+    new = [migrate_v1(o, project, parents, today) for o in todo]
+    for r in new:
+        s = json.dumps(r, separators=(',', ':'))
+        if len(s) >= 4096:
+            r.pop('tokens_detail', None)
+    if write and new:
+        with open(path, 'a') as fh:
+            for r in new:
+                fh.write(json.dumps(r, separators=(',', ':')) + '\n')
+    return new, sum(1 for r in new if r['parent_id'])
+
+
+# ------------------------------------------------------------------ self-test
+def self_test():
+    fails = []
+
+    def check(name, cond, detail=''):
+        print(('PASS ' if cond else 'FAIL ') + name + ('' if cond else '  [%s]' % detail))
+        if not cond:
+            fails.append(name)
+
+    tmp = tempfile.mkdtemp(prefix='ledger-check-')
+    try:
+        # negative control: v1-only ledger computes nothing beyond T1
+        v1 = [dict(task_id='agent-a%d' % i, date='2026-09-2%d' % i, purpose='fix crash %d' % i, wall_min=10.0 + i, active_min=10.0,
+                   tool_calls=5, tokens=100, tokens_detail={}, cat_min={'builds': 1, 'jest': 2, 'tsc': 1, 'model': 5},
+                   builds_n=1, timeouts_n=0, retries_n=0, big_reads_n=0, outcome=None, source='v1') for i in range(6)]
+        p = os.path.join(tmp, 'demo.jsonl')
+        with open(p, 'w') as fh:
+            for r in v1:
+                fh.write(json.dumps(r) + '\n')
+        res = check_project(p)
+        check('v1 ledger: T1 computable', res['thresholds']['T1 >= 5 tasks logged']['ok'])
+        check('v1 ledger: T2 not computable (no class)', not res['thresholds']['T2 class median (>= 3 per class)']['ok'])
+        check('v1 ledger: T4 not computable (no outcome/route)', not res['thresholds']['T4 approved-first-time per hour']['ok'])
+        check('v1 ledger: 6 schema-less unmigrated', res['schema_less_unmigrated'] == 6, res['schema_less_unmigrated'])
+        before = open(p).read()
+        new, _ = cmd_migrate('demo', tmp, True, '2026-10-07')
+        after = open(p).read()
+        check('migration appends, never edits', after.startswith(before) and len(new) == 6, len(new))
+        new2, _ = cmd_migrate('demo', tmp, True, '2026-10-07')
+        check('migration is idempotent', new2 == [], len(new2))
+        res = check_project(p)
+        check('migrated: 0 unmigrated, 6 migrated', res['schema_less_unmigrated'] == 0 and res['migrated'] == 6, res)
+        check('migrated: class now present -> T2 computable', res['thresholds']['T2 class median (>= 3 per class)']['ok'], res['classes'])
+        check('migrated: tests minutes = jest + tsc', all(json.loads(l).get('tests', {}).get('min') == 3 for l in after[len(before):].splitlines()))
+        check('migration never invents loadavg or outcome', all(json.loads(l)['conditions']['loadavg_start'] is None and json.loads(l)['outcome'] is None for l in after[len(before):].splitlines()))
+        # positive control: a controller line per §10 template makes T4 computable
+        with open(p, 'a') as fh:
+            for i in range(5):
+                fh.write(json.dumps(dict(schema='process-metrics/2', task_id='brief-%d' % i, **{'class': 'feature'}, date='2026-10-0%d' % (i + 1),
+                                         purpose='x', wall_min=30, cat_min={'builds': 5}, outcome='approved-first-time',
+                                         route_version='r1', conditions=dict(loadavg_start=3.1, loadavg_end=4.0, disk_free_gb=40, shared_emulator=False))) + '\n')
+        res = check_project(p)
+        check('controller lines: T4 computable', res['thresholds']['T4 approved-first-time per hour']['ok'], res['thresholds'])
+        check('controller lines: T3 computable (last 5 timed with cat_min)', res['thresholds']['T3 recurring-step share (last 5)']['ok'])
+        check('outcome aliases: changes -> changes-requested', norm_outcome('changes') == 'changes-requested' and norm_outcome('meh') is None)
+        # a correction line overlays, file order wins
+        with open(p, 'a') as fh:
+            fh.write(json.dumps(dict(schema='process-metrics/2', task_id='brief-0', outcome='reverted')) + '\n')
+        check('correction line overlays the task', effective(read_lines(p))['brief-0']['outcome'] == 'reverted')
+    finally:
+        import shutil
+        shutil.rmtree(tmp, ignore_errors=True)
+    print('\nLEDGER-CHECK SELF-TEST %s: %d checks failed' % ('PASSED' if not fails else 'FAILED', len(fails)))
+    return 0 if not fails else 1
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('projects', nargs='*')
+    ap.add_argument('--dir', default=os.path.expanduser('~/.claude/process-metrics'))
+    ap.add_argument('--json', action='store_true')
+    ap.add_argument('--migrate-v1', metavar='PROJECT')
+    ap.add_argument('--write', action='store_true')
+    ap.add_argument('--today', default=None)
+    ap.add_argument('--self-test', action='store_true')
+    a = ap.parse_args(argv)
+    if a.self_test:
+        return self_test()
+    if a.migrate_v1:
+        import datetime
+        new, with_parent = cmd_migrate(a.migrate_v1, a.dir, a.write, a.today or datetime.date.today().isoformat())
+        print('%s %d MIGRATION lines for %s (%d with a parent_id from the digests)' % ('appended' if a.write else 'would append (dry run)', len(new), a.migrate_v1, with_parent))
+        return 0
+    projects = a.projects or sorted(f[:-6] for f in os.listdir(a.dir) if f.endswith('.jsonl'))
+    out = []
+    for p in projects:
+        path = os.path.join(a.dir, p + '.jsonl')
+        if not os.path.exists(path):
+            print('error: no ledger %s' % path, file=sys.stderr)
+            return 2
+        res = check_project(path)
+        out.append(res)
+        if not a.json:
+            print(render(res) + '\n')
+    if a.json:
+        print(json.dumps(out, indent=1))
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

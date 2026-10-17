@@ -1,0 +1,43 @@
+- [Perf architecture and evidence](perf-architecture-and-evidence.md) — retained native board view; all numbers are API 31 emulator, iOS unmeasured
+- [Tap forgiveness revision and its verification gaps](tap-forgiveness-and-verification-gaps.md) — web + emulator-validated; perf A/B/A showed no regression but the loaded Mac made absolute gates unevaluable; harness/disk gotchas
+- [Measured game-design truths](game-design-truths-measured.md) — no order can brick a board; flat difficulty forever; 4 shapes are 71% of content
+- [Shipping defects found 2026-09-09](shipping-defects-found-2026-09-09.md) — reduce-motion feedback blackout, interstitial counter resets, splash has no backstop, test-ad modal in production (being fixed on branch next-level, W0)
+- [Owner rulings for next-level execution](owner-rulings-next-level-2026-09-16.md) — Track A, branch next-level, only ad-counter fix approved, notification rejected
+- [Shared host contention](shared-host-contention.md) — another Claude session (geoguesser-app) boots emulators and eats disk; use -s emulator-5556 and df right before builds
+- [LevelPlay emulator fill + JS repack](levelplay-emulator-fill-and-js-repack.md) — sample key 85460dcd fills; JS-only builds via export:embed+hermesc+debug-sign, no gradle
+- [Remote-config emulator gotchas](remote-config-emulator-gotchas.md) — release blocks cleartext localhost; RN Android revalidates (304); EXPO_PUBLIC ?? '' inlines; LevelPlay native init marker
+- [W6-01 mask rebuild + trace gotchas](w6-01-mask-rebuild-and-trace-gotchas.md) — rebuild ≤0.5 ms vs 39-47 ms p95; export needs --clear for env flips; sort Perfetto events
+- [Codex delegation setup](codex-delegation-setup.md) — codex exec flags that work in its sandbox; Codex codes in the working tree, Claude reviews + commits
+- [Detector needs a positive control](detector-needs-positive-control.md) — W6-07 0/10 was a blind detector (dev-only sink in release); zero counts need a same-build positive control
+- [ADMOB-B emulator gotchas](admob-b-emulator-gotchas.md) — solver taps to reach an interstitial; 37x37 calibration failed and clicked a test ad; release has no pacing logs
+- [Capture harness gotchas (T5)](capture-harness-gotchas-t5.md) — zsh glob abort skips Metro clear; screenrecord VFR frame-at-time; HEAD baseline via tar+git show
+- [POLISH-T6 hand-off fix + gotchas](polish-t6-handoff-and-gotchas.md) — native/Skia unordered, never-hide+cover fix; cold-paint cost of new Skia draw types; zsh "$FILES" tar near-loss
+- [W2-04 scrim capture gotchas](w2-04-scrim-capture-gotchas.md) — soak gfxinfo 120-frame cap; test interstitial X; ad-exit reveal vs cover; HOME snapshot cross-fade; zoomed tutorial taps
+- [W2-05 capture gotchas](w2-05-capture-gotchas.md) — bugreport clock sync, BACK-close TEST rewarded, post-ad redraw hides motion, Reanimated detach needs snap, don't kill port-8097 listeners blindly
+- [Round summary artifact](round-summary-artifact.md) — owner wants an ELI5, facts-first visual artifact at the end of each round; /show-me and /eli5 not installed
+- [POLISH-T11 perf gate gotchas](polish-t11-gate-gotchas.md) — libhwui aborts from gfxinfo/SF resets + focus guard; idle-gap 'dropped' artefact; device-clock dumps; duplicate detached chains; PRE-native scratch build
+- [W4-06 repack/harness gotchas](w4-06-repack-and-harness-gotchas.md) — git-archive repack loses fonts; RNTL press walks composite onPress; Browser pane resizes mid-batch; 21 dp under the 360x640 pill
+- [W4-07 Hermes fold + boot trace](w4-07-hermes-fold-and-boot-trace.md) — 26 us/6.6 KB per lookup on Hermes; ad start-up burst in the menu's first ~1.6 s; su-sqlite seeding + monotonic-aligned framestats recipe
+- [Range-inside-range perf gate is invalid](range-inside-range-criterion-invalid.md) — identical builds fail it at n=8; gate on null-spread + replicated median shift or permutation test
+- [W4-09 gallery perf + capture gotchas](w4-09-gallery-perf-and-capture-gotchas.md) — emulator buffer-wait mode fakes misses; identical A/B protocols; per-Svg bitmaps (use one Svg + Yoga-snapped origins); menu-exit Reanimated warning burst inflates next screen
+- [Reanimated dead-tag mechanism (PERF-DEADTAG)](reanimated-dead-tag-mechanism.md) — registry re-applied on svg draw-pass events; cancel-on-unmount does not fix; screen hand-off does; sound-off = positive control
+- [W4-10 menu compose gotchas](w4-10-menu-compose-gotchas.md) — wrapper box ate header taps (bounds passed); jest -u deletes artifacts *.snap; RNTL folds NBSP
+- [W4-11 store-review gotchas](w4-11-store-review-gotchas.md) — emulator Play stub (bind fails), isAvailableAsync = Play package present, star wobble to 4.2 s, zsh one-word flags caught by bundle proof
+- [DotNetRandom port not exact](dotnetrandom-port-not-exact.md) — draws 3+ leave [0,1) for |seed|>MSEED; v1/daily frozen as-is, new consumers need an exact RNG
+- [W3-08 legibility capture gotchas](w3-08-legibility-capture-gotchas.md) — capture.mjs post-shot wm-reset relayout log; seed campaign pointer not DEV_LEVEL; all boards width-bound (cellPt=0.94*vw/cols)
+- [W2-08/06/10 capture gotchas](w2-08-06-10-capture-gotchas.md) — symlink repack font rewrite, sqlite write counter, zoomed fit origin/pinch focal, ink reaches cell edges, recorder stalls, POLISH-T10 visible vs clock
+- [RE-CEILING results and gotchas](re-ceiling-gotchas.md) — owner picked ceiling = floor = 354 (scan-matched); arrow cap allows 450; typical level still +9% gen vs v1; pgrep self-match
+- [W5 art batch gotchas](w5-art-batch-gotchas.md) — Image source size beats absoluteFill; P-02 tolerance blind to faint effects; pgrep self-match; repack can't add resources; A/B/A leg bias
+- [W5-02/W5-08 harness gotchas](w5-02-08-harness-gotchas.md) — emoji XML entities, # toggle eats taps, composed-menu seeds move Play, zoomed-camera pan solve, null p<0.05
+- [Reanimated settledProps rest states](reanimated-settled-props-rest-state.md) — static rest style loses to synced-back props; attached style loses React props on background; test with forced mid-leg + HOME after settle
+- [Arrow skins direction](arrow-skins-direction-2026-09-29.md) — owner wants cute/cozy/ASMR skins; canvases + skill set; nothing built yet
+- [Sound design 2026-09-30](sound-design-2026-09-30.md) — exit pop REMOVED 2026-10-06 (EXIT_POP_ENABLED=false); other sounds kept; Higgsfield is speech-only
+- [ART-SKINS-01 review](art-skins-01-review.md) — Codex texture spike: REQUEST CHANGES; ungated asset packaging, dense-board readability, +2.2 ms replicated
+- [ART-SKINS-07 review](art-skins-07-review.md) — 15 skins approved as default-OFF look check; pixel gate lacked a reinstall null control; Archery/Ink/Clear/Paper look findings
+- [ART-SKINS-08 review](art-skins-08-review.md) — cuter skins APPROVED by owner, merged c6f9b98 behind picker flag; diag logs fixed 44642bb; phone perf still open
+- [Reward path 2026-10-04](reward-path-2026-10-04.md) — A (680370b) and B collection book (853ec1a) built behind flags; phone build + owner look pending; amend plan in commits when Codex flags conflicts
+- [W3-15/W7-09 gotchas](w3-15-w7-09-gotchas.md) — SF overflow = post-window frames during meminfo; Play wants 24-bit PNG (screencap RGBA); nohup builds survive session loss
+- [W3-21 v2 freeze](w3-21-v2-freeze.md) — 85dda6b: 4 shapes admitted, v2 fingerprints frozen; over-install proven with current-code build A; flip waits on W3-17 + owner
+- [Speed audit 2026-10-07](speed-audit-2026-10-07.md) — builds only 6% of helper time; model 34%, perf series 23%; test-APK template regressed to clean+x86_64; ledger seeded
+- [Owner data-first stance](owner-data-first-stance.md) — no answer is 100%; measure, label guesses as hypotheses, promise the correction loop not certainty
+- [Tester feedback rulings 2026-10-13](tester-feedback-rulings-2026-10-13.md) — build system theme + Rate + How-to-play rows; prep 4 flags for flip; title Calm Arrow Puzzle; notifications still no

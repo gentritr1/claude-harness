@@ -1,0 +1,5 @@
+.DS_Store
+process-metrics/cache/
+process-metrics/hooks/
+skill-updates/logs/
+skill-updates/removed-*/

@@ -1,0 +1,54 @@
+- [Android package is frozen](android-package-is-frozen.md) — never rename com.snaxxtech.geoguesser; main has a WIP rename that would strand the closed test
+- [Release build steps](geoguesser-release-build-steps.md) — npm ci first; versionCode lives in both app.json and build.gradle
+- [Verifying WebView maps without a device](verify-webview-maps-without-a-device.md) — render the generated HTML in a browser and grep the Hermes bundle
+- [Don't pipe long builds through tail](dont-pipe-long-builds-through-tail.md) — buffered output made me call a successful build failed
+- [Seed store from browser for visual QA](seed-store-from-browser-for-visual-qa.md) — drive gameStore.setState from the console on expo web; guess:null skips the WebView
+- [Tester feedback 2026-09-07](tester-feedback-2026-09-07.md) — no bugs; onboarding/rating/ASO asks answered in 1.4.0 (11); store copy lives in store/
+- [Commit before release build](commit-before-release-build.md) — 1.3.1 shipped from an uncommitted tree; commit + tag before build-aab
+- [Web preview QA gotchas](web-preview-qa-gotchas.md) — Modal fade looks broken for seconds; click via JS when the pane is covered
+- [Android SDK versions come from RN's catalog](android-sdk-versions-come-from-rn-catalog.md) — already targets 36; read the build log, never Expo's "35" fallback
+- [playerStore wipes the profile on a slow read](playerstore-wipes-profile-on-slow-read.md) — fixed (edf2b36, c122551); tests/player-store.test.ts Case 1 guards it; probe keep-original guards with finite out-of-range values
+- [WebViews load their libs from unpkg](webviews-load-libs-from-unpkg.md) — no SRI, no bundling; the guess map fails silently and hard-blocks the first guess
+- [Large-screen landscape is already live](large-screen-landscape-is-live.md) — Android 16 tablets ignore the portrait lock; app survives; repeated-world map fixed
+- [One shared Mapillary token](mapillary-single-shared-token.md) — dev scripts share players' quota; cap probes at 600/min, abort on first rate-limit
+- [Gradle reuses a stale bundle across EXPO_PUBLIC_* changes](gradle-bundle-ignores-expo-public-env.md) — store AAB could ship test ads + QA panel; read the artifact's build stamp
+- [Custom font gotchas on Android](custom-font-android-gotchas.md) — Overpass middle dot was a zero-width GDEF mark (fixed in fetch-fonts); fontWeight + custom family = Roboto; tnum works; Ads logcat shows no unit IDs
+- [NUL bytes hide diffs from review](nul-bytes-hide-diffs-from-review.md) — git diffs such text files as binary; check numstat for '-' before any review
+- [Delayed entering + Remove animations hides a view](reduced-motion-delayed-entering-hides-view.md) — HowToPlay page-1 icon blank on first open with animator scale 0 (1.4.0 too); v2 dropped the entering; E2 owns the v1 fix
+- [Pixel-exact before/after screenshots](pixel-exact-before-after-screenshots.md) — animator scale 0 + demo mode on the AVD; headless Chrome CDP with deterministic flags on web; mask the status bar
+- [Gates recompute, never trust report flags](gates-recompute-never-trust-report-flags.md) — coverage check passed n=240 vs 18,432 by trusting `reconciled`; mutate counts/dates to test a gate
+- [Shared-quota locks live outside the checkout](shared-quota-lock-outside-checkout.md) — per-worktree lock let parallel agents double Mapillary requests; use ~/.cache lock dir
+- [AVD has a stale global proxy](avd-stale-global-proxy.md) — 10.0.2.2:8888, nothing listening; returns on every quickboot from the stale snapshot (-no-snapshot-save)
+- [MapLibre page CSS and repaint](maplibre-page-css-and-repaint.md) — its CSS outranks one-class page rules (use #map); paint changes fade 300 ms; load waits for tiles; SwiftShader for headless WebGL
+- [AVD proxy cleanup leaves host/port](avd-proxy-cleanup-leaves-host-port.md) — deleting http_proxy keeps global_http_proxy_host/port live; use http_proxy :0 and delete both
+- [Device and web QA harness traps](device-and-web-qa-harness-traps.md) — CDP profile keeps flag overrides; timed-out adb install kills the app; reduced motion read at start; ad height moves summary; buffered QA lines are not triggers (mid-spin checks were void); QA rows need prefix match + slow swipes; test.cjs wipes .check/test so never two runs per worktree
+- [Next-level execution state](next-level-execution-paused.md) — units through E4-2 merged; phone session PAUSED 2026-10-07 (A1 run 1 PASS, A4 done); resume from device-2026-10-07/STATUS.md
+- [Never read nativeEvent inside a state updater](never-read-nativeevent-inside-a-state-updater.md) — RN recycles the event; it crashed every round start and no headless gate saw it
+- [A min over a sampled matrix is an artefact](a-min-over-a-sampled-matrix-is-an-artefact.md) — 9.7 → 9.3 → 1.5 → 0.000 for the same question; quote sensitivity, not a worst case
+- [Every gate we write ships a silent pass](every-gate-we-write-ships-a-silent-pass.md) — three readers, three holes; attack a gate with synthetic input before reading its tests
+- [Delegate on the newest Opus](delegate-on-the-newest-opus.md) — implementers/full reviews on Opus 5.5, scoped re-reviews on Sonnet 5.5; enum verified 2026-10-02
+- [Unreachable usually means untested](unreachable-usually-means-untested.md) — R107, M19 and B2-4's ten wiring sites: every such claim was disproved once checked
+- [Gate commits on the exit code](gate-commits-on-the-exit-code.md) — a 904/905 run got committed and its failing test could not be named; save every run, chain commit to the exit code
+- [Timer floor assertions need slack](timer-floor-assertions-need-slack.md) — elapsed >= N vs an N ms timer reads 1 ms early (Date.now vs libuv); was the 904/905 flake
+- [Agent worktree isolation cuts from main](agent-worktree-isolation-cuts-from-main.md) — isolation:"worktree" landed on main's tip, not feat/next-level; make the worktree yourself, dispatch verifies HEAD
+- [AVD dies under host memory pressure](avd-dies-under-host-memory-pressure.md) — died 7× (10-02 ×2, 10-07, 10-08 ×4 on installs: dexopt starves networkstack → system_server FATAL); 8-core host, gate on load < ~15
+- [design-icons test flags non-subset glyphs](design-icons-test-flags-non-ascii-in-src.md) — ≈/→/emoji fail even in comments; em dash passes, so it is not an ASCII gate; scan added lines with perl
+- [Astra is GPT-6 in the ChatGPT app](astra-is-gpt6-in-chatgpt-app.md) — owner's second agent; keep it read-only while Claude commits; ask its real generation capabilities
+- [Worktree remove deletes evidence](worktree-remove-deletes-evidence.md) — gitignored docs/plan/evidence lived only in scratchpad worktrees; copy it out before git worktree remove
+- [Mockup code is not trusted math](mockup-code-is-not-trusted-math.md) — my globe mockup's clipping shortcut, ported into ART-1, inverted land/ocean in a dozen time zones; demand a ground-truth oracle sweep
+- [Disk nearly full: gates fail with ENOSPC](disk-nearly-full-gates-fail-enospc.md) — 2026-10-05 464 MiB free; check-contrast died silently; run df -h before diagnosing a bare gate failure
+- [Web previews show fallback fonts](web-previews-show-fallback-fonts.md) — art_v2 web shots rendered a serif (no @font-face on web); owner judged the font on it; inject the real TTFs or label LAYOUT ONLY in-image
+- [Native mode setters have global side effects](native-mode-setters-have-global-side-effects.md) — expo-audio setAudioModeAsync forces speakerphone on Android each call; read what a setter does to the OS, not just its permission
+- [Launcher icon is the OFF home hero](launcher-icon-is-the-off-home-hero.md) — assets/icon.png is both; I2 swapped the flags-OFF home mascot unnoticed; owner kept it; grep require() before touching assets/
+- [Briefs must not reverse owner decisions](brief-must-not-reverse-owner-decisions.md) — ART-4 v1 re-proposed tz facing the owner replaced + a sun model that existed; grep module headers for OWNER-APPROVED first
+- [Device evidence was reduced-motion only](device-evidence-was-reduced-motion-only.md) — SND-1 log + tests all at scale 0; animations-ON cue lost as why=cold; run timing bugs with motion ON and OFF
+- [Overlay redraws break when a layer is inserted](overlay-redraws-break-when-a-layer-is-inserted.md) — ART-4a caps above the coast made GlobeOverlay's unclipped coast glow on the night side; pins can't see compositing
+- [Cloned node_modules carry native caches](cloned-node-modules-carry-native-caches.md) — fresh worktree builds need libworklets.so hard-linked into cmake/release/obj (reanimated legacy path)
+- [gfxinfo rows are not frames](gfxinfo-rows-are-not-frames.md) — a Modal doubles rows per vsync; latency>16.7 ms is pipelining, not jank; group by vsync, use FrameDeadline + gaps
+- [Spike ready time is not cold-start ready time](spike-ready-time-is-not-cold-start-ready-time.md) — Skia prep 16-43 ms idle vs 0.5-3.3 s on cold start (8/8 skips); measure deadlines in the real trigger context
+- [Skia write after unmount segfaults](skia-write-after-unmount-segfaults.md) — librnskia setJsiProperty SIGSEGV when a worklet writes to an unmounted Canvas; stop+ack before unmount; fakes must throw; check crash buffer per step; also unmount-by-reparent (hero variant swap) — pin its tree position
+- [Globe after-entrance direction](globe-after-entrance-direction.md) — band audited accurate; owner picked ALL (4c sun, 4d fill, 4e new day, 4f drag needs RNGH yes)
+- [Living globe RESUME point](living-globe-resume-point.md) — RESUMED 2026-10-08 20:48; 4c fix round + 4d review + art-4s flake runs restarted
+- [Small-n flake comparisons mislead](small-n-flake-comparisons-mislead.md) — 0/16 vs 4/14 looked like a regression; base rate 4/100; find the mechanism, size runs to the rate
+- [Third-party style repaint must guard each call](third-party-style-repaint-must-guard-each-call.md) — ART-5m: one upstream layer-type change threw and killed the guess map; type-check + try/catch per layer, review with a mutated style
+- [Release 1.6.0 scope](release-1-6-0-scope.md) — owner 2026-10-10: 13 flags ON, 6 OFF (daily/reminders/today-fill/rewarded/ump/interstitial), real-ads APK+AAB, measure provisional timings first

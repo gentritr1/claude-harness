@@ -1,0 +1,1 @@
+- [AppCare Supabase live-verification scars](appcare-supabase-live-verification.md) — verify Supabase catalog/API checks against a REAL hosted project, not PGlite; Probe 2.0 / PR #5 lessons (storage-schema scan-abort, 401-not-403, restrictive policies)

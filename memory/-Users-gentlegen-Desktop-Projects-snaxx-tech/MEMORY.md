@@ -1,0 +1,13 @@
+- [Hero "World Within" concept + canvas](hero-world-within-concept.md) — Sept 2026 hero redesign, design canvas URL, Arrows + Geo Guesser launching on Play, FJALË stays, Genesis (Word→World→Arrow) narrative pending pick
+- [Offday repo + landing page](offday-landing.md) — SnaxxTech/offday split, landing at / and app at /app, globals.css main/reduced-motion gotchas
+- [Fresh 3D brand direction (Oct 2026)](brand-3d-fresh-direction.md) — owner ruled start fresh, Red Thread not carried over; building a 3-direction master prompt, then AppScan project research
+- [AppCare next-projects research](appcare-next-projects-research.md) — Oct 2026 report path, dashboard branch is the baseline, top-3 = probe 2.0 / write-path proof / key blast radius
+- [Notes mining → opportunity map (Oct 2026)](notes-mining-opportunity-map.md) — ranked bets dashboard URL, lanes, parked ideas, redactor gaps + secrets to rotate
+- [Inquiry Engine thread (Oct 2026)](inquiry-engine-thread.md) — ChatGPT thread export at ~/Desktop/Projects/inquiry-engine, Fable verdict, Proof House mission, export route that works
+- [jira-sheets add-on (Oct 2026)](jira-sheets-project.md) — rev 4.1 phases A–D, phase A done, test sheet + S account, Chrome MCP is the wrong profile, brag installed
+- [Deeper-version planning pass](deeper-version-planning-prompt.md) — owner wants the 4-question "deeper, not bigger" pass on every plan/brief before presenting
+- [Proof Runner v0 (Oct 2026)](proof-runner-project.md) — repo/branches/worktree, real jira-sheets numbers, open owner decisions, rehashed-forgery review lesson
+- [Play Deadline kit (Oct 2026)](play-deadline-kit.md) — pdk CLI + Ignite 52→54 proof, owner apps already API 36, zipalign≠16KB, open push/pricing decisions
+- [paddle-kit (Oct 2026)](paddle-kit-project.md) — shared Paddle Billing package, spec+plan approved path, open gates: Kosovo payouts, GitHub push, sandbox E2E
+- [Proof Spine research (Oct 2026)](proof-spine-research.md) — future-problem ideas + career/startup spine page, NLnet 3 Nov, top 3 ideas
+- [deadline-radar (Oct 2026)](deadline-radar-project.md) — RN/Expo upgrade+deadline tool, bench A/B runs, owner rule: complement Expo tools never compete, v0.2 orchestrator queued

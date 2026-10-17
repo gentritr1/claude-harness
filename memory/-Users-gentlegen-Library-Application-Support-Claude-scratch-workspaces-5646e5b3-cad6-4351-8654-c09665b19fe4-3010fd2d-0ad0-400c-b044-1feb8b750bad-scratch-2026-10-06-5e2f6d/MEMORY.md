@@ -1,0 +1,9 @@
+- [LOMN web port probes](lomn-web-port-probes.md) — exe has full debug symbols; Ghidra decomp readable; Boxedwine kit awaiting user test
+- [Claude-only implementers](claude-only-implementers.md) — LOMN port: all coding by Claude subagents, never Codex
+- [LOMN toolchain gotchas](lomn-toolchain-gotchas.md) — Dawn Threads order, emdawnwebgpu flags, Playwright SwiftShader blank-canvas trap
+- [Autonomy + knowledge capture](autonomy-and-knowledge-capture.md) — proceed without confirmations; data-driven optimization; RE/porting knowledge base + audits in repo
+- [agent-playbooks](agent-playbooks-reference.md) — owner's playbook plugin; rules applied to LOMN, ctx:web gap, promotion candidates
+- [LOMN roadmap board](lomn-roadmap-board.md) — live artifact; update board/state as tasks land
+- [LOMN process experiments](lomn-process-experiments.md) — ledger, E1 warm builds, E2 model A/B, read-only-review lesson
+- [Scratch cleanup after verify](scratch-cleanup-after-verify.md) — delete frozen verification copies/caches once the result is ledgered
+- [Model cost policy](model-cost-policy.md) — on API credits: Fable only for plan reviews + milestone-end; Opus-medium/Sonnet implement; fresh session per step

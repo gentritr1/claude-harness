@@ -1,0 +1,7 @@
+# Where each tracked skill really comes from. The repo copies lag their originals, so upstream.sh
+# watches the original path too. Format: skill  github-owner/repo  path  [renamed-to note]
+# prisma-expert and database-migration are community skills with no upstream of their own.
+react-native-skills            vercel-labs/agent-skills  skills/react-native-skills
+vercel-optimize                vercel-labs/agent-skills  skills/vercel-optimize
+neon-postgres                  neondatabase/agent-skills skills/neon-postgres
+neon-postgres-egress-optimizer neondatabase/agent-skills skills/neon-postgres-egress-optimizer

@@ -1,0 +1,1568 @@
+{
+ "reconciliation": {
+  "files": 67,
+  "main": 4,
+  "sub": 63,
+  "lines": 13616,
+  "bad_lines": 0,
+  "tool_use_blocks": 2554,
+  "tool_results": 2554,
+  "paired_calls": 2554,
+  "orphan_uses": 0,
+  "results_without_use": 0,
+  "paired_raw": 2554,
+  "dedup": {
+   "sub_copies": 0,
+   "calls_dropped": 0,
+   "transcripts_dropped": 0
+  },
+  "raw_files": 67,
+  "errors": 85,
+  "timeouts_not_error": 32,
+  "failures": 117,
+  "classified": 107,
+  "other": 2,
+  "other_nonzero": 8,
+  "other_share": 0.08547008547008547,
+  "first": 1791288846.243,
+  "last": 1791360761.644,
+  "agent_wall_h": 23.917905277609826,
+  "host_reclass": 0
+ },
+ "tools": [
+  {
+   "key": "Bash",
+   "n": 1936,
+   "err": 70,
+   "fail": 102,
+   "med": 0.9315,
+   "p90": 26.892100000000063,
+   "hours": 5.178068055555555
+  },
+  {
+   "key": "WebSearch",
+   "n": 140,
+   "err": 4,
+   "fail": 4,
+   "med": 8.3725,
+   "p90": 12.055900000000001,
+   "hours": 0.3752613888888889
+  },
+  {
+   "key": "Read",
+   "n": 91,
+   "err": 1,
+   "fail": 1,
+   "med": 0.033,
+   "p90": 0.476,
+   "hours": 0.004617777777777777
+  },
+  {
+   "key": "SubagentHandback",
+   "n": 80,
+   "err": 1,
+   "fail": 1,
+   "med": 0.4205,
+   "p90": 0.7043,
+   "hours": 0.011736944444444444
+  },
+  {
+   "key": "Write",
+   "n": 79,
+   "err": 2,
+   "fail": 2,
+   "med": 0.11,
+   "p90": 3.576200000000002,
+   "hours": 0.032139999999999995
+  },
+  {
+   "key": "WebFetch",
+   "n": 74,
+   "err": 4,
+   "fail": 4,
+   "med": 7.8665,
+   "p90": 18.383100000000006,
+   "hours": 0.21567416666666667
+  },
+  {
+   "key": "Agent",
+   "n": 63,
+   "err": 0,
+   "fail": 0,
+   "med": 334.21000000000004,
+   "p90": 411.62739999999997,
+   "hours": 0.6942422222222222
+  },
+  {
+   "key": "Edit",
+   "n": 25,
+   "err": 0,
+   "fail": 0,
+   "med": 0.106,
+   "p90": 20.853800000000007,
+   "hours": 0.04185083333333334
+  },
+  {
+   "key": "SendMessage",
+   "n": 19,
+   "err": 0,
+   "fail": 0,
+   "med": 0.667,
+   "p90": 9.542199999999998,
+   "hours": 0.017126944444444445
+  },
+  {
+   "key": "ToolSearch",
+   "n": 17,
+   "err": 0,
+   "fail": 0,
+   "med": 0.013,
+   "p90": 0.3336,
+   "hours": 0.0005147222222222222
+  },
+  {
+   "key": "Skill",
+   "n": 8,
+   "err": 0,
+   "fail": 0,
+   "med": 0.1245,
+   "p90": 2.311799999999999,
+   "hours": 0.0019186111111111112
+  },
+  {
+   "key": "Monitor",
+   "n": 8,
+   "err": 0,
+   "fail": 0,
+   "med": 0.424,
+   "p90": 0.7600999999999999,
+   "hours": 0.0011586111111111111
+  },
+  {
+   "key": "mcp:claude-in-chrome",
+   "n": 3,
+   "err": 1,
+   "fail": 1,
+   "med": 1.572,
+   "p90": 2.6392,
+   "hours": 0.0013319444444444444
+  },
+  {
+   "key": "TaskStop",
+   "n": 3,
+   "err": 1,
+   "fail": 1,
+   "med": 0.023,
+   "p90": 0.143,
+   "hours": 6e-05
+  },
+  {
+   "key": "SendUserFile",
+   "n": 2,
+   "err": 0,
+   "fail": 0,
+   "med": 0.036000000000000004,
+   "p90": 0.038400000000000004,
+   "hours": 2e-05
+  },
+  {
+   "key": "Artifact",
+   "n": 2,
+   "err": 0,
+   "fail": 0,
+   "med": 1.4975,
+   "p90": 1.7035,
+   "hours": 0.0008319444444444445
+  },
+  {
+   "key": "mcp:Claude_Browser",
+   "n": 1,
+   "err": 0,
+   "fail": 0,
+   "med": 4.011,
+   "p90": 4.011,
+   "hours": 0.0011141666666666667
+  },
+  {
+   "key": "AskUserQuestion",
+   "n": 1,
+   "err": 0,
+   "fail": 0,
+   "med": 3.372,
+   "p90": 3.372,
+   "hours": 0.0
+  },
+  {
+   "key": "mcp:ccd_session",
+   "n": 1,
+   "err": 0,
+   "fail": 0,
+   "med": 0.222,
+   "p90": 0.222,
+   "hours": 6.166666666666667e-05
+  },
+  {
+   "key": "bash",
+   "n": 1,
+   "err": 1,
+   "fail": 1,
+   "med": 0.006,
+   "p90": 0.006,
+   "hours": 1.6666666666666667e-06
+  }
+ ],
+ "error_classes": [
+  {
+   "cls": "timeout:command",
+   "bucket": "BEHAVIOUR",
+   "n": 28,
+   "call_h": 0.4818441666666667,
+   "lost_h": 0.6504830555555555,
+   "projects": [
+    [
+     "claude-scratch",
+     28
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     28
+    ]
+   ],
+   "example": "timeout N tools/toolchain.sh",
+   "sigs": [
+    [
+     "timeout N tools/toolchain.sh",
+     2
+    ],
+    [
+     "source .toolchain/emsdk/emsdk_env.sh >/dev/null N>&N; timeout N .venv/bin/pytest -q -rs tools",
+     2
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: bjcbNzNxn). Output is being writte",
+     1
+    ],
+    [
+     "native:",
+     1
+    ],
+    [
+     "timeout N .venv/bin/python <REDACTED>.py --exe build/native/lomn_datacheck --install \"$HOME/Library/Application <REDA",
+     1
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: bjNhbcNc). Output is being writte",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "file:not-found",
+   "bucket": "BEHAVIOUR",
+   "n": 7,
+   "call_h": 0.16396861111111113,
+   "lost_h": 0.2116630555555556,
+   "projects": [
+    [
+     "claude-scratch",
+     7
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     7
+    ]
+   ],
+   "example": "Exit code N: tail: <REDACTED>.log: No such file or directory",
+   "sigs": [
+    [
+     "Exit code N: tail: <REDACTED>.log: No such file or directory",
+     1
+    ],
+    [
+     "Exit code N: cp: tools/decomp/nbN.py: No such file or directory",
+     1
+    ],
+    [
+     "Exit code N: ls: ~/Library/Application <REDACTED>*.py: No such file or directory",
+     1
+    ],
+    [
+     "Exit code N: ls: docs/surface.md: No such file or directory",
+     1
+    ],
+    [
+     "Exit code N: cat: ~/Library/Application <REDACTED>.c: No such file or directory",
+     1
+    ],
+    [
+     "Exit code N: virtual Error read(std::string_view path, std::vector<uintN_t>& out) const = N;",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "shell:zsh-equals-expansion",
+   "bucket": "TOOL",
+   "n": 29,
+   "call_h": 0.09822722222222222,
+   "lost_h": 0.14592166666666667,
+   "projects": [
+    [
+     "claude-scratch",
+     29
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     29
+    ]
+   ],
+   "example": "Exit code N: N. **Ghidra analysis or a script fails partway** (bad JDK, script compile error, timeout) \u2192 `make decomp` m",
+   "sigs": [
+    [
+     "Exit code N: N. **Ghidra analysis or a script fails partway** (bad JDK, script compile error, timeout) \u2192 `make decomp` m",
+     5
+    ],
+    [
+     "Exit code N: (eval):N: === not found",
+     3
+    ],
+    [
+     "Exit code N: (eval):N: ==== not found",
+     2
+    ],
+    [
+     "Exit code N: - [ ] **Step N: Write the failing tests.**",
+     2
+    ],
+    [
+     "Exit code N: Warning(\"BLK format check failed.\");",
+     1
+    ],
+    [
+     "Exit code N: - `lomn_data.DataError`, `lomn_data.BUILDS`",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "other:nonzero-exit",
+   "bucket": "BEHAVIOUR",
+   "n": 8,
+   "call_h": 0.04538416666666667,
+   "lost_h": 0.11393972222222222,
+   "projects": [
+    [
+     "claude-scratch",
+     8
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     8
+    ]
+   ],
+   "example": "Exit code N: innoextract not found",
+   "sigs": [
+    [
+     "Exit code N: innoextract not found",
+     1
+    ],
+    [
+     "Exit code N: LOMN-Beta/LEGOBionicle.exe ../probeN/LEGOBionicle.exe differ: char N, line N",
+     1
+    ],
+    [
+     "Exit code N: emcc: error: emdawnwebgpu requires C++. Link using em++ (or emcc -sDEFAULT_TO_CXX), instead of emcc.",
+     1
+    ],
+    [
+     "Exit code N:",
+     1
+    ],
+    [
+     "Exit code N: proj",
+     1
+    ],
+    [
+     "Exit code N: N:TEST_CASE(\"blockchain: an entry that fails to read falls through to the next blockfile\") {",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "wait:sleep-blocked",
+   "bucket": "TOOL",
+   "n": 6,
+   "call_h": 2.277777777777778e-05,
+   "lost_h": 0.08127277777777778,
+   "projects": [
+    [
+     "claude-scratch",
+     6
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     6
+    ]
+   ],
+   "example": "<tool_use_error>Blocked: sleep N followed by: ps -axo pid,etime,pcpu,rss,command grep -i \"Boxedwine.app/Contents/MacOS\"",
+   "sigs": [
+    [
+     "<tool_use_error>Blocked: sleep N followed by: ps -axo pid,etime,pcpu,rss,command grep -i \"Boxedwine.app/Contents/MacOS\"",
+     1
+    ],
+    [
+     "<tool_use_error>Blocked: sleep N followed by: tail -c N /private/tmp/claude-N/setup.log tr '\\r' '\\n' tail -N. To wa",
+     1
+    ],
+    [
+     "<tool_use_error>Blocked: sleep N followed by: cat <REDACTED>.out tail -N ~<REDACTED>*/analyze.log cut -cN-N. To wait ",
+     1
+    ],
+    [
+     "<tool_use_error>Blocked: sleep N followed by: tail -N ~<REDACTED>*/analyze.log cut -cN-N. To wait for a condition, us",
+     1
+    ],
+    [
+     "<tool_use_error>Blocked: sleep N followed by: <REDACTED> tail -N $W/out/oracle_check.txt tail -N $W/out/wasm_build.log",
+     1
+    ],
+    [
+     "<tool_use_error>Blocked: sleep N followed by: cat <REDACTED>.log. To wait for a condition, use Monitor with an until-lo",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "timeout:foreground-wait",
+   "bucket": "BEHAVIOUR",
+   "n": 4,
+   "call_h": 0.052421388888888885,
+   "lost_h": 0.05794916666666666,
+   "projects": [
+    [
+     "claude-scratch",
+     4
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     4
+    ]
+   ],
+   "example": "timeout N tools/toolchain.sh",
+   "sigs": [
+    [
+     "timeout N tools/toolchain.sh",
+     1
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: bbbkhaNr). Output is being written",
+     1
+    ],
+    [
+     "Command did not complete within its Ns timeout and was moved to the background (ID: bulnvNgmN). Output is being writte",
+     1
+    ],
+    [
+     "make check: all layers green",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "env:command-not-found",
+   "bucket": "ENV",
+   "n": 6,
+   "call_h": 0.003817222222222222,
+   "lost_h": 0.04773388888888888,
+   "projects": [
+    [
+     "claude-scratch",
+     6
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     6
+    ]
+   ],
+   "example": "Exit code N: pdftotext not found",
+   "sigs": [
+    [
+     "Exit code N: pdftotext not found",
+     1
+    ],
+    [
+     "Exit code N: ghidra not found",
+     1
+    ],
+    [
+     "Exit code N: N% tests passed, N tests failed out of N",
+     1
+    ],
+    [
+     "Exit code N: - [ ] **Step N: Write the failing test.** Create `tools/tests/test_harness.py` from REF.",
+     1
+    ],
+    [
+     "Exit code N: CHECK(m.write(\"User/../../escape\", b, N) == Error::BadMount);",
+     1
+    ],
+    [
+     "Exit code N: < N model blu\ufffd: not found: Root/Da",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "nonzero:benign-no-match",
+   "bucket": "SIGNAL",
+   "n": 3,
+   "call_h": 0.0408075,
+   "lost_h": 0.046557499999999995,
+   "projects": [
+    [
+     "claude-scratch",
+     3
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     3
+    ]
+   ],
+   "example": "Exit code N:",
+   "sigs": [
+    [
+     "Exit code N:",
+     2
+    ],
+    [
+     "Exit code N: <REDACTED>",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "network",
+   "bucket": "ENV",
+   "n": 4,
+   "call_h": 0.002836944444444444,
+   "lost_h": 0.017586944444444443,
+   "projects": [
+    [
+     "claude-scratch",
+     4
+    ]
+   ],
+   "tools": [
+    [
+     "WebFetch",
+     4
+    ]
+   ],
+   "example": "getaddrinfo ENOTFOUND trustmrr.com",
+   "sigs": [
+    [
+     "getaddrinfo ENOTFOUND trustmrr.com",
+     3
+    ],
+    [
+     "Claude Code is unable to fetch from www.reddit.com",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "script:python-traceback",
+   "bucket": "BEHAVIOUR",
+   "n": 2,
+   "call_h": 0.0016936111111111112,
+   "lost_h": 0.016304722222222224,
+   "projects": [
+    [
+     "claude-scratch",
+     2
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     2
+    ]
+   ],
+   "example": "Exit code N: Traceback (most recent call last):",
+   "sigs": [
+    [
+     "Exit code N: Traceback (most recent call last):",
+     1
+    ],
+    [
+     "Exit code N: FileNotFoundError: [Errno N] No such file or directory: 'j.txt.json'",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "env:service-limit",
+   "bucket": "ENV",
+   "n": 4,
+   "call_h": 0.001979722222222222,
+   "lost_h": 0.011868611111111113,
+   "projects": [
+    [
+     "claude-scratch",
+     4
+    ]
+   ],
+   "tools": [
+    [
+     "WebSearch",
+     4
+    ]
+   ],
+   "example": "API Error: N The following domains are not accessible to our user agent: ['reddit.com']. Read more: https://support.an",
+   "sigs": [
+    [
+     "API Error: N The following domains are not accessible to our user agent: ['reddit.com']. Read more: https://support.an",
+     4
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "shell:zsh-glob-nomatch",
+   "bucket": "TOOL",
+   "n": 3,
+   "call_h": 0.004514444444444444,
+   "lost_h": 0.010903333333333333,
+   "projects": [
+    [
+     "claude-scratch",
+     3
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     3
+    ]
+   ],
+   "example": "Exit code N: (eval):N: no matches found: /tmp/*boxed*",
+   "sigs": [
+    [
+     "Exit code N: (eval):N: no matches found: /tmp/*boxed*",
+     1
+    ],
+    [
+     "Exit code N: source .toolchain/emsdk/emsdk_env.sh >/dev/null N>&N && ctest --test-dir build/wasm --output-on-failure --t",
+     1
+    ],
+    [
+     "Exit code N: (eval):N: no matches found: --include=*.cpp",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "tool:subagent-wrote-report",
+   "bucket": "BEHAVIOUR",
+   "n": 2,
+   "call_h": 4.444444444444444e-06,
+   "lost_h": 0.006476666666666665,
+   "projects": [
+    [
+     "claude-scratch",
+     2
+    ]
+   ],
+   "tools": [
+    [
+     "Write",
+     2
+    ]
+   ],
+   "example": "<tool_use_error>Subagents should return findings as text, not write report files. Include this content in your final res",
+   "sigs": [
+    [
+     "<tool_use_error>Subagents should return findings as text, not write report files. Include this content in your final res",
+     2
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "test:failures",
+   "bucket": "SIGNAL",
+   "n": 2,
+   "call_h": 0.00036527777777777774,
+   "lost_h": 0.005809722222222223,
+   "projects": [
+    [
+     "claude-scratch",
+     2
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     2
+    ]
+   ],
+   "example": "Exit code N: Traceback (most recent call last):",
+   "sigs": [
+    [
+     "Exit code N: Traceback (most recent call last):",
+     1
+    ],
+    [
+     "Exit code N: FAIL",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "permission:classifier-denied",
+   "bucket": "ENV",
+   "n": 2,
+   "call_h": 1.1666666666666668e-05,
+   "lost_h": 0.0035672222222222225,
+   "projects": [
+    [
+     "claude-scratch",
+     2
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     2
+    ]
+   ],
+   "example": "Permission for this command was denied by a built-in Claude Code safety check, not by the user. The check stops removals",
+   "sigs": [
+    [
+     "Permission for this command was denied by a built-in Claude Code safety check, not by the user. The check stops removals",
+     2
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "browser:other",
+   "bucket": "ENV",
+   "n": 1,
+   "call_h": 0.0004366666666666667,
+   "lost_h": 0.0034088888888888884,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "mcp:claude-in-chrome",
+     1
+    ]
+   ],
+   "example": "This site is not allowed due to safety restrictions.",
+   "sigs": [
+    [
+     "This site is not allowed due to safety restrictions.",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "git:other",
+   "bucket": "BEHAVIOUR",
+   "n": 1,
+   "call_h": 0.0003061111111111111,
+   "lost_h": 0.0022505555555555556,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     1
+    ]
+   ],
+   "example": "Exit code N: fatal: --quiet is only valid with a single pathname",
+   "sigs": [
+    [
+     "Exit code N: fatal: --quiet is only valid with a single pathname",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "interrupted",
+   "bucket": "ENV",
+   "n": 1,
+   "call_h": 0.0001075,
+   "lost_h": 0.002246388888888889,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "SubagentHandback",
+     1
+    ]
+   ],
+   "example": "Interrupted: the response that made this tool call was stopped by a safety classifier while the call was running; it may",
+   "sigs": [
+    [
+     "Interrupted: the response that made this tool call was stopped by a safety classifier while the call was running; it may",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "tool:unknown-tool",
+   "bucket": "BEHAVIOUR",
+   "n": 1,
+   "call_h": 1.6666666666666667e-06,
+   "lost_h": 0.0021683333333333333,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "bash",
+     1
+    ]
+   ],
+   "example": "<tool_use_error>Error: No such tool available: bash. Tool names are case-sensitive: call Bash instead.</tool_use_error>",
+   "sigs": [
+    [
+     "<tool_use_error>Error: No such tool available: bash. Tool names are case-sensitive: call Bash instead.</tool_use_error>",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "other",
+   "bucket": "BEHAVIOUR",
+   "n": 2,
+   "call_h": 2.111111111111111e-05,
+   "lost_h": 0.00216,
+   "projects": [
+    [
+     "claude-scratch",
+     2
+    ]
+   ],
+   "tools": [
+    [
+     "Read",
+     1
+    ],
+    [
+     "TaskStop",
+     1
+    ]
+   ],
+   "example": "pdftoppm is not installed. Install poppler-utils (e.g. `brew install poppler` or `apt-get install poppler-utils`) to ena",
+   "sigs": [
+    [
+     "pdftoppm is not installed. Install poppler-utils (e.g. `brew install poppler` or `apt-get install poppler-utils`) to ena",
+     1
+    ],
+    [
+     "<tool_use_error>Task btNaatNtN is not running (status: completed)</tool_use_error>",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  },
+  {
+   "cls": "env:disk-full",
+   "bucket": "ENV",
+   "n": 1,
+   "call_h": 0.00011833333333333333,
+   "lost_h": 0.001423888888888889,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "tools": [
+    [
+     "Bash",
+     1
+    ]
+   ],
+   "example": "Exit code N: AN (Important) Depth tests that can fail: in test_gpu_mesh.cpp add (a) draw the NEAR quad first then the FA",
+   "sigs": [
+    [
+     "Exit code N: AN (Important) Depth tests that can fail: in test_gpu_mesh.cpp add (a) draw the NEAR quad first then the FA",
+     1
+    ]
+   ],
+   "owner_h": 0.0
+  }
+ ],
+ "loops_summary": [
+  [
+   "same failing call (identical skeleton) retried 3+ times, 2+ failures",
+   0,
+   "0.00",
+   "0.00",
+   "0 ended in success"
+  ],
+  [
+   "3+ consecutive failures of one tool (any input)",
+   2,
+   "0.18",
+   "0.10",
+   "switched tool/approach 1, next call of same tool succeeded 1"
+  ],
+  [
+   "edit fail -> re-edit on one file (files with 1+ failed edit)",
+   2,
+   "-",
+   "0.59",
+   "0 files with 2+ failed edits"
+  ],
+  [
+   "near-identical dispatch (prompt Jaccard >= 0.9) after the first agent had finished",
+   0,
+   "-",
+   "0.00",
+   "0 identical prompts; 0 say fix-round/retry/resume (0.0 h); 0 while the first was still running; 0 first agent not found; 0 pairs >= 0.8"
+  ],
+  [
+   "build of an unchanged tree (same build command, no edit/mutation in between, same agent) INFERRED",
+   0,
+   "0.00",
+   "-",
+   "0 after a failed build"
+  ],
+  [
+   "full test/tsc run repeated with no change in between INFERRED",
+   0,
+   "0.00",
+   "-",
+   "0 after a failed run"
+  ],
+  [
+   "waits that ended in a timeout",
+   4,
+   "0.05",
+   "-",
+   "+6 foreground sleeps blocked by the harness"
+  ],
+  [
+   "subagents parked waiting on the coordinator (dormant until a coordinator message)",
+   12,
+   "-",
+   "3.09",
+   "median 6 min, p90 23 min per agent; 1 parked > 30 min; capped at 8 h per agent: 3.1 h; bg-notification wakes add 0.4 h"
+  ],
+  [
+   "manual polling: same successful command 5+ times within 30 min",
+   11,
+   "1.94",
+   "0.91",
+   "wait-loop 11"
+  ]
+ ],
+ "comparisons": [
+  {
+   "name": "Read tool (A) vs Bash cat/head/tail/sed -n (B)",
+   "na": 91,
+   "fa": 1,
+   "nb": 405,
+   "fb": 23,
+   "ra": 0.01098901098901099,
+   "rb": 0.056790123456790124,
+   "cia": [
+    0.0019424213233478922,
+    0.05965080359061392
+   ],
+   "cib": [
+    0.0381367611172106,
+    0.08377255535156361
+   ],
+   "strata": 12,
+   "wa": 67,
+   "wfa": 0,
+   "wb": 122,
+   "wfb": 10,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "no failures in one arm within shared agents: cannot estimate",
+   "note": ""
+  },
+  {
+   "name": "Edit tool (A) vs sed -i / perl -i / script rewrite (B)",
+   "na": 25,
+   "fa": 0,
+   "nb": 256,
+   "fb": 11,
+   "ra": 0.0,
+   "rb": 0.04296875,
+   "cia": [
+    0.0,
+    0.13319649395317873
+   ],
+   "cib": [
+    0.024159562780836395,
+    0.07529179527730365
+   ],
+   "strata": 6,
+   "wa": 23,
+   "wfa": 0,
+   "wb": 173,
+   "wfb": 5,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "small n: cannot separate from task mix",
+   "note": "sed -i exits 0 when nothing matched, so B under-reports silent misses"
+  },
+  {
+   "name": "Grep tool (A) vs Bash grep/rg (B), benign exit-1 excluded",
+   "na": 0,
+   "fa": 0,
+   "nb": 141,
+   "fb": 5,
+   "ra": null,
+   "rb": 0.03546099290780142,
+   "cia": [
+    0.0,
+    0.0
+   ],
+   "cib": [
+    0.015239951514497679,
+    0.0803237539402888
+   ],
+   "strata": 0,
+   "wa": 0,
+   "wfa": 0,
+   "wb": 0,
+   "wfb": 0,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "arm A never used (tool not exposed in these sessions?): no comparison possible",
+   "note": ""
+  },
+  {
+   "name": "Grep tool (A) vs Bash grep/rg (B), any non-zero",
+   "na": 0,
+   "fa": 0,
+   "nb": 141,
+   "fb": 5,
+   "ra": null,
+   "rb": 0.03546099290780142,
+   "cia": [
+    0.0,
+    0.0
+   ],
+   "cib": [
+    0.015239951514497679,
+    0.0803237539402888
+   ],
+   "strata": 0,
+   "wa": 0,
+   "wfa": 0,
+   "wb": 0,
+   "wfb": 0,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "arm A never used (tool not exposed in these sessions?): no comparison possible",
+   "note": ""
+  },
+  {
+   "name": "Glob tool (A) vs Bash find (B)",
+   "na": 0,
+   "fa": 0,
+   "nb": 10,
+   "fb": 0,
+   "ra": null,
+   "rb": 0.0,
+   "cia": [
+    0.0,
+    0.0
+   ],
+   "cib": [
+    0.0,
+    0.2775401687666165
+   ],
+   "strata": 0,
+   "wa": 0,
+   "wfa": 0,
+   "wb": 0,
+   "wfb": 0,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "arm A never used (tool not exposed in these sessions?): no comparison possible",
+   "note": ""
+  },
+  {
+   "name": "Write tool (A) vs heredoc/tee write (B)",
+   "na": 79,
+   "fa": 2,
+   "nb": 198,
+   "fb": 9,
+   "ra": 0.02531645569620253,
+   "rb": 0.045454545454545456,
+   "cia": [
+    0.006970221164761907,
+    0.0876875353247313
+   ],
+   "cib": [
+    0.024095044408936204,
+    0.084116543291518
+   ],
+   "strata": 6,
+   "wa": 59,
+   "wfa": 2,
+   "wb": 134,
+   "wfb": 4,
+   "orr": 0.349017962889854,
+   "lo": 0.04515330918796626,
+   "hi": 2.6977765441884336,
+   "verdict": "no within-agent difference (raw gap is task mix)",
+   "note": ""
+  },
+  {
+   "name": "Long command in background (A) vs foreground (B): timeout or error",
+   "na": 22,
+   "fa": 0,
+   "nb": 264,
+   "fb": 17,
+   "ra": 0.0,
+   "rb": 0.06439393939393939,
+   "cia": [
+    1.1814722454179233e-17,
+    0.14865952572596122
+   ],
+   "cib": [
+    0.040589276008001815,
+    0.10069422886950785
+   ],
+   "strata": 11,
+   "wa": 20,
+   "wfa": 0,
+   "wb": 215,
+   "wfb": 15,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "small n: cannot separate from task mix",
+   "note": "A counts the launch only; a background job that later fails shows in its notification, not here"
+  },
+  {
+   "name": "Monitor tool (A) vs Bash until/while+sleep loop (B): timeout or error",
+   "na": 8,
+   "fa": 0,
+   "nb": 144,
+   "fb": 10,
+   "ra": 0.0,
+   "rb": 0.06944444444444445,
+   "cia": [
+    0.0,
+    0.3244156195108769
+   ],
+   "cib": [
+    0.03815472872177902,
+    0.12310975975778289
+   ],
+   "strata": 2,
+   "wa": 8,
+   "wfa": 0,
+   "wb": 127,
+   "wfb": 6,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "small n: cannot separate from task mix",
+   "note": ""
+  },
+  {
+   "name": "sh -c / bash script (A) vs plain zsh command (B)",
+   "na": 92,
+   "fa": 2,
+   "nb": 1749,
+   "fb": 97,
+   "ra": 0.021739130434782608,
+   "rb": 0.05546026300743282,
+   "cia": [
+    0.00598191583767091,
+    0.07583641774607561
+   ],
+   "cib": [
+    0.04567548881305707,
+    0.06719358047420769
+   ],
+   "strata": 18,
+   "wa": 92,
+   "wfa": 2,
+   "wb": 981,
+   "wfb": 53,
+   "orr": 0.2574865463621758,
+   "lo": 0.056289376348758725,
+   "hi": 1.1778300961577972,
+   "verdict": "no within-agent difference (raw gap is task mix)",
+   "note": ""
+  },
+  {
+   "name": "sh -c / bash script (A) vs plain zsh (B): zsh-class errors only",
+   "na": 92,
+   "fa": 0,
+   "nb": 1749,
+   "fb": 32,
+   "ra": 0.0,
+   "rb": 0.018296169239565466,
+   "cia": [
+    0.0,
+    0.04008280329209862
+   ],
+   "cib": [
+    0.01298953812511192,
+    0.02571424435015567
+   ],
+   "strata": 18,
+   "wa": 92,
+   "wfa": 0,
+   "wb": 981,
+   "wfb": 15,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "no failures in one arm within shared agents: cannot estimate",
+   "note": ""
+  },
+  {
+   "name": "Bash with absolute paths only (A) vs relative paths only (B)",
+   "na": 657,
+   "fa": 37,
+   "nb": 11,
+   "fb": 1,
+   "ra": 0.0563165905631659,
+   "rb": 0.09090909090909091,
+   "cia": [
+    0.04113082248423871,
+    0.07666079353993409
+   ],
+   "cib": [
+    0.016231752262825964,
+    0.3773646254862038
+   ],
+   "strata": 1,
+   "wa": 159,
+   "wfa": 4,
+   "wb": 11,
+   "wfb": 1,
+   "orr": 0.25806451612903225,
+   "lo": 0.026323452804541514,
+   "hi": 2.5299604493154364,
+   "verdict": "small n: cannot separate from task mix",
+   "note": ""
+  },
+  {
+   "name": "Bash absolute (A) vs relative (B): file-not-found only",
+   "na": 657,
+   "fa": 2,
+   "nb": 11,
+   "fb": 0,
+   "ra": 0.0030441400304414,
+   "rb": 0.0,
+   "cia": [
+    0.0008351928422489606,
+    0.011030888227707892
+   ],
+   "cib": [
+    2.057132194452876e-17,
+    0.2588400172488141
+   ],
+   "strata": 1,
+   "wa": 159,
+   "wfa": 0,
+   "wb": 11,
+   "wfb": 0,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "small n: cannot separate from task mix",
+   "note": ""
+  },
+  {
+   "name": "Bash compound (multi-line or 3+ chained) (A) vs simple (B)",
+   "na": 1400,
+   "fa": 86,
+   "nb": 533,
+   "fb": 13,
+   "ra": 0.06142857142857143,
+   "rb": 0.024390243902439025,
+   "cia": [
+    0.05001075388425802,
+    0.07524668256726186
+   ],
+   "cib": [
+    0.014308080144194135,
+    0.04127926629095546
+   ],
+   "strata": 49,
+   "wa": 1345,
+   "wfa": 77,
+   "wb": 527,
+   "wfb": 13,
+   "orr": 2.119271654008467,
+   "lo": 1.1325408762147526,
+   "hi": 3.9656955769180904,
+   "verdict": "A higher, holds within agent",
+   "note": ""
+  },
+  {
+   "name": "Read with offset/limit (A) vs whole-file Read (B)",
+   "na": 12,
+   "fa": 0,
+   "nb": 79,
+   "fb": 1,
+   "ra": 0.0,
+   "rb": 0.012658227848101266,
+   "cia": [
+    0.0,
+    0.2425007574992425
+   ],
+   "cib": [
+    0.0022379362307692087,
+    0.06827736043177714
+   ],
+   "strata": 4,
+   "wa": 8,
+   "wfa": 0,
+   "wb": 38,
+   "wfb": 0,
+   "orr": null,
+   "lo": null,
+   "hi": null,
+   "verdict": "small n: cannot separate from task mix",
+   "note": ""
+  }
+ ],
+ "skills": [
+  {
+   "skill": "anthropic-skills:deep-research",
+   "n": 1,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 23.8659500002861,
+   "med_calls": 10.0,
+   "fail_rate": 0.0,
+   "agents": 7,
+   "tests": 0,
+   "edits": 0,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "anthropic-skills:built-in-browser",
+   "n": 1,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 3.0431166648864747,
+   "med_calls": 12.0,
+   "fail_rate": 0.08333333333333333,
+   "agents": 0,
+   "tests": 0,
+   "edits": 1,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "anthropic-skills:chrome-browser",
+   "n": 1,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 2.5653666655222573,
+   "med_calls": 8.0,
+   "fail_rate": 0.125,
+   "agents": 0,
+   "tests": 0,
+   "edits": 1,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:brainstorming",
+   "n": 1,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 3.2453499992688495,
+   "med_calls": 7.0,
+   "fail_rate": 0.0,
+   "agents": 1,
+   "tests": 0,
+   "edits": 0,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:writing-plans",
+   "n": 1,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 119.01558333237966,
+   "med_calls": 127.0,
+   "fail_rate": 0.03937007874015748,
+   "agents": 1,
+   "tests": 21,
+   "edits": 2,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:subagent-driven-development",
+   "n": 1,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 163.66946666638057,
+   "med_calls": 119.0,
+   "fail_rate": 0.03361344537815126,
+   "agents": 18,
+   "tests": 5,
+   "edits": 5,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "superpowers:finishing-a-development-branch",
+   "n": 1,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 215.03008333444595,
+   "med_calls": 148.0,
+   "fail_rate": 0.006756756756756757,
+   "agents": 23,
+   "tests": 2,
+   "edits": 5,
+   "contra": {},
+   "outcomes": {}
+  },
+  {
+   "skill": "writing-for-agents",
+   "n": 1,
+   "projects": [
+    [
+     "claude-scratch",
+     1
+    ]
+   ],
+   "med_wall_min": 11.165399996439616,
+   "med_calls": 30.0,
+   "fail_rate": 0.0,
+   "agents": 0,
+   "tests": 0,
+   "edits": 10,
+   "contra": {},
+   "outcomes": {}
+  }
+ ],
+ "per_project": {
+  "claude-scratch": {
+   "main": 4,
+   "sub": 63,
+   "calls": 2554,
+   "fails": 117,
+   "errs": 85,
+   "wall": 86104.45899939537,
+   "active": 69000.94899939535,
+   "to_s": 1923.356,
+   "ec": {
+    "shell:zsh-equals-expansion": 29,
+    "timeout:command": 28,
+    "other:nonzero-exit": 8,
+    "file:not-found": 7,
+    "env:command-not-found": 6,
+    "wait:sleep-blocked": 6,
+    "network": 4,
+    "env:service-limit": 4,
+    "timeout:foreground-wait": 4,
+    "shell:zsh-glob-nomatch": 3
+   },
+   "loops_s": 0.0,
+   "skills": 8,
+   "dup": 0,
+   "dup_s": 0.0,
+   "first": 1791288846.243,
+   "last": 1791360761.644
+  }
+ }
+}

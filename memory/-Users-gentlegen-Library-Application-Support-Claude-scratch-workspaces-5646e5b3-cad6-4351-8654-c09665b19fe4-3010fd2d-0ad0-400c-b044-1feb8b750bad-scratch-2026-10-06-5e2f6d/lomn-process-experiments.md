@@ -1,0 +1,14 @@
+---
+name: lomn-process-experiments
+description: Owner-approved process experiments for the LOMN port (warm builds E1, implementer model E2) plus the per-task ledger and the read-only-review lesson
+metadata:
+  type: project
+---
+2026-10-07 owner asked "what slows us down / would Opus-medium help" and approved: (1) per-task ledger `~/.claude/process-metrics/lomn-web.jsonl` (schema process-metrics/2; backfilled 22 runs from harness usage) — append one line per dispatch outcome; (2) E1 warm build copies (APFS `cp -c -R` of a warm build/ + rewrite abs paths + touch files changed SRC..TGT; ABAB×3 vs fresh; script scratchpad/e1_warm.sh; run when host quiet); (3) E2 implementer model: Sonnet vs `opus-medium-implementer` agent (scratch-workspace `.claude/agents/`, model opus, effort medium) on M1a-4 cleanup and M1b T8, counterbalanced, same Opus reviewer blind to arm. Spec + results: lomn-web `docs/knowledge/process-experiments.md` (uncommitted on m1a4-hardening until the cleanup commit).
+Measured M1b split (6.7 h): reference build + review ≈48%, review/fix loops ≈27%, verification runs ≈18%, implementation ≈4% → implementer model is NOT the bottleneck.
+**Why:** answer speed questions from data (§10); don't thin verification.
+**How to apply:** never tell a hostile reference reviewer "read only, don't run" to save load — that moved 2 REF defects into T5b fix rounds (~1.5 h); schedule the review for a quieter window instead. Killing other projects' orphan processes is blocked by the permission classifier — leave it to the owner.
+Related: [[lomn-roadmap-board]], [[agent-playbooks-reference]].
+Gotcha 2026-10-07: project agent definitions (`.claude/agents/*.md`) written mid-session are NOT loaded ("Agent type not found"); per-dispatch effort can't be set. E2 round 1 ran Sonnet vs Opus-default; after the 22:24 restart opus-medium-implementer IS available (round 2: M1a-4 batch 2 → opus-medium, M1b batch B → Sonnet).
+Gotcha: implementer commit trailers name the model, so a "blind" review that sees `git log` is not blind. Blinded reviews use scratchpad/blind_package.sh (diff only, fails if a Co-Authored-By line leaks) and the reviewer is told not to run git log.
+E2 round 1 RESULT (2026-10-08): all 4 batches (Sonnet ×2, Opus-medium, Opus-default) approved first time, 0 critical, no implementer-attributable important finding → no quality difference detectable; time/cost not comparable (2 batches interrupted by restart, unequal scope, load 7–150). Decision: keep Sonnet for planned fix lists, don't adopt Opus-medium, continue split on M2 with matched scope. E1 (warm builds) still not run — host never quiet.
